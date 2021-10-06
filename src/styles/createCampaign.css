@@ -1,0 +1,98 @@
+.uploadLogoDiv{
+    width: 100%;
+    background-image: linear-gradient(-144deg, #b7e7b7 0%, #5ddf5d 100%);
+}
+
+.uploadHiddenInput{
+    z-index: 2;
+    opacity: 0.0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
+}
+
+.plusIcon{
+    margin: 4px;
+}
+.formItemInput{
+    width: 100%;
+}
+
+.submitFormItem>div{
+    max-width: 100% !important;
+}
+
+.deleteImgIcon:hover{
+font-size: x-large!important;
+}
+
+/* From: https://blog.hubspot.com/website/css-animation-examples #9 */
+/* Animation property */
+.deleteImgIcon:hover {
+    animation: wiggle 2s linear infinite;
+  }
+  
+  /* Keyframes */
+  @keyframes wiggle {
+    0%, 7% {
+      transform: rotateZ(0);
+    }
+    15% {
+      transform: rotateZ(-15deg);
+    }
+    20% {
+      transform: rotateZ(10deg);
+    }
+    25% {
+      transform: rotateZ(-10deg);
+    }
+    30% {
+      transform: rotateZ(6deg);
+    }
+    35% {
+      transform: rotateZ(-4deg);
+    }
+    40%, 100% {
+      transform: rotateZ(0);
+    }
+  }
+  .deleteImgIcon:hover {
+    transform-origin: 30% 3em;
+  }
+
+  .customForm{
+    height: 73vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .wrapForm{
+    height: 80vh;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
+    background: #5ddf5d33;
+  }
+.createCampaignTxt{
+  height: 5vh;
+  font-size: 16px;
+  padding: auto;
+}
+  .btnSubmit{
+    width: 100%;
+    background-image: linear-gradient(to left, #76768f,#252583 , #76768f)!important;
+      transition: .5s;
+}
+.btnSubmit:hover{
+    background: #252583 !important;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #5c5cc48f,
+                0 0 25px #5c5cc48f,
+                0 0 50px #5c5cc48f,
+                0 0 100px #5c5cc48f;
+}
+

@@ -1,0 +1,96 @@
+.LiveCampaigns .cardImg {
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 40vh;
+    object-fit: contain;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.LiveCampaigns .card-body {
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.LiveCampaigns .companyDetails {
+    width: 100%;
+    height: 8vh;
+}
+
+.LiveCampaigns p {
+    color: #252583;
+    /* font-weight: bolder; */
+    /* width: 70%; */
+    /* height: 5vh; */
+    display: inline-block;
+}
+
+.LiveCampaigns .logoImg {
+    /* width: 30%; */
+    /* height: 5vh; */
+    /* objectFit: contain; */
+    position: absolute;
+    left: 20px;
+    display: inline-block;
+}
+
+.LiveCampaigns h5 {
+    color: #252583;
+    font-weight: bolder;
+    width: 100%;
+    height: 12vh;
+}
+
+.LiveCampaigns .progress {
+    width: 100%;
+    height: 5vh;
+    background-color: rgb(255, 255, 255, 0);
+}
+
+.LiveCampaigns .ant-progress-inner {
+    background-color: #dddeea;
+}
+
+.LiveCampaigns .ant-progress-success-bg, .ant-progress-bg {
+    background-color: #5572bf;
+}
+
+.LiveCampaigns .ant-progress-text {
+    color: #6c757d!important;
+}
+
+.LiveCampaigns .goal {
+    width: 100%;
+    height: 5vh;
+    align-self: flex-end;
+}
+
+.liveCampaignCard:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06)
+}
+
+.liveCampaignCard {
+    background-color: #c3c3d33b !important;
+    height: 70vh;
+    display: inline-block;
+    cursor: pointer;
+    margin: 2%;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, .08), 0 0 6px rgba(0, 0, 0, .05);
+    transition: .3s transform cubic-bezier(.155, 1.105, .295, 1.12), .3s box-shadow, .3s -webkit-transform cubic-bezier(.155, 1.105, .295, 1.12);
+    border: 0;
+    border-radius: 1rem
+}
+
+.LiveCampaigns .row>* {
+    padding: 0%;
+}
+
+.card {
+    display: inline-block;
+}

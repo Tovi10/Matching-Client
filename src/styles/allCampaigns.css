@@ -1,0 +1,21 @@
+.comapaignCard {
+    display: inline-block;
+    cursor: pointer;
+    padding: 15px;
+    display: inline-block;
+    column-break-inside: avoid;
+}
+
+.AllCampaigns .card-img-top {
+    padding: 10px;
+}
+
+@media (min-width: 100px) {
+    .AllCampaigns .card {
+        display: inline-block;
+        width: 100%;
+    }
+    .AllCampaigns .card-columns {
+        column-count: 4;
+    }
+}

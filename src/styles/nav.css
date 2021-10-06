@@ -1,0 +1,30 @@
+.nav-link {
+    color: #5ddf5d;
+    padding: .5rem !important;
+    border-bottom: thin solid #5ddf5d;
+    margin: 10px;
+    transition: all 0.4s ease-in;
+}
+.Nav{
+    margin: unset !important;
+    height: 10vh;
+}
+
+.navbar-brand{
+    margin: unset !important;
+    color: #252583;
+    font-size: 20px;
+}
+
+.nav-link:hover{
+    transition: all 0.4s ease-in;
+    transform: translateY(2px);
+    border-bottom: thin solid #252583;
+    color: #252583;
+}
+
+.navLinkActive{
+    border-bottom: thin solid #252583;
+    color: #252583;
+}
+

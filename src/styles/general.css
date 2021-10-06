@@ -1,0 +1,237 @@
+body {
+  direction: rtl;
+  text-align: center;
+  /* shulamit */
+  width: 99vw;
+  height: 100vh;
+}
+
+/* class for elemnts which their content cant be selected */
+
+.notSelected {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The following css statement disables click events */
+
+.disabledClickEvents {
+  pointer-events: none;
+  background-color: turquoise;
+}
+
+.pointer {
+  cursor: pointer !important;
+}
+
+/**===== bars1 =====*/
+
+#bars1 {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 50px;
+  width: 50px;
+  margin: -25px 0 0 -25px;
+}
+
+#bars1 span {
+  position: absolute;
+  display: block;
+  bottom: 10px;
+  width: 9px;
+  height: 5px;
+  background: rgba(0, 0, 0, 0.25);
+  -webkit-animation: bars1 1.5s infinite ease-in-out;
+  animation: bars1 1.5s infinite ease-in-out;
+}
+
+#bars1 span:nth-child(2) {
+  left: 11px;
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+
+#bars1 span:nth-child(3) {
+  left: 22px;
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+
+#bars1 span:nth-child(4) {
+  left: 33px;
+  -webkit-animation-delay: 0.6s;
+  animation-delay: 0.6s;
+}
+
+#bars1 span:nth-child(5) {
+  left: 44px;
+  -webkit-animation-delay: 0.8s;
+  animation-delay: 0.8s;
+}
+
+@keyframes bars1 {
+  0% {
+    height: 5px;
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    background: rgba(0, 0, 0, 0.25);
+  }
+  25% {
+    height: 30px;
+    -webkit-transform: translateY(15px);
+    transform: translateY(15px);
+    -webkit-transform: translateY(15px);
+    transform: translateY(15px);
+    background: #000000;
+  }
+  50% {
+    height: 5px;
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    background: rgba(0, 0, 0, 0.25);
+  }
+  100% {
+    height: 5px;
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    background: rgba(0, 0, 0, 0.25);
+  }
+}
+
+@-webkit-keyframes bars1 {
+  0% {
+    height: 5px;
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    background: rgba(0, 0, 0, 0.25);
+  }
+  25% {
+    height: 30px;
+    -webkit-transform: translateY(15px);
+    transform: translateY(15px);
+    background: #000000;
+  }
+  50% {
+    height: 5px;
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    background: rgba(0, 0, 0, 0.25);
+  }
+  100% {
+    height: 5px;
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    background: rgba(0, 0, 0, 0.25);
+  }
+}
+
+/** END of bars1 */
+
+/*-----------------------------------------------------------------------*/
+
+/* typing demo */
+
+.wrapper {
+  height: 10vh;
+  /*This part is important for centering*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.typing-demo {
+  width: 45ch;
+  animation: typing 2s steps(45), blink .5s step-end infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  /* for Hebrew @shulamit 5-10-21 */
+  /* border-right: 3px solid; */
+  border-left: 3px solid;
+  /* font-family: monospace; */
+  font-size: 2em;
+}
+
+@keyframes typing {
+  from {
+    width: 0
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent
+  }
+}
+
+/* end typing */
+
+/* start bg animate */
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.bg {
+  animation: slide 3s ease-in-out infinite alternate;
+  background-image: linear-gradient(-60deg, #5b5bfda2 50%, #5ddf5db6 50%);
+  bottom: 0;
+  left: -50%;
+  opacity: .5;
+  position: fixed;
+  right: -50%;
+  top: 10vh;
+  z-index: -1;
+}
+
+.bg2 {
+  animation-direction: alternate-reverse;
+  animation-duration: 4s;
+}
+
+.bg3 {
+  animation-duration: 5s;
+}
+
+.content {
+  background-color: rgba(255, 255, 255, .8);
+  border-radius: .25em;
+  box-shadow: 0 0 .25em rgba(0, 0, 0, .25);
+  box-sizing: border-box;
+  left: 50%;
+  padding: 10vmin;
+  position: fixed;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+}
+
+/* h1 {
+  font-family:monospace;
+} */
+
+@keyframes slide {
+  0% {
+    transform: translateX(-25%);
+  }
+  100% {
+    transform: translateX(25%);
+  }
+}
+/* end bg */
