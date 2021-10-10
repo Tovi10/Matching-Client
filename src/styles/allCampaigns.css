@@ -4,6 +4,8 @@
     padding: 15px;
     display: inline-block;
     column-break-inside: avoid;
+    border: 1.5px solid #5ddf5d;
+    background-color: #f9faf9;
 }
 
 .AllCampaigns .card-img-top {
@@ -18,4 +20,16 @@
     .AllCampaigns .card-columns {
         column-count: 4;
     }
+}
+
+.AllCampaigns .goal {
+    color: #5572bf;
+}
+
+.AllCampaigns .campaignName {
+    color: #252583;
+}
+
+.LiveCampaigns .ant-progress-inner {
+    background-color: #e2e2e2;
 }

@@ -14,10 +14,6 @@ function LiveCampaigns(props) {
     const allCampaigns = useSelector(state => state.campaignReducer.allCampaigns);
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     dispatch(actions.getAllCampaigns());
-    // }, []);
-
     useEffect(() => {
         let currentDate = new Date(Date.now());
         setLiveCampaigns(allCampaigns.filter(c => currentDate >= new Date(c.duration[0]) && currentDate <= new Date(c.duration[1])));
