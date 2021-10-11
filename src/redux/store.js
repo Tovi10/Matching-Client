@@ -3,17 +3,19 @@ import reducers from './reducers'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
-import { getUser } from './middleware/user.crud';
+import { getUserByUid,updateUser } from './middleware/user.crud';
 import { getAllCampaigns,getCampaignById, createCampaign, updateCampaign, } from './middleware/campaign.crud';
 import { getAllGifts, createGift, getGiftById,updateGift } from './middleware/gift.crud';
 import { createCard } from './middleware/card.crud';
 import { getAllCompanies, createCompany, updateCompany } from './middleware/company.crud';
 import { setCurrentNotification } from './middleware/general.crud';
+import { createDonation } from './middleware/donation.crud';
 
 const store = createStore(
     reducers,
     composeWithDevTools(applyMiddleware(thunk,
-        getUser,
+        getUserByUid,
+        updateUser,
         getAllCampaigns,
         getCampaignById,
         createCampaign,
@@ -27,6 +29,7 @@ const store = createStore(
         createCompany,
         updateCompany,
         setCurrentNotification,
+        createDonation,
     )));
 
 export default store;
