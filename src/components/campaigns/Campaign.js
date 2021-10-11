@@ -9,6 +9,7 @@ import { SpinnerCircularFixed } from 'spinners-react';
 import { actions } from '../../redux/actions';
 
 import Card from './Card';
+import Donations from './Donations';
 
 
 export default function Campaign(props) {
@@ -70,10 +71,12 @@ export default function Campaign(props) {
                                     </div>
                                 </div>
                                 <div className='row'>
+                                    <div className='col-8'>
                                     <p>מתוך סכום של {numberWithCommas(campaign.goal)} ש"ח</p>
-                                    {campaign.donors.length ? <h4>מס' התורמים עד כה הינו {campaign.donors.length}</h4> : <h4>היה אתה התורם הראשון!</h4>}
-                                    <div className='col-4'></div>
-                                    <div className='col-4 d-flex justify-content-around p-2 Share'>
+                                    {campaign.donations.length ? <h4>מס' התרומות עד כה הינו {campaign.donations.length}</h4> : <h4>היה אתה התורם הראשון!</h4>}
+                                    </div>
+                                    {/* <div className='col-4'></div> */}
+                                    <div className='col-4 d-flex justify-content-around align-items-center Share'> 
                                         <div>
                                             שתף באמצעות:
                                             {/* <ShareAltOutlined /> */}
@@ -103,6 +106,7 @@ export default function Campaign(props) {
                         </div>
                     </div>
                     <div className='row'>
+                        <Donations/>
                     </div>
                 </div> : 'אין קמפיין'
             }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Avatar, Popover } from 'antd';
+import { Avatar, Popover, Tooltip } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import UserProfile from '../campaigns/UserProfile';
 import Login from '../login/Login';
@@ -14,23 +14,27 @@ export default function Nav() {
     const [current, setCurrent] = useState(window.location.pathname.split('/')[1]);
     const [showPopover, setShowPopover] = useState(false);
 
-    const handleVisibleChange=()=>{
+    const handleVisibleChange = () => {
         setShowPopover(!showPopover);
     }
     return (
         <div className='Nav'>
             <div className="row d-dlex align-items-center">
                 <div className="navbar-brand col-1">
-                    <Popover  style={{textAlign:'center'}} content={user ? <UserProfile  close={handleVisibleChange}/> : <Login />} title="!פרופיל שלי" trigger="click" placement='topRight' visible={showPopover}
+                    <Popover content={user ? <UserProfile close={handleVisibleChange} /> : <Login />} title="!פרופיל שלי" trigger="click" placement='topRight' visible={showPopover}
                         onVisibleChange={handleVisibleChange}>
-                        {firebaseUser ?
-                            firebaseUser.photoURL ?
-                                <Avatar src={firebaseUser.photoURL} /> :
-                                <Avatar icon={<UserOutlined />} /> :
-                            <Avatar icon={<UserOutlined />} />}
-
+                        {(firebaseUser && firebaseUser.photoURL) ?
+                            <Tooltip className='pointer' title={firebaseUser.displayName}>
+                                <Avatar src={firebaseUser.photoURL} />
+                            </Tooltip> :
+                            (user && user.name) ?
+                                <Tooltip className='pointer' title={user.name}>
+                                    <Avatar>{user.name[0]}</Avatar>
+                                </Tooltip> :
+                                <Tooltip className='pointer' title='לחץ כדי להתחבר.'>
+                                    <Avatar icon={<UserOutlined />} />
+                                </Tooltip>}
                     </Popover>
-
                     {` גיפטמאצ' `}
                 </div>
                 <nav className="nav d-dlex justify-content-end col-11">

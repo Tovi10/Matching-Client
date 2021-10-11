@@ -28,8 +28,8 @@ export default function Card(props) {
                         <Link to={`/gift-details/${card.gift}`} onClick={() => dispatch(actions.getGiftById(card.gift))}>לפרטים על המתנה</Link></>}
                 </div>}
             </div>
-            <Modal footer={false} title='תרום כאן!' visible={openModal} onOk={() => setOpenModal(false)} onCancel={() => setOpenModal(false)}>
-                {user ? <Donate card={card}/> : <Login />}
+            <Modal footer={false} title='תרום כאן!' visible={openModal} onCancel={() => setOpenModal(false)}>
+                {user ? <Donate card={card} close={() => setOpenModal(false)} /> : <Login />}
             </Modal>
         </div >
     )
