@@ -10,13 +10,11 @@ import {
     Alert,
     Tooltip,
 } from 'antd';
-
 import { PlusOutlined, DeleteTwoTone, MinusOutlined, UploadOutlined, } from '@ant-design/icons';
 import { firebase } from '../../services/firebase.service';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/actions';
 
-import CreateGift from './CreateGift';
 import '../../styles/createCampaign.css';
 
 
@@ -152,7 +150,6 @@ function CreateCampaign(props) {
     }
 
     return (
-        // <div className='CreateCampaign hero'>
         <div className='CreateCampaign'>
             <div className={`wrapForm mt-2`}>
                 <Spin size='large' spinning={spining}>
@@ -349,9 +346,6 @@ function CreateCampaign(props) {
                                     style={{ display: 'inline-block', width: 'calc(100% - 8px)', marginLeft: '8px' }}
                                 >
                                     <DatePicker.RangePicker
-                                        // defaultValue={moment(new Date(), 'DD MMM, YYYY')}
-                                        // defaultPickerValue={moment(new Date(), 'DD MMM, YYYY')}
-                                        // format={'DD MMM, YYYY'}
                                         placeholder={['תאריך התחלה', 'תאריך סיום']}
                                         direction='rtl'
                                         showNow={true}

@@ -12,11 +12,12 @@ export default function UserProfile(props) {
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
         dispatch(actions.updateUser({ ...user, ...values }));
-        props.close();
+        if (props.close)
+            props.close();
     }
 
     return (
-        <div className='UserProfile' style={{textAlign:'center'}}>
+        <div className='UserProfile' style={{ textAlign: 'center' }}>
             <Form onFinish={onFinish} initialValues={user}>
                 <Form.Item
                     name="email"
@@ -44,7 +45,7 @@ export default function UserProfile(props) {
                 </Form.Item>
                 <Form.Item>
                     <div className='d-flex justify-content-between'>
-                        <Button type="primary" onClick={() => props.close()}>בטל</Button>
+                        {props.close && <Button type="primary" onClick={() => props.close()}>בטל</Button>}
                         <Button type="primary" htmlType="submit">עדכן</Button>
                     </div>
                 </Form.Item>
