@@ -3,6 +3,7 @@ import { Tabs } from 'antd';
 import CreateCampaign from './CreateCampaign';
 import CreateCard from './CreateCard';
 import CreateGift from './CreateGift';
+import CreateRecruiter from './CreateRecruiter';
 
 
 const { TabPane } = Tabs;
@@ -21,6 +22,9 @@ export default function BaseManagement() {
                 </TabPane>
                 <TabPane tab="הוסף מתנה" key="3">
                     <CreateGift />
+                </TabPane>
+                <TabPane tab="הוסף מגייס" key="4">
+                    <CreateRecruiter />
                 </TabPane>
             </Tabs>
         </div>
