@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Carousel } from 'react-carousel-minimal';
-import { Spin, Tooltip } from 'antd';
+import { Spin, Tooltip, Tabs } from 'antd';
 import { ShareAltOutlined, MailOutlined, CopyOutlined, CopyFilled } from '@ant-design/icons';
 import { numberWithCommas } from '../../services/service';
 import { SpinnerCircularFixed } from 'spinners-react';
@@ -10,6 +10,9 @@ import { actions } from '../../redux/actions';
 
 import Card from './Card';
 import Donations from './Donations';
+import Recruiters from './Recruiters';
+
+const { TabPane } = Tabs;
 
 
 export default function Campaign(props) {
@@ -72,11 +75,11 @@ export default function Campaign(props) {
                                 </div>
                                 <div className='row'>
                                     <div className='col-8'>
-                                    <p>מתוך סכום של {numberWithCommas(campaign.goal)} ש"ח</p>
-                                    {campaign.donations.length ? <h4>מס' התרומות עד כה הינו {campaign.donations.length}</h4> : <h4>היה אתה התורם הראשון!</h4>}
+                                        <p>מתוך סכום של {numberWithCommas(campaign.goal)} ש"ח</p>
+                                        {campaign.donations.length ? <h4>מס' התרומות עד כה הינו {campaign.donations.length}</h4> : <h4>היה אתה התורם הראשון!</h4>}
                                     </div>
                                     {/* <div className='col-4'></div> */}
-                                    <div className='col-4 d-flex justify-content-around align-items-center Share'> 
+                                    <div className='col-4 d-flex justify-content-around align-items-center Share'>
                                         <div>
                                             שתף באמצעות:
                                             {/* <ShareAltOutlined /> */}
@@ -105,9 +108,14 @@ export default function Campaign(props) {
                             }
                         </div>
                     </div>
-                    <div className='row'>
-                        <Donations/>
-                    </div>
+                    <Tabs defaultActiveKey="1" type='card'>
+                        <TabPane tab="תורמים" key="1">
+                            <Donations />
+                        </TabPane>
+                        <TabPane tab="מגייסים" key="2">
+                            <Recruiters />
+                        </TabPane>
+                    </Tabs>
                 </div> : 'אין קמפיין'
             }
         </div >
