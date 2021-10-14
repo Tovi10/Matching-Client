@@ -1,4 +1,5 @@
 import React from 'react';
+import ApplyCreateCampaign from '../general/CreateApply';
 // import "animate.css"
 
 export default function About() {
@@ -23,6 +24,7 @@ export default function About() {
                         זה המקום לספר על האתר שלנו כמה הוא יפה ומשוכלל!!
                     </div >
                 </div>
+                <ApplyCreateCampaign/>
             </div>
         </div>
     )

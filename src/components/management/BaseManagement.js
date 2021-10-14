@@ -4,6 +4,7 @@ import CreateCampaign from './CreateCampaign';
 import CreateCard from './CreateCard';
 import CreateGift from './CreateGift';
 import CreateRecruiter from './CreateRecruiter';
+import Applies from './Applies';
 
 
 const { TabPane } = Tabs;
@@ -25,6 +26,9 @@ export default function BaseManagement() {
                 </TabPane>
                 <TabPane tab="הוסף מגייס" key="4">
                     <CreateRecruiter />
+                </TabPane>
+                <TabPane tab="בקשות" key="5">
+                    <Applies />
                 </TabPane>
             </Tabs>
         </div>

@@ -11,6 +11,7 @@ import { getAllCompanies, createCompany, updateCompany } from './middleware/comp
 import { setCurrentNotification } from './middleware/general.crud';
 import { createDonation } from './middleware/donation.crud';
 import { createRecruiter } from './middleware/recruiter.crud';
+import { createApply, getApplies } from './middleware/apply.crud';
 
 const store = createStore(
     reducers,
@@ -32,6 +33,8 @@ const store = createStore(
         setCurrentNotification,
         createDonation,
         createRecruiter,
+        createApply,
+        getApplies,
     )));
 
 export default store;

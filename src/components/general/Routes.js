@@ -8,21 +8,23 @@ import About from '../home/About';
 import Personal from '../home/Personal';
 import CampaignDetails from '../management/CampaignDetails';
 import BaseManagement from '../management/BaseManagement';
+import { useSelector } from 'react-redux';
 
 
 export default function Routes() {
 
+    const admin=useSelector(state=>state.userReducer.admin);
     return (
         <div className='Routes'>
             <Switch>
                 <Route path="/home" component={BaseHome} />
                 <Route path="/about" component={About} />
                 <Route path="/gift-details/:currentGift" component={GiftDetails} />
-                <Route path="/create-campaign" component={BaseManagement} />
                 <Route path="/new-campaign" component={CampaignDetails} />
                 <Route path="/all-campaigns" component={BaseCampaigns} />
                 <Route path="/current-campaign/:currentCampaign" component={Campaign} />
                 <Route path="/personal" component={Personal} />
+                {admin &&<Route path="/management" component={BaseManagement} />}
                 <Route path="" component={BaseHome} />
                 <Route component={NotFound} />
             </Switch>

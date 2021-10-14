@@ -5,6 +5,7 @@ import userReducer from './user.reducer';
 import campaignReducer from './campaign.reducer';
 import companyReducer from './company.reducer';
 import giftReducer from './gift.reducer';
+import applyReducer from './apply.reducer';
 
 export default combineReducers({
     generalReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
     campaignReducer,
     companyReducer,
     giftReducer,
+    applyReducer,
 });
