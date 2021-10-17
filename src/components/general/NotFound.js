@@ -4,7 +4,7 @@ export default function NotFound() {
 
     return (
         <div className='NotFound'>
-            <span>NotFound</span>
+            <h4>NotFound</h4>
         </div>
     )
 }

@@ -13,10 +13,11 @@ import { useSelector } from 'react-redux';
 
 export default function Routes() {
 
-    const admin=useSelector(state=>state.userReducer.admin);
+    const admin = useSelector(state => state.userReducer.admin);
     return (
         <div className='Routes'>
             <Switch>
+                <Route exact path="/" component={BaseHome} />
                 <Route path="/home" component={BaseHome} />
                 <Route path="/about" component={About} />
                 <Route path="/gift-details/:currentGift" component={GiftDetails} />
@@ -24,9 +25,8 @@ export default function Routes() {
                 <Route path="/all-campaigns" component={BaseCampaigns} />
                 <Route path="/current-campaign/:currentCampaign" component={Campaign} />
                 <Route path="/personal" component={Personal} />
-                {admin &&<Route path="/management" component={BaseManagement} />}
-                <Route path="" component={BaseHome} />
-                <Route component={NotFound} />
+                {admin && <Route path="/management" component={BaseManagement} />}
+                <Route path="*" component={NotFound} />
             </Switch>
         </div>
     )

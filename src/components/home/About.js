@@ -1,5 +1,6 @@
 import React from 'react';
 import ApplyCreateCampaign from '../general/CreateApply';
+import CreateRecruiter from '../management/CreateRecruiter';
 // import "animate.css"
 // import Board from '../campaigns/Note';
 // import Note from '../campaigns/try';
@@ -8,7 +9,7 @@ export default function About() {
 
     return (
         <div className='About'>
-            <div className="aboutText">
+            {/* <div className="aboutText">
                 <p>
                     מחפש קריאה מהירה באינטרנט? להלן תמצא את האתרים האהובים עלינו לקרוא עליהם סיפורים קצרים.
                     אם אתה קורא את הפוסט הזה, רוב הסיכויים שגלשת דרך פייסבוק, טוויטר, Tumblr או Reddit במשך כחצי השעה האחרונה. סביר להניח שתרצה לעשות משהו פרודוקטיבי יותר עם הזמן שלך - תקרא ספר, למשל - אבל פשוט אין לך מספיק זמן בידיים כדי להתחייב לרומן בעל משקל של 400 עמודים.
@@ -29,7 +30,7 @@ export default function About() {
                     מדוע סיפורים קצרים הם קריאה מצוינת
                     היות שאין מספיק זמן להתחייב לקריאת ספר כבד משקל היא אחת הסיבות העיקריות לכך שכל כך הרבה אנשים נופלים
                 </p>
-            </div>
+            </div> */}
             <div>
                 {/* <Board /> */}
                 {/* <Note /> */}
@@ -56,6 +57,7 @@ export default function About() {
             {/* </div >
                 </div> */}
             <ApplyCreateCampaign />
+            {/* <CreateRecruiter /> */}
             {/* </div> */}
         </div >
     )

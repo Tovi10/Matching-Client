@@ -22,7 +22,7 @@ export default function Nav() {
         <div className='Nav'>
             <div className="row d-dlex align-items-center">
                 <div className="navbar-brand col-1">גיפטמאצ'</div>
-                <nav className="nav d-dlex justify-content-end col-10">
+                <nav className="linksMenu nav d-dlex justify-content-end col-10">
                     <Link className={`nav-link ${(current === 'home' || current === '') ? 'navLinkActive' : ''}`} onClick={() => setCurrent('home')} to='/home'>דף הבית</Link>
                     <Link className={`nav-link ${current === 'about' ? 'navLinkActive' : ''}`} onClick={() => setCurrent('about')} to='/about'>אודות</Link>
                     <Link className={`nav-link ${current === 'all-campaigns' ? 'navLinkActive' : ''}`} onClick={() => setCurrent('all-campaigns')} to='/all-campaigns'>קמפיינים</Link>
