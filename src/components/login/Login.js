@@ -83,19 +83,6 @@ export default function Login() {
 
     return (
         <div className='Login' style={{ textAlign: 'center' }}>
-            <Button onClick={e=>{
-                debugger
-                const cookie = document.cookie.split('giftMatchUserUid=');
-                // if (cookie.length === 2&&cookie[1]) {
-                    firebase.auth().signInWithCustomToken('bF4GS5wTMreGza4sTc0VeteXy0C2').then(res=>{
-                    console.log("🚀 ~ file: Login.js ~ line 91 ~ firebase.auth ~ res", res)
-
-                    }).catch(err=>{
-                    console.log("🚀 ~ file: Login.js ~ line 94 ~ firebase.auth ~ err", err)
-                        
-                    })
-                // }
-            }}>hi hihi </Button>
             <Form onFinish={onFinish}>
                 <Form.Item
                     name="email"
