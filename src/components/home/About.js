@@ -1,6 +1,5 @@
 import React from 'react';
 import ApplyCreateCampaign from '../general/CreateApply';
-import CreateRecruiter from '../management/CreateRecruiter';
 // import "animate.css"
 // import Board from '../campaigns/Note';
 // import Note from '../campaigns/try';
@@ -57,7 +56,6 @@ export default function About() {
             {/* </div >
                 </div> */}
             <ApplyCreateCampaign />
-            {/* <CreateRecruiter /> */}
             {/* </div> */}
         </div >
     )
