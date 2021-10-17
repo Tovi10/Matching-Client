@@ -83,6 +83,15 @@ export default function Login() {
 
     return (
         <div className='Login' style={{ textAlign: 'center' }}>
+            {/* <Button onClick={e => {
+                firebase.auth().getUser('bF4GS5wTMreGza4sTc0VeteXy0C2').then(res => {
+                    console.log("🚀 ~ file: Login.js ~ line 91 ~ firebase.auth ~ res", res)
+
+                }).catch(err => {
+                    console.log("🚀 ~ file: Login.js ~ line 94 ~ firebase.auth ~ err", err)
+
+                })
+            }}>get by uid trainig</Button> */}
             <Form onFinish={onFinish}>
                 <Form.Item
                     name="email"
@@ -101,11 +110,11 @@ export default function Login() {
                     />
                 </Form.Item>
                 <Form.Item>
-                    <Button type="primary" htmlType="submit" onClick={() => setIsForgetPassword(true)}>שכחתי סיסמא</Button>
+                    <Button type="primary" htmlType="submit" onClick={() => { setIsForgetPassword(true); setIsSignUp(false) }}>שכחתי סיסמא</Button>
                     {` או `}
                     <Button type="primary" htmlType="submit">התחבר</Button>
                     {` או `}
-                    <Button type='primary' htmlType='submit' onClick={() => setIsSignUp(true)}>הרשם</Button>
+                    <Button type='primary' htmlType='submit' onClick={() => { setIsSignUp(true); setIsForgetPassword(false) }}>הרשם</Button>
                     {` או `}
                     <Button type='primary' onClick={signWithGoogle}>GOOGLE</Button>
                 </Form.Item>

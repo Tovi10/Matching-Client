@@ -35,11 +35,12 @@ export const createCampaign = store => next => action => {
         axios.post(`${SERVER_URL}/api/campaign/createCampaign`, action.payload)
             .then(result => {
                 console.log("🚀 ~ file: campaign.crud.js ~ line 27 ~ result.data", result.data);
-                if (!result.data.images.length) {
+                if (!result.data.campaign.images.length) {
                     store.dispatch(actions.setCurrentNotification('הקמפיין נוצר בהצלחה!'))
                 }
-                store.dispatch(actions.setCampaignFromServer(result.data));
-                store.dispatch(actions.setCampaignId(result.data._id))
+                store.dispatch(actions.setCampaignFromServer(result.data.campaign));
+                store.dispatch(actions.setUser(result.data.user));
+                store.dispatch(actions.setCampaignId(result.data.campaign._id))
             })
             .catch(error => {
                 store.dispatch(actions.setCurrentNotification('ארעה שגיאה ביצירת הקמפיין!'))
