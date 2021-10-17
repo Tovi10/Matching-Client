@@ -3,6 +3,7 @@ import store from './redux/store';
 import Base from './components/general/Base';
 
 function App() {
+  
   return (
     <div className="App">
       <Provider store={store}>

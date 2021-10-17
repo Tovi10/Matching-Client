@@ -235,3 +235,8 @@ body {
   }
 }
 /* end bg */
+
+
+.rtlColumn{
+  direction: rtl !important;
+}
