@@ -37,8 +37,8 @@ export default function Nav() {
                     </Popover>
                     {` גיפטמאצ' `}
                 </div>
-                <nav className="nav d-dlex justify-content-end col-11">
-                    <Link className={`nav-link ${(current === 'home'||current === '') ? 'navLinkActive' : ''}`} onClick={() => setCurrent('home')} to='/home'>דף הבית</Link>
+                <nav className="linksMenu nav d-dlex justify-content-end col-11">
+                    <Link className={`nav-link ${(current === 'home' || current === '') ? 'navLinkActive' : ''}`} onClick={() => setCurrent('home')} to='/home'>דף הבית</Link>
                     <Link className={`nav-link ${current === 'about' ? 'navLinkActive' : ''}`} onClick={() => setCurrent('about')} to='/about'>אודות</Link>
                     <Link className={`nav-link ${current === 'all-campaigns' ? 'navLinkActive' : ''}`} onClick={() => setCurrent('all-campaigns')} to='/all-campaigns'>קמפיינים</Link>
                     <Link className={`nav-link ${current === 'create-campaign' ? 'navLinkActive' : ''}`} onClick={() => setCurrent('create-campaign')} to='/create-campaign'>צור קמפיין</Link>
