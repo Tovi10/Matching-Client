@@ -32,7 +32,7 @@ export default function About() {
             </div>
             <div>
                 {/* <Board /> */}
-                <Note />
+                {/* <Note /> */}
             </div>
             {/* https://animate.style/ */}
             {/* <h1 className="animate__animated animate__flipOutY">An animated element</h1> */}
