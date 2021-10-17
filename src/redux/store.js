@@ -10,6 +10,8 @@ import { createCard } from './middleware/card.crud';
 import { getAllCompanies, createCompany, updateCompany } from './middleware/company.crud';
 import { setCurrentNotification } from './middleware/general.crud';
 import { createDonation } from './middleware/donation.crud';
+import { createRecruiter } from './middleware/recruiter.crud';
+import { createApply, getApplies } from './middleware/apply.crud';
 
 const store = createStore(
     reducers,
@@ -30,6 +32,9 @@ const store = createStore(
         updateCompany,
         setCurrentNotification,
         createDonation,
+        createRecruiter,
+        createApply,
+        getApplies,
     )));
 
 export default store;

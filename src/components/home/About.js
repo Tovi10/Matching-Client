@@ -1,7 +1,8 @@
 import React from 'react';
+import ApplyCreateCampaign from '../general/CreateApply';
 // import "animate.css"
 // import Board from '../campaigns/Note';
-import Note from '../campaigns/try';
+// import Note from '../campaigns/try';
 
 export default function About() {
 
@@ -51,6 +52,10 @@ export default function About() {
                         זה המקום לספר על האתר שלנו כמה הוא יפה ומשוכלל!!
                     </div >
                 </div> */}
+            {/* </div> */}
+            {/* </div >
+                </div> */}
+            <ApplyCreateCampaign />
             {/* </div> */}
         </div >
     )
