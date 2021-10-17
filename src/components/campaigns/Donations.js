@@ -18,6 +18,7 @@ export default function Donations() {
                                     <Card title={donation.user.name} bordered={false}>
                                         <div>{`תרם ${donation.card.text}`}</div>
                                         <div>{`בתאריך ${moment(new Date((Date)(donation.date))).format('DD/MM/YYYY')}`}</div>
+                                        <div>{`בשעה ${moment(new Date((Date)(donation.date))).format('h:mm:ss a')}`}</div>
                                         <div>{`וקבל ${donation.card.gift && donation.card.gift.name}`}</div>
                                     </Card>
                                 </Col>
