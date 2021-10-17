@@ -25,7 +25,7 @@ export default function CreateRecruiter() {
     const onFinish = (values) => {
         console.log("🚀 ~ file: CreateRecruiter.js ~ line 20 ~ onFinish ~ values", values);
         const campaignId = allCampaigns.find(c => c.campaignName === values.campaign)._id;
-        dispatch(actions.createRecruiter({...values,campaign:campaignId}))
+        dispatch(actions.createRecruiter({ ...values, campaign: campaignId }))
     };
 
     return (

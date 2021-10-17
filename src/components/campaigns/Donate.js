@@ -1,7 +1,8 @@
 import React from 'react';
-import { Form, Input, Button,notification,} from 'antd';
+import { Form, Input, Button, notification, } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/actions';
+import moment from 'moment';
 
 export default function Donate(props) {
     const { card } = props;
@@ -13,10 +14,10 @@ export default function Donate(props) {
     const onFinish = (values) => {
         notification.open({
             message: 'תרומה חדשה!',
-            description:'תרומה חדשה',
+            description: 'תרומה חדשה',
         });
         console.log('Received values of form: ', values);
-        dispatch(actions.createDonation({ ...values, campaignId: campaign._id, user: user._id, card: card._id, date: Date.now() }));
+        dispatch(actions.createDonation({ ...values, campaignId: campaign._id, user: user._id, card: card._id, date: moment(new Date()).format('DD/MM/YYYY a h:mm:ss ') + "" }));
         props.close();
     }
     return (
