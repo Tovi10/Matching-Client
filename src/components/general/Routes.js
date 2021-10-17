@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 export default function Routes() {
 
     const admin = useSelector(state => state.userReducer.admin);
+    const user = useSelector(state => state.userReducer.user);
     return (
         <div className='Routes'>
             <Switch>
@@ -26,9 +27,10 @@ export default function Routes() {
                 <Route path="/current-campaign/:currentCampaign" component={Campaign} />
                 <Route path="/personal" component={Personal} />
                 {admin && <Route path="/management" component={BaseManagement} />}
+                {(admin || (user && user.allowed)) && <Route path="/management" component={BaseManagement} />}
                 <Route path="*" component={NotFound} />
-            </Switch>
-        </div>
+            </Switch >
+        </div >
     )
 }
 

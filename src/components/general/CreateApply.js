@@ -25,7 +25,7 @@ export default function CreateApply() {
 
     return (
         <div className='p-auto CreateApply'>
-            <h1>יצירת קמפיין</h1>
+            <h1>הגשת בקשה ליצירת קמפיין</h1>
             {user ?
                 <Form
                     labelCol={{

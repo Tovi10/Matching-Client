@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Table } from 'antd';
+import { Table, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/actions';
 
@@ -15,19 +15,31 @@ export default function Applies() {
 
     const columns = [
         {
-            title: '_id',
-            dataIndex: '_id',
-            key: '_id',
+            title: '',
+            dataIndex: '',
+            render: (text, apply) => <Button onClick={() => dispatch(actions.confirmApply(apply._id))}>אשר!</Button>,
+            className: 'rtlColumn'
         },
         {
-            title: 'Text',
+            title: 'תוכן הבקשה',
             dataIndex: 'text',
-            key: 'text',
+            width: 800,
+            align: 'right',
+            ellipsis: true,
+            className: 'rtlColumn'
+        },
+        {
+            title: 'סטטוס הבקשה',
+            dataIndex: 'status',
         },
     ];
     return (
         <div className='Applies'>
-          {applies?<Table dataSource={applies} columns={columns} />:'no applies'}
+            {applies ?
+                <Table dataSource={applies} columns={columns}
+                    rowKey={apply => apply._id}
+                    pagination={{ position: ['bottomLeft', 'none'] }}
+                    style={{ direction: 'ltr' }} /> : 'no applies'}
         </div>
     )
 }

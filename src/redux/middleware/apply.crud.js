@@ -30,3 +30,16 @@ export const getApplies = store => next => action => {
     }
     return next(action)
 }
+export const confirmApply = store => next => action => {
+    if (action.type === 'CONFIRM_APPLY') {
+        axios.put(`${SERVER_URL}/api/apply/confirmApply/${action.payload}`)
+            .then(result => {
+                console.log("🚀 ~ file: apply.crud.js ~ line 37 ~ result", result);
+                store.dispatch(actions.setApplies(result.data));
+            })
+            .catch(error => {
+                console.log("🚀 ~ file: apply.crud.js ~ line 40 ~ error", error)
+            })
+    }
+    return next(action)
+}

@@ -47,6 +47,7 @@ export default function UserProfile(props) {
                     <div className='d-flex justify-content-between'>
                         {props.close && <Button type="primary" onClick={() => props.close()}>בטל</Button>}
                         <Button type="primary" htmlType="submit">עדכן</Button>
+                        <Button type="primary" onClick={()=>dispatch(actions.signOut())}>התנתק</Button>
                     </div>
                 </Form.Item>
             </Form>
