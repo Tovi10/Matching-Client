@@ -5,26 +5,31 @@
     margin: 10px;
     transition: all 0.4s ease-in;
 }
-.Nav{
+
+.Nav {
     margin: unset !important;
     height: 10vh;
 }
 
-.navbar-brand{
+.navbar-brand {
     margin: unset !important;
     color: #252583;
     font-size: 20px;
+    z-index: 3;
 }
 
-.nav-link:hover{
+.nav-link:hover {
     transition: all 0.4s ease-in;
     transform: translateY(2px);
     border-bottom: thin solid #252583;
     color: #252583;
 }
 
-.navLinkActive{
+.navLinkActive {
     border-bottom: thin solid #252583;
     color: #252583;
 }
 
+.linksMenu {
+    z-index: 3;
+}

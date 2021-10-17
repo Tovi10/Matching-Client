@@ -13,6 +13,7 @@ import '../../styles/campaign.css';
 import '../../styles/allCampaigns.css';
 import '../../styles/liveCampaigns.css';
 import '../../styles/nav.css';
+import '../../styles/about.css';
 
 export default function Base() {
 

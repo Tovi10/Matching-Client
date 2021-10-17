@@ -121,6 +121,7 @@ function CreateCampaign(props) {
             }
         });
     }
+
     const uploadLogoToStorage = async (companyId) => {
         if (logo) {
             const storageRef = firebase.storage().ref();

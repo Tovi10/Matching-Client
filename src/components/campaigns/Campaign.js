@@ -87,6 +87,7 @@ export default function Campaign(props) {
                                         <Tooltip title={copy ? 'העתקת קישור' : 'הקישור הועתק'} onClick={() => {
                                             setCopy(false);
                                             navigator.clipboard.writeText(`http://localhost:3000/current-campaign/${campaign._id}`);
+                                            // navigator.clipboard.writeText(`https://matching-try.herokuapp.com/current-campaign/${campaign._id}`);
                                         }}>
                                             <div className='shareIcon'>
                                                 {copy ? <CopyOutlined /> : <CopyFilled />}
@@ -94,7 +95,9 @@ export default function Campaign(props) {
                                         </Tooltip>
                                         <Tooltip title='מייל'>
                                             <div className='shareIcon'>
-                                                <MailOutlined onClick={() => window.open(`https://mail.google.com/mail/u/0/?fs=1&su=1&body=http://localhost:3000/current-campaign/${campaign._id}&tf=cm`, '_blank')} />
+                                                //NOTE SERVER
+                                                {/* <MailOutlined onClick={() => window.open(`https://mail.google.com/mail/u/0/?fs=1&su=1&body=http://3000/current-campaign/${campaign._id}&tf=cm`, '_blank')} /> */}
+                                                <MailOutlined onClick={() => window.open(`https://mail.google.com/mail/u/0/?fs=1&su=1&body=https://matching-try.herokuapp.com/current-campaign/${campaign._id}&tf=cm`, '_blank')} />
                                             </div>
                                         </Tooltip>
                                     </div>
