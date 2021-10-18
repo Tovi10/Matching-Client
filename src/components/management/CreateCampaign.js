@@ -28,6 +28,7 @@ function CreateCampaign(props) {
     const campaign = useSelector(state => state.campaignReducer.campaign);
     const company = useSelector(state => state.companyReducer.company);
     const allCompanies = useSelector(state => state.companyReducer.allCompanies);
+    const user = useSelector(state => state.userReducer.user);
 
     const [form] = Form.useForm();
     const [logo, setLogo] = useState(null);
@@ -91,7 +92,7 @@ function CreateCampaign(props) {
             setCreateCompany(false)
         }
         else {
-            const data = { ...values, duration: [values.duration[0]._d, values.duration[1]._d] };
+            const data = { ...values, duration: [values.duration[0]._d, values.duration[1]._d],userId:user._id };
             dispatch(actions.createCampaign(data));
         }
     };

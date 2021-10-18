@@ -12,6 +12,8 @@ export default function CreateRecruiter() {
 
     const dispatch = useDispatch();
     const allCampaigns = useSelector(state => state.campaignReducer.allCampaigns);
+    const userCampaigns = useSelector(state => state.userReducer.user.campaigns);
+    const admin = useSelector(state => state.userReducer.admin);
 
     const [form] = Form.useForm();
 
@@ -56,9 +58,13 @@ export default function CreateRecruiter() {
                     <Select
                         allowClear
                         showSearch
-                        options={allCampaigns && allCampaigns.map(campaign => {
-                            return { value: campaign.campaignName, label: campaign.campaignName }
-                        })}
+                        options={admin ? (
+                            allCampaigns && allCampaigns.map(campaign => {
+                                return { value: campaign.campaignName, label: campaign.campaignName }
+                            })) :
+                            userCampaigns && userCampaigns.map(campaign => {
+                                return { value: campaign.campaignName, label: campaign.campaignName }
+                            })}
                         style={{ textAlign: 'right' }}
                         dropdownStyle={{ textAlign: 'right' }}
                         notFoundContent={<>לא נמצאו נתונים</>}
