@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Progress, Spin } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import { LoadingOutlined, RedditCircleFilled } from '@ant-design/icons';
 import { actions } from '../../redux/actions';
 import { numberWithCommas } from '../../services/service';
 import Stamp from './Stamp';
@@ -29,14 +29,20 @@ function AllCampaigns(props) {
         history.push(`/current-campaign/${campaign._id}`);
     }
 
-    const [currentHeight, setCurrentHeight] = useState(null);
-
+    const [currentHeight, setCurrentHeight] = useState([]);
+    const func = (height, i) => {
+        let a = currentHeight;
+        a.push({ key: i, value: height })
+        setCurrentHeight([...a])
+        console.log({ key: i, value: height })
+    }
     return (
         <div className='AllCampaigns container-fluid'>
             <div className="card-columns">
-                {allCampaigns ? allCampaigns.map(campaign => (
+                {allCampaigns ? allCampaigns.map((campaign, i) => (
                     <div className="m-3 card comapaignCard" key={campaign._id} onClick={() => { selectCampaign(campaign) }}>
-                        <ReactHeight onHeightReady={height => { setCurrentHeight(height); console.log(`the id of the card is ${campaign._id} and the height is ${height}`) }}>
+                        <ReactHeight onHeightReady={height => { func(height, i) }}>
+                            {/* // <ReactHeight onHeightReady={height => { func(height) }setCurrentHeight(...currentHeight, [{key: i, value: height }]); console.log(`the id of the card is ${campaign._id} and the height is ${height}`) }}> */}
                             <div>
                                 <h5 className="card-title">{campaign.campaignName}</h5>
                                 <Spin style={{ display: showSpin ? 'block' : 'none' }} />
@@ -49,18 +55,23 @@ function AllCampaigns(props) {
                                     {campaign.goal ? <Progress percent={Math.round(100 / campaign.goal * campaign.goalRaised)} /> : <Progress percent={0} />}
                                 </div>
                             </div>
+                            {
+                                campaign.duration[1] && new Date(campaign.duration[1]) < new Date(Date.now()) ?
+                                    // <div style={{ marginTop: '20px' }}>
+                                    <div style={{ padding: "30px", backgroundColor: "red", height: "50px", width: "20px", zIndex: '4' }} style={{ padding: `${currentHeight[i] ? (Number(currentHeight[i].value) - 250) / 2 : 1000}px !important`, marginTop: `${currentHeight[i] ? (Number(currentHeight[i].value) - 250) / 2 : 1000}px !important` }}>
+                                        {/* <div style={{ marginTop: `${(Number(currentHeight[i].value) - 250) / 2}px !important` }}> */}
+                                        {/* <Stamp height={currentHeight} /> */}
+                                    </div>
+                                    :
+                                    ""
+                            }
                         </ReactHeight>
-                        {
-                            campaign.duration[1] && new Date(campaign.duration[1]) < new Date(Date.now()) ?
-                                <Stamp height={currentHeight} />
-                                :
-                                ""
-                        }
                     </div>
                 )) :
                     // <div style={{ textAlign: 'center' }}><LoadingOutlined style={{ fontSize: 40 }} spin size='large' /></div>}
-                    <Spin size='large' />}
-            </div>
+                    <Spin size='large' />
+                }
+            </div >
         </div >
     )
 }

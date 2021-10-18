@@ -96,6 +96,7 @@ export default function CreateRecruiter() {
                 {/* emil */}
                 <Form.Item
                     name="email"
+                    label={`כתובת אימייל`}
                     rules={[{ required: true, message: 'הכנס מייל!' }]}
                 >
                     <Input type='email' placeholder="מייל" />

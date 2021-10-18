@@ -25,7 +25,7 @@ export default function Card(props) {
                     <b className="card-text">{card.text}</b>
                     {card.gift && <>
                         <p>קבלו במתנה {card.gift.name}</p>
-                        <Link to={`/gift-details/${card.gift}`} onClick={() => dispatch(actions.getGiftById(card.gift))}>לפרטים על המתנה</Link></>}
+                        <Link to={`/gift-details/${card.gift._id}`} onClick={() => dispatch(actions.getGiftById(card.gift))}>לפרטים על המתנה</Link></>}
                 </div>}
             </div>
             <Modal footer={false} title='תרום כאן!' visible={openModal} onCancel={() => setOpenModal(false)}>

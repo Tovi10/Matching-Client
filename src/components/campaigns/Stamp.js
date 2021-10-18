@@ -12,7 +12,8 @@ export default function Stamp({ height }) {
     // }, []);
 
     return (
-        <div className="Stamp" ref={stampRef} style={{ marginTop: `${height ? (Number(height) - 250) / 2 : 1000} px` }} >
+        // <div className="Stamp" ref={stampRef} style={{ marginTop: `${height ? (Number(height) - 250) / 2 : 1000} px` }} >
+        <div className="Stamp">
             {console.log((Number(height) - 250) / 2)}
             < p >
                 <span>CLOSED</span>
