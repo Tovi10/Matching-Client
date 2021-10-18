@@ -14,13 +14,14 @@ import '../../styles/allCampaigns.css';
 import '../../styles/liveCampaigns.css';
 import '../../styles/nav.css';
 import '../../styles/about.css';
+import '../../styles/stamp.css';
 
 export default function Base() {
 
     const dispatch = useDispatch()
     useEffect(() => {
         const cookie = document.cookie.split('giftMatchUserUid=');
-        if (cookie.length === 2&&cookie[1]) {
+        if (cookie.length === 2 && cookie[1]) {
             dispatch(actions.getUserByUid(cookie[1]))
         }
     }, [])
