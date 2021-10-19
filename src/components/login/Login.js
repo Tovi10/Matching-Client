@@ -34,7 +34,7 @@ export default function Login() {
             .then((result) => {
                 console.log("🚀 ~ file: Login.js ~ line 35 ~ .then ~ result", result)
                 dispatch(actions.setFirebaseUser(result.user));
-                dispatch(actions.getUserByUid(result.user.uid));
+                dispatch(actions.createUser(result.user));
             })
             .catch((error) => {
                 dispatch(actions.setCurrentNotification(error.code))
@@ -83,15 +83,6 @@ export default function Login() {
 
     return (
         <div className='Login' style={{ textAlign: 'center' }}>
-            {/* <Button onClick={e => {
-                firebase.auth().getUser('bF4GS5wTMreGza4sTc0VeteXy0C2').then(res => {
-                    console.log("🚀 ~ file: Login.js ~ line 91 ~ firebase.auth ~ res", res)
-
-                }).catch(err => {
-                    console.log("🚀 ~ file: Login.js ~ line 94 ~ firebase.auth ~ err", err)
-
-                })
-            }}>get by uid trainig</Button> */}
             <Form onFinish={onFinish}>
                 <Form.Item
                     name="email"

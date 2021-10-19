@@ -3,7 +3,7 @@ import reducers from './reducers'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
-import { getUserByUid,updateUser } from './middleware/user.crud';
+import { createUser, getUserByUid,updateUser } from './middleware/user.crud';
 import { getAllCampaigns,getCampaignById, createCampaign, updateCampaign, } from './middleware/campaign.crud';
 import { getAllGifts, createGift, getGiftById,updateGift } from './middleware/gift.crud';
 import { createCard } from './middleware/card.crud';
@@ -36,6 +36,7 @@ const store = createStore(
         createApply,
         getApplies,
         confirmApply,
+        createUser,
     )));
 
 export default store;

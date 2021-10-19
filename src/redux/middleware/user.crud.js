@@ -29,3 +29,17 @@ export const updateUser = store => next => action => {
     }
     return next(action)
 }
+
+export const createUser = store => next => action => {
+    if (action.type === 'CREATE_USER') {
+        axios.post(`${SERVER_URL}/api/user/createUser`, action.payload)
+            .then(result => {
+                console.log("🚀 ~ file: user.crud.js ~ line 37 ~ result", result)
+                store.dispatch(actions.setUser(result.data));
+            })
+            .catch(error => {
+                console.log("🚀 ~ file: user.crud.js ~ line 41 ~ error", error);
+            })
+    }
+    return next(action)
+}

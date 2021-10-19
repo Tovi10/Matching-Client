@@ -95,7 +95,7 @@ export default function Campaign(props) {
                                         </Tooltip>
                                         <Tooltip title='מייל'>
                                             <div className='shareIcon'>
-                                                //NOTE SERVER
+                                                {/* NOTE SERVER */}
                                                 {/* <MailOutlined onClick={() => window.open(`https://mail.google.com/mail/u/0/?fs=1&su=1&body=http://3000/current-campaign/${campaign._id}&tf=cm`, '_blank')} /> */}
                                                 <MailOutlined onClick={() => window.open(`https://mail.google.com/mail/u/0/?fs=1&su=1&body=https://matching-try.herokuapp.com/current-campaign/${campaign._id}&tf=cm`, '_blank')} />
                                             </div>
