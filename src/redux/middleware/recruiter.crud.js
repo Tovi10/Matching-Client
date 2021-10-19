@@ -6,12 +6,13 @@ export const createRecruiter = store => next => action => {
     if (action.type === 'CREATE_RECRUITER') {
         axios.post(`${SERVER_URL}/api/recruiter/createRecruiter`, action.payload)
             .then(result => {
-                console.log("🚀 ~ file: recruiter.crud.js ~ line 5 ~ result", result)
-                store.dispatch(actions.setCurrentNotification('המגייס נוצר בהצלחה!'))
+                console.log("🚀 ~ file: recruiter.crud.js ~ line 5 ~ result", result);
+                store.dispatch(actions.setCurrentNotification('המגייס נוצר בהצלחה!'));
+                store.dispatch(actions.setRecruiterLink("http://localhost:3000/recruiters/" + result.data.recruiter._id));
             })
             .catch(error => {
-                console.log("🚀 ~ file: recruiter.crud.js ~ line 9 ~ error", error)
-                store.dispatch(actions.setCurrentNotification('ארעה שגיאה ביצירת מגייס!'))
+                console.log("🚀 ~ file: recruiter.crud.js ~ line 9 ~ error", error);
+                store.dispatch(actions.setCurrentNotification('ארעה שגיאה ביצירת מגייס!'));
             });
     }
     return next(action);

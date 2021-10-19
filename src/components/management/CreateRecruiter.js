@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
     Form,
     Input,
@@ -14,6 +14,9 @@ export default function CreateRecruiter() {
     const allCampaigns = useSelector(state => state.campaignReducer.allCampaigns);
     const userCampaigns = useSelector(state => state.userReducer.user.campaigns);
     const admin = useSelector(state => state.userReducer.admin);
+    const recruiterLink = useSelector(state => state.recruiterReducer.recruiterLink);
+
+    const linkRef = useRef(recruiterLink);
 
     const [form] = Form.useForm();
 
@@ -22,12 +25,13 @@ export default function CreateRecruiter() {
             dispatch(actions.getAllCampaigns());
     }, []);
 
-
+    useEffect(() => {
+    }, [recruiterLink]);
 
     const onFinish = (values) => {
         console.log("🚀 ~ file: CreateRecruiter.js ~ line 20 ~ onFinish ~ values", values);
         const campaignId = allCampaigns.find(c => c.campaignName === values.campaign)._id;
-        dispatch(actions.createRecruiter({ ...values, campaign: campaignId }))
+        dispatch(actions.createRecruiter({ ...values, campaign: campaignId }));
     };
 
     return (
@@ -108,6 +112,14 @@ export default function CreateRecruiter() {
                     </Button>
                 </Form.Item>
             </Form>
+            {
+                recruiterLink != '' ?
+                    <spna>
+                        לינק לאזור האישי של המגייס החדש :<br />
+                        <a href={recruiterLink} className="recruiterLink" >{recruiterLink}</a>
+                    </spna>
+                    : ""
+            }
         </div >
     );
 };
