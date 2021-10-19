@@ -15,6 +15,7 @@ import '../../styles/liveCampaigns.css';
 import '../../styles/nav.css';
 import '../../styles/about.css';
 import '../../styles/stamp.css';
+import '../../styles/createRecruiter.css';
 
 export default function Base() {
 

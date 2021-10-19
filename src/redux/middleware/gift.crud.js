@@ -36,7 +36,7 @@ export const updateGift = store => next => action => {
 
 export const getGiftById = store => next => action => {
     if (action.type === 'GET_GIFT_BY_ID') {
-        axios.get(`${SERVER_URL}/api/gift/getGiftById/${action.payload}`)
+        axios.get(`${SERVER_URL}/api/gift/getGiftById/${action.payload._id}`)
             .then((result) => {
                 console.log("🚀 ~ file: gift.crud.js ~ line 23 ~ .then ~ result", result)
                 store.dispatch(actions.setCurrentGift(result.data));

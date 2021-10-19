@@ -1,8 +1,9 @@
 .Stamp {
   z-index: 3;
-  background: transparent;
+  /* background: transparent; */
   opacity: 0.4;
   position: absolute;
+  /* margin-top: 50%; */
 }
 
 .Stamp p {

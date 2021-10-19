@@ -8,6 +8,7 @@ import About from '../home/About';
 import Personal from '../home/Personal';
 import CampaignDetails from '../management/CampaignDetails';
 import BaseManagement from '../management/BaseManagement';
+import RecruiterArea from '../general/RecruiterArea';
 import { useSelector } from 'react-redux';
 
 
@@ -26,6 +27,7 @@ export default function Routes() {
                 <Route path="/all-campaigns" component={BaseCampaigns} />
                 <Route path="/current-campaign/:currentCampaign" component={Campaign} />
                 <Route path="/personal" component={Personal} />
+                <Route path="/recruiters/:recruiterId" component={RecruiterArea} />
                 {admin && <Route path="/management" component={BaseManagement} />}
                 {(admin || (user && user.allowed)) && <Route path="/management" component={BaseManagement} />}
                 <Route path="*" component={NotFound} />
