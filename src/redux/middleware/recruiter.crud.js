@@ -9,6 +9,7 @@ export const createRecruiter = store => next => action => {
                 console.log("🚀 ~ file: recruiter.crud.js ~ line 5 ~ result", result);
                 store.dispatch(actions.setCurrentNotification('המגייס נוצר בהצלחה!'));
                 store.dispatch(actions.setRecruiterLink("http://localhost:3000/recruiters/" + result.data.recruiter._id));
+                // store.dispatch(actions.setRecruiterLink("https://matching-try.herokuapp.com/recruiters/" + result.data.recruiter._id));
             })
             .catch(error => {
                 console.log("🚀 ~ file: recruiter.crud.js ~ line 9 ~ error", error);
