@@ -4,6 +4,7 @@ import createReducer from "./reducerUtils";
 const initialState = {
     recruiterLink: '',
     recruiterDonations: [],
+    currentRecruiter: null,
 }
 
 const recruiterReducer = {
@@ -11,6 +12,9 @@ const recruiterReducer = {
         state.recruiterLink = action.payload;
     },
     setRecruiterDonations(state, action) {
+        state.recruiterDonations = action.payload;
+    },
+    setCurrentRecruiter(state, action) {
         state.recruiterDonations = action.payload;
     },
 }

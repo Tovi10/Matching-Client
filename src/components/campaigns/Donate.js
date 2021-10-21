@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, notification, } from 'antd';
+import { Form, Select, Input, Button, notification, } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/actions';
 import moment from 'moment';
@@ -23,7 +23,34 @@ export default function Donate(props) {
     return (
         <div className='Donate'>
             <Form onFinish={onFinish}>
-                <div>{`תרום ${card.sum} וקבל ${card.gift ? card.gift.name : 'אין שם למתנה'}`}</div>
+                <p>{`תרום ${card.sum} וקבל ${card.gift ? card.gift.name : 'אין שם למתנה'}`}</p>
+                <Form.Item
+                    name="recruiter"
+                    // rules={createCompany ? [] : [
+                    //     {
+                    //         required: true,
+                    //         message: `אנא בחר חברה!`,
+                    //     },
+                    // ]}
+                    style={{ display: 'inline-block', width: 'calc(90% - 8px)' }}
+                >
+                    <Select
+                        size='large'
+                        allowClear
+                        showSearch
+                        style={{ textAlign: 'right' }}
+                        dropdownStyle={{ textAlign: 'right' }}
+                        // onChange={() => { setCreateCompany(false) }}
+                        notFoundContent={<>לא נמצאו נתונים</>}
+                        placeholder={`בחר מגייס...`}
+                        virtual={false}
+                        dropdownClassName='companiesSelectDropdown'>
+                        {campaign && campaign.recruiters && campaign.recruiters.map(item => (
+                            <Select.Option key={item._id}>{item.designName}</Select.Option>
+                        ))}
+                    </Select>
+                </Form.Item>
+
                 {/* <Form.Item
                     name="credutCard"
                     rules={[{ required: true, message: 'הכנס מספר אשראי!' }]}
