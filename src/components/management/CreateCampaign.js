@@ -402,7 +402,7 @@ function CreateCampaign(props) {
                 </Spin>
             </div >
 
-            <Modal footer={false} title='קמפיין חדש' visible={openModal} onCancel={() => setOpenModal(false)} centered={true} width={1000}>
+            <Modal footer={false} title='קמפיין חדש' visible={openModal} onCancel={() => {setOpenModal(false);setSpining(false);form.resetFields()}} centered={true} width={1000}>
                 <CampaignDetails />
             </Modal>
         </div >
