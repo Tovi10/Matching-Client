@@ -90,12 +90,12 @@ export default function CreateRecruiter() {
                 </Form.Item>
                 {/* name */}
                 <Form.Item
-                    name="name"
-                    label={`שם המגייס`}
+                    name="designName"
+                    label={`שם המגייס לתצוגה`}
                     rules={[{ required: true, message: 'הכנס שם!' }]}
 
                 >
-                    <Input placeholder={`הכנס כאן את שם המגייס...`} />
+                    <Input placeholder={`הכנס כאן את שם המגייס לתצוגה...`} />
                 </Form.Item>
                 {/* emil */}
                 <Form.Item

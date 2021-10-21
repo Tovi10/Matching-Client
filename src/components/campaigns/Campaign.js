@@ -112,7 +112,7 @@ export default function Campaign(props) {
                         </div>
                     </div>
                     <Tabs defaultActiveKey="1" type='card'>
-                        <TabPane tab="תורמים" key="1">
+                        <TabPane tab="תרומות" key="1">
                             <Donations />
                         </TabPane>
                         <TabPane tab="מגייסים" key="2">

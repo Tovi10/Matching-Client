@@ -7,9 +7,11 @@ export default function RecruiterArea() {
 
     const dispatch = useDispatch();
     const recruiterDonations = useSelector(state => state.recruiterReducer.recruiterDonations);
+    const currentRecruiter = useSelector(state => state.recruiterReducer.currentRecruiter);
     let recruiterId = useParams();
 
     useEffect(() => {
+        dispatch(actions.getRecruiterById(recruiterId));
         dispatch(actions.getDonationsByRecruiterId(recruiterId));
     }, []);
 
@@ -19,6 +21,7 @@ export default function RecruiterArea() {
 
     return (
         <div className="RecruiterArea">
+            <h5>{`שלום לך ${currentRecruiter ? currentRecruiter.designName : ""}`}</h5>
             <h5>{`התרומות שנתרמו על ידך לקמפיין ${recruiterDonations[0] ? recruiterDonations[0].recruiter.campaign.campaignName : ""}`}</h5>
             <div className="row">
                 {recruiterDonations ? recruiterDonations.map((donation, i) => (

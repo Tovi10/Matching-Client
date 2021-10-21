@@ -33,3 +33,17 @@ export const updateRecruiterDetails = store => next => action => {
     }
     return next(action);
 }
+
+export const getRecruiterById = store => next => action => {
+    if (action.type === 'GET_RECRUITER_BY_ID') {
+        axios.get(`${SERVER_URL}/api/recruiter/getRecruiterById/${action.payload}`)
+            .then(result => {
+                console.log("🚀 ~ file: recruiter.crud.js ~ line 41 ~ result", result);
+                store.dispatch(actions.setCurrentRecruiter(result.data));
+            })
+            .catch(error => {
+                console.log("🚀 ~ file: recruiter.crud.js ~ line 44 ~ error", error);
+            })
+    }
+    return next(action);
+}
