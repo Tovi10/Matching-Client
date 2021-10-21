@@ -11,7 +11,7 @@ import { createCard } from './middleware/card.crud';
 import { getAllCompanies, createCompany, updateCompany } from './middleware/company.crud';
 import { setCurrentNotification } from './middleware/general.crud';
 import { createDonation, getDonationsByRecruiterId } from './middleware/donation.crud';
-import { createRecruiter } from './middleware/recruiter.crud';
+import { createRecruiter, updateRecruiterDetails } from './middleware/recruiter.crud';
 import { confirmApply, createApply, getApplies } from './middleware/apply.crud';
 
 const store = createStore(
@@ -35,6 +35,7 @@ const store = createStore(
         createDonation,
         getDonationsByRecruiterId,
         createRecruiter,
+        updateRecruiterDetails,
         createApply,
         getApplies,
         confirmApply,
