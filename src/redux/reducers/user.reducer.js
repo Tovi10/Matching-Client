@@ -11,7 +11,7 @@ const userReducer = {
     setUser(state, action) {
         state.user = action.payload;
         document.cookie = `giftMatchUserUid=${state.user.uid}`;
-        if (action.payload.email === 'glikel108@gmail.com') {
+        if (action.payload.email === 'theflow.leader@gmail.com') {
             state.admin = true;
         } else {
             state.admin = false;

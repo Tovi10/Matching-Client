@@ -52,14 +52,21 @@ export const createCampaign = store => next => action => {
 
 export const updateCampaign = store => next => action => {
     if (action.type === 'UPDATE_CAMPAIGN') {
+        debugger
         axios.put(`${SERVER_URL}/api/campaign/updateCampaign`, action.payload)
             .then(result => {
-                store.dispatch(actions.setCurrentNotification('הקמפיין נוצר בהצלחה!'))
+                if (action.payload.create)
+                    store.dispatch(actions.setCurrentNotification('הקמפיין נוצר בהצלחה!'));
+                else
+                    store.dispatch(actions.setCurrentNotification('הקמפיין התעדכן בהצלחה!'))
                 console.log("🚀 ~ file: campaign.crud.js ~ line 39 ~ result", result)
                 store.dispatch(actions.setCampaignFromServer(result.data));
             })
             .catch(error => {
-                store.dispatch(actions.setCurrentNotification('ארעה שגיאה ביצירת הקמפיין!'))
+                if (action.payload.create)
+                    store.dispatch(actions.setCurrentNotification('ארעה שגיאה ביצירת הקמפיין!'))
+                else
+                    store.dispatch(actions.setCurrentNotification('ארעה שגיאה בעדכון הקמפיין!'))
                 console.log("🚀 ~ file: campaign.crud.js ~ line 42 ~ error", error)
             });
     }

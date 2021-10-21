@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Table, Button } from 'antd';
+import { Table, Button, Spin, } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/actions';
 
@@ -35,11 +35,12 @@ export default function Applies() {
     ];
     return (
         <div className='Applies'>
-            {applies ?
+            <Spin size='large' spinning={!applies}>
                 <Table dataSource={applies} columns={columns}
                     rowKey={apply => apply._id}
                     pagination={{ position: ['bottomLeft', 'none'] }}
-                    style={{ direction: 'ltr' }} /> : 'no applies'}
+                    style={{ direction: 'ltr' }} />
+            </Spin>
         </div>
     )
 }

@@ -16,6 +16,7 @@ export default function Campaigns() {
     const admin = useSelector(state => state.userReducer.admin);
 
     const [form] = Form.useForm();
+    const [campaign, setCampaign] = useState(null);
 
     useEffect(() => {
         if (!allCampaigns && admin)
@@ -23,15 +24,14 @@ export default function Campaigns() {
     }, [])
 
     const onFinish = (values) => {
-        console.log("🚀 ~ file: Campaigns.js ~ line 31 ~ onFinish ~ values", values)
+        console.log("🚀 ~ file: Campaigns.js ~ line 31 ~ onFinish ~ values", values);
+        dispatch(actions.updateCampaign({...campaign, ...values}));
     };
 
     const choose = (campaignId) => {
-        const campaign = allCampaigns.find(c => c._id === campaignId)
-        form.setFieldsValue({...campaign,
-            // duration:null
-            duration:[campaign.duration[0],campaign.duration[1]]
-        });
+        const campaignObj = allCampaigns.find(c => c._id === campaignId);
+        setCampaign(campaignObj)
+        form.setFieldsValue({ ...campaignObj, duration: null });
     }
 
     return (

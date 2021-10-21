@@ -119,7 +119,7 @@ function CreateCampaign(props) {
             imagePaths.push(singleImgPath);
             // the end :)
             if (imagePaths.length === images.length) {
-                const updateCampaign = { ...campaign, images: imagePaths }
+                const updateCampaign = { ...campaign, images: imagePaths ,create:true}
                 dispatch(actions.updateCampaign(updateCampaign))
                 dispatch(actions.setCampaignId(null));
                 // history.push(`/new-campaign`);
