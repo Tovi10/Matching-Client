@@ -9,8 +9,8 @@ export default function Donations() {
 
     return (
         <div className='Donations'>
-            {campaign.donations.length ?
-                <div style={{ background: '#ace5ac', padding: '10px' }}>
+            <div style={{ background: '#ace5ac', padding: '10px' }}>
+                {campaign.donations.length ?
                     <Row gutter={[8, 8]}>
                         {campaign.donations.map(donation => {
                             return (
@@ -23,9 +23,8 @@ export default function Donations() {
                                 </Col>
                             )
                         })}
-                    </Row>
-                </div> : ''}
+                    </Row> : 'אין תורמים עדיין!'}
+            </div>
         </div>
-
     )
 }

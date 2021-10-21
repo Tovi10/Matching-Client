@@ -17,35 +17,28 @@ export default function CampaignDetails(props) {
     return (
         <div className="CampaignDetails">
             {campaign ? <div className="row notSelected">
-                <div className="col-2"></div>
-                <div className="offset-2 card mb-3 col-8 campaignCard">
-                    <div className="row no-gutters">
-                        {/* <h3>קמפיין חדש!</h3> */}
-                        <Divider orientation="left">קמפיין חדש</Divider>
-                        <div className="col-md-8">
-                            <div className="card-body">
-                                <h2 className="card-title">{campaign.campaignName}</h2>
-                                <h1 className="card-text">{numberWithCommas(campaign.goal)} ש"ח</h1>
-                                <h4 className="card-text">{campaign.purposeOfCollecting}</h4>
-                                <h5>{`הקמפיין יהיה פעיל מיום ${campaign.duration[0]} עד ${campaign.duration[1]}`}</h5>
-                                <label>{`קמפיין זה שייך לארגון ${campaign.company.companyName}`}</label>
-                                <p className="card-text"><small className="text-muted">{`ניתן ליצור קשר ב${campaign.company.phone} או ב ${campaign.company.email}`}</small></p>
-                                <Spin style={{ display: showSpin ? 'block' : 'none' }} />
-                                {campaign.company.logo ?
-                                    <img style={{ width: '100%', height: '100%', objectFit: 'contain', display: showSpin ? 'none' : '' }} className="card-img" src={campaign.company.logo} alt="logo" /> :
-                                    <div style={{ display: showSpin ? 'none' : '' }}  >no company logo</div>}
+                <div className="col-md-8">
+                    <div className="card-body">
+                        <h2 className="card-title">{campaign.campaignName}</h2>
+                        <h1 className="card-text">{numberWithCommas(campaign.goal)} ש"ח</h1>
+                        <h4 className="card-text">{campaign.purposeOfCollecting}</h4>
+                        <h5>{`הקמפיין יהיה פעיל מיום ${campaign.duration[0]} עד ${campaign.duration[1]}`}</h5>
+                        <label>{`קמפיין זה שייך לארגון ${campaign.company.companyName}`}</label>
+                        <p className="card-text"><small className="text-muted">{`ניתן ליצור קשר ב${campaign.company.phone} או ב ${campaign.company.email}`}</small></p>
+                        <Spin style={{ display: showSpin ? 'block' : 'none' }} />
+                        {campaign.company.logo ?
+                            <img style={{ width: '100%', height: '100%', objectFit: 'contain', display: showSpin ? 'none' : '' }} className="card-img" src={campaign.company.logo} alt="logo" /> :
+                            <div style={{ display: showSpin ? 'none' : '' }}  >no company logo</div>}
 
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <Spin style={{ display: showSpin ? 'block' : 'none' }} />
-                            {(campaign.images && campaign.images.length) ?
-                                // campaign.images.map(i =>
-                                //     <img key={i} style={{ width: '100%', height: '100%', objectFit: 'contain' }} className="card-img" src={i} alt="..." />) : 'no images!'}
-                                <img style={{ width: '100%', height: '100%', objectFit: 'contain', display: showSpin ? 'none' : '' }} className="card-img" src={campaign.images[0]} alt="..." /> :
-                                <div style={{ display: showSpin ? 'none' : '' }}  >no campaigns images</div>}
-                        </div>
                     </div>
+                </div>
+                <div className="col-md-4">
+                    <Spin style={{ display: showSpin ? 'block' : 'none' }} />
+                    {(campaign.images && campaign.images.length) ?
+                        // campaign.images.map(i =>
+                        //     <img key={i} style={{ width: '100%', height: '100%', objectFit: 'contain' }} className="card-img" src={i} alt="..." />) : 'no images!'}
+                        <img style={{ width: '100%', height: '100%', objectFit: 'contain', display: showSpin ? 'none' : '' }} className="card-img" src={campaign.images[0]} alt="..." /> :
+                        <div style={{ display: showSpin ? 'none' : '' }}  >no campaigns images</div>}
                 </div>
             </div> : <Empty description='לא קיים מידע על קמפיין חדש ...' image={Empty.PRESENTED_IMAGE_SIMPLE} />}
         </div >
