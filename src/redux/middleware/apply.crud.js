@@ -7,6 +7,7 @@ export const createApply = store => next => action => {
         axios.post(`${SERVER_URL}/api/apply/CreateApply`, action.payload)
             .then(result => {
                 console.log("🚀 ~ file: apply.crud.js ~ line 9 ~ result", result)
+                store.dispatch(actions.setApplies(result.data));
                 store.dispatch(actions.setCurrentNotification('הבקשה נוצרה בהצלחה!'))
             })
             .catch(error => {
@@ -36,9 +37,11 @@ export const confirmApply = store => next => action => {
             .then(result => {
                 console.log("🚀 ~ file: apply.crud.js ~ line 37 ~ result", result);
                 store.dispatch(actions.setApplies(result.data));
+                store.dispatch(actions.setCurrentNotification('הבקשה אושרה בהצלחה!'))
             })
             .catch(error => {
                 console.log("🚀 ~ file: apply.crud.js ~ line 40 ~ error", error)
+                store.dispatch(actions.setCurrentNotification('ארעה שגיאה באישור הבקשה!'))
             })
     }
     return next(action)

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Table, Button, Spin, } from 'antd';
+import { Table, Button, Spin, Tag, Tooltip, Avatar, } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/actions';
 
@@ -7,6 +7,8 @@ export default function Applies() {
 
     const dispatch = useDispatch();
     const applies = useSelector(state => state.applyReducer.applies);
+    const firebaseUser = useSelector(state => state.userReducer.firebaseUser);
+    const user = useSelector(state => state.userReducer.user);
 
     useEffect(() => {
         if (!applies)
@@ -17,20 +19,35 @@ export default function Applies() {
         {
             title: '',
             dataIndex: '',
-            render: (text, apply) => <Button onClick={() => dispatch(actions.confirmApply(apply._id))}>אשר!</Button>,
-            className: 'rtlColumn'
+            render: (text, apply) =>
+                !apply.status ?
+                    <Button onClick={() => dispatch(actions.confirmApply(apply._id))}>אשר!</Button> :
+                    <Tag color='green' className='notSelected pointer'>הסתיים</Tag>,
+            className: 'rtlColumn',
+            align: 'left',
         },
         {
-            title: 'תוכן הבקשה',
+            title: 'תוכן',
             dataIndex: 'text',
-            width: 800,
+            width: '80%',
             align: 'right',
             ellipsis: true,
             className: 'rtlColumn'
         },
+        // {
+        //     title: 'סטטוס',
+        //     dataIndex: 'status',
+        //     render: (status, apply) => <Tag color={status ? 'blue' : 'green'} className='notSelected pointer'>{status ? '!אושר' : '.בטיפול'}</Tag>,
+        //     align: 'center',
+        // },
         {
-            title: 'סטטוס הבקשה',
-            dataIndex: 'status',
+            title: 'משתמש',
+            dataIndex: 'user',
+            render: (user, apply) =>
+                <Tooltip className='pointer' title={user.name}>
+                    <Avatar>{user.name[0]}</Avatar>
+                </Tooltip>,
+            align: 'center',
         },
     ];
     return (
