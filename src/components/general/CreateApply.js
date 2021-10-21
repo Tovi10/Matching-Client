@@ -3,12 +3,13 @@ import {
     Form,
     Input,
     Button,
-    Select,
+    DatePicker,
 } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/actions';
 import TextArea from 'rc-textarea';
 import Login from '../login/Login';
+import moment from 'moment';
 
 export default function CreateApply() {
 
@@ -20,7 +21,11 @@ export default function CreateApply() {
 
     const onFinish = (values) => {
         console.log("🚀 ~ file: CreateApply.js ~ line 22 ~ onFinish ~ values", values)
-        dispatch(actions.createApply({...values,user:user._id}));
+        dispatch(actions.createApply({ ...values, user: user._id }));
+        form.setFieldsValue({
+            duration: [moment('2015/01/01', 'DD/MM/YYYY'), moment('2015/01/01', 'DD/MM/YYYY')]
+        });
+
     };
 
     return (
@@ -28,6 +33,7 @@ export default function CreateApply() {
             <h1>הגשת בקשה ליצירת קמפיין</h1>
             {user ?
                 <Form
+
                     labelCol={{
                         span: 4,
                     }}
@@ -47,8 +53,7 @@ export default function CreateApply() {
                     </Form.Item>
                     {/* submit */}
                     <Form.Item className='submitFormItem'>
-                        <Button type="primary" htmlType="submit">
-                            send                    </Button>
+                        <Button type="primary" htmlType="submit">send</Button>
                     </Form.Item>
                 </Form> : <Login />}
         </div >

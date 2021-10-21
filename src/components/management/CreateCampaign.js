@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/actions';
 import CampaignDetails from './CampaignDetails';
 import '../../styles/createCampaign.css';
-
+import moment from 'moment';
 
 function CreateCampaign(props) {
 
@@ -95,7 +95,7 @@ function CreateCampaign(props) {
             setCreateCompany(false)
         }
         else {
-            const data = { ...values, duration: [values.duration[0]._d, values.duration[1]._d], userId: user._id };
+            const data = { ...values, duration: [moment(values.duration[0].toString()).format("DD/MM/YYYY"), moment(values.duration[1].toString()).format("DD/MM/YYYY")], userId: user._id };
             dispatch(actions.createCampaign(data));
         }
     };

@@ -8,6 +8,7 @@ export default function About() {
 
     return (
         <div className='About'>
+            
             {/* <div className="aboutText">
                 <p>
                     מחפש קריאה מהירה באינטרנט? להלן תמצא את האתרים האהובים עלינו לקרוא עליהם סיפורים קצרים.
@@ -56,6 +57,7 @@ export default function About() {
             {/* </div >
                 </div> */}
             <ApplyCreateCampaign />
+
             {/* </div> */}
         </div >
     )

@@ -8,6 +8,7 @@ import {
     DatePicker,
     Select,
 } from 'antd';
+import moment from 'moment';
 export default function Campaigns() {
 
     const dispatch = useDispatch();
@@ -25,13 +26,19 @@ export default function Campaigns() {
 
     const onFinish = (values) => {
         console.log("🚀 ~ file: Campaigns.js ~ line 31 ~ onFinish ~ values", values);
-        dispatch(actions.updateCampaign({...campaign, ...values}));
+        dispatch(actions.updateCampaign({ ...campaign, ...values }));
     };
 
     const choose = (campaignId) => {
         const campaignObj = allCampaigns.find(c => c._id === campaignId);
+        console.log("🚀 ~ file: Campaigns.js ~ line 34 ~ choose ~ campaignObj", campaignObj)
         setCampaign(campaignObj)
-        form.setFieldsValue({ ...campaignObj, duration: null });
+        form.setFieldsValue({
+            ...campaignObj,
+            // duration:null
+            // duration: [moment('01/01/1999', 'DD/MM/YYYY'), moment('01/03/1999', 'DD/MM/YYYY')]
+            duration: [moment(campaignObj.duration[0], 'DD/MM/YYYY'), moment(campaignObj.duration[1], 'DD/MM/YYYY')]
+        });
     }
 
     return (
@@ -122,6 +129,7 @@ export default function Campaigns() {
                     style={{ display: 'inline-block', width: 'calc(100% - 8px)', marginLeft: '8px' }}
                 >
                     <DatePicker.RangePicker
+                        format='DD/MM/YYYY'
                         placeholder={['תאריך התחלה', 'תאריך סיום']}
                         direction='rtl'
                         showNow={true}
