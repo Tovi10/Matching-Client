@@ -9,8 +9,8 @@ export default function Recruiters() {
 
     return (
         <div className='Recruiters'>
-            {campaign.recruiters.length ?
                 <div style={{ background: '#ace5ac', padding: '10px' }}>
+            {campaign.recruiters.length ?
                     <Row gutter={[8, 8]}>
                         {campaign.recruiters.map(recruiter => {
                             return (
@@ -22,8 +22,8 @@ export default function Recruiters() {
                                 </Col>
                             )
                         })}
-                    </Row>
-                </div> : ''}
+                    </Row>: 'אין מגייסים עדיין!'}
+                </div>
         </div>
 
     )
