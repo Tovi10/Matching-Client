@@ -6,6 +6,7 @@ import CreateGift from './CreateGift';
 import CreateRecruiter from './CreateRecruiter';
 import Applies from './Applies';
 import { useSelector } from 'react-redux';
+import Campaigns from './Campaigns';
 
 
 const { TabPane } = Tabs;
@@ -34,6 +35,9 @@ export default function BaseManagement() {
                         </TabPane>
                         <TabPane tab="בקשות" key="5">
                             <Applies />
+                        </TabPane>
+                        <TabPane tab="קמפיינים" key="6">
+                            <Campaigns />
                         </TabPane>
                     </>}
             </Tabs>
