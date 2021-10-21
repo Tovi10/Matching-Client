@@ -9,12 +9,13 @@ import {
     Spin,
     Alert,
     Tooltip,
+    Modal,
 } from 'antd';
 import { PlusOutlined, DeleteTwoTone, MinusOutlined, UploadOutlined, } from '@ant-design/icons';
 import { firebase } from '../../services/firebase.service';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/actions';
-
+import CampaignDetails from './CampaignDetails';
 import '../../styles/createCampaign.css';
 
 
@@ -38,6 +39,8 @@ function CreateCampaign(props) {
     const [uploadErr, setUploadErr] = useState(false);
     const [logoURL, setLogoURL] = useState(null);
     const [imagesURL, setImagesURL] = useState([]);
+
+    const [openModal, setOpenModal] = useState(false);
 
     const inputLogoRef = useRef(null), inputImagesRef = useRef(null);
 
@@ -92,7 +95,7 @@ function CreateCampaign(props) {
             setCreateCompany(false)
         }
         else {
-            const data = { ...values, duration: [values.duration[0]._d, values.duration[1]._d],userId:user._id };
+            const data = { ...values, duration: [values.duration[0]._d, values.duration[1]._d], userId: user._id };
             dispatch(actions.createCampaign(data));
         }
     };
@@ -101,7 +104,8 @@ function CreateCampaign(props) {
         if (!imageList) {
             // maybe move them to the end of the function;
             dispatch(actions.setCampaignId(null));
-            history.push(`/new-campaign`);
+            // history.push(`/new-campaign`);
+            setOpenModal(true);
             return;
         };
         for (const [key, value] of Object.entries(imageList)) {
@@ -118,7 +122,8 @@ function CreateCampaign(props) {
                 const updateCampaign = { ...campaign, images: imagePaths }
                 dispatch(actions.updateCampaign(updateCampaign))
                 dispatch(actions.setCampaignId(null));
-                history.push(`/new-campaign`);
+                // history.push(`/new-campaign`);
+                setOpenModal(true);
             }
         });
     }
@@ -396,6 +401,10 @@ function CreateCampaign(props) {
                     </Form>
                 </Spin>
             </div >
+
+            <Modal footer={false} title='קמפיין חדש' visible={openModal} onCancel={() => setOpenModal(false)} centered={true} width={1000}>
+                <CampaignDetails />
+            </Modal>
         </div >
     );
 };

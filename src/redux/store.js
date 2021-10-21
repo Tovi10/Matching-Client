@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-
+import reducers from './reducers'
 import { createUser, getUserByUid,updateUser } from './middleware/user.crud';
 import { getAllCampaigns,getCampaignById, createCampaign, updateCampaign, } from './middleware/campaign.crud';
 import { getAllGifts, createGift, getGiftById,updateGift } from './middleware/gift.crud';
