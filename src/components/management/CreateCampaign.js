@@ -119,7 +119,7 @@ function CreateCampaign(props) {
             imagePaths.push(singleImgPath);
             // the end :)
             if (imagePaths.length === images.length) {
-                const updateCampaign = { ...campaign, images: imagePaths ,create:true}
+                const updateCampaign = { ...campaign, images: imagePaths, create: true }
                 dispatch(actions.updateCampaign(updateCampaign))
                 dispatch(actions.setCampaignId(null));
                 // history.push(`/new-campaign`);
@@ -353,6 +353,7 @@ function CreateCampaign(props) {
                                     style={{ display: 'inline-block', width: 'calc(100% - 8px)', marginLeft: '8px' }}
                                 >
                                     <DatePicker.RangePicker
+                                        format='DD/MM/YYYY'
                                         placeholder={['תאריך התחלה', 'תאריך סיום']}
                                         direction='rtl'
                                         showNow={true}
@@ -401,7 +402,7 @@ function CreateCampaign(props) {
                     </Form>
                 </Spin>
             </div >
-            <Modal footer={false} title='קמפיין חדש' visible={openModal} onCancel={() => {setOpenModal(false);setSpining(false);form.resetFields()}} centered={true} width={1000}>
+            <Modal footer={false} title='קמפיין חדש' visible={openModal} onCancel={() => { setOpenModal(false); setSpining(false); form.resetFields() }} centered={true} width={1000}>
                 <CampaignDetails />
             </Modal>
         </div >

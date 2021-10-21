@@ -35,7 +35,6 @@ export default function Campaigns() {
         setCampaign(campaignObj)
         form.setFieldsValue({
             ...campaignObj,
-            // duration:null
             // duration: [moment('01/01/1999', 'DD/MM/YYYY'), moment('01/03/1999', 'DD/MM/YYYY')]
             duration: [moment(campaignObj.duration[0], 'DD/MM/YYYY'), moment(campaignObj.duration[1], 'DD/MM/YYYY')]
         });

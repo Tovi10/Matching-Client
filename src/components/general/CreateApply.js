@@ -22,10 +22,6 @@ export default function CreateApply() {
     const onFinish = (values) => {
         console.log("🚀 ~ file: CreateApply.js ~ line 22 ~ onFinish ~ values", values)
         dispatch(actions.createApply({ ...values, user: user._id }));
-        form.setFieldsValue({
-            duration: [moment('2015/01/01', 'DD/MM/YYYY'), moment('2015/01/01', 'DD/MM/YYYY')]
-        });
-
     };
 
     return (
