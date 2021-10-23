@@ -1,58 +1,39 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     Form,
     Input,
     Button,
+    Select,
 } from 'antd';
 import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons';
-import { firebase } from '../../services/firebase.service';
-
 import { actions } from '../../redux/actions';
 
-export default function CreateGift() {
+export default function UpdateGift() {
 
     const dispatch = useDispatch();
-    const general = useSelector(state => state.generalReducer);
-    const gift = useSelector(state => state.giftReducer.gift);
+    const allGifts = useSelector(state => state.giftReducer.allGifts);
 
     const [form] = Form.useForm();
-    const [image, setImage] = useState(null);
-
-    const inputImageRef = useRef(null);
 
     useEffect(() => {
-        if (general.giftId) { 
-            uploadImageToStorage(general.giftId)
-        }
-    }, [general.giftId]);
-
-    useEffect(() => {
-        if (general.currentNotification === 'המתנה התווספה בהצלחה!') {
-            setImage(null);
-            form.resetFields();
-        }
-    }, [general.currentNotification]);
-    
+        if (!allGifts)
+            dispatch(actions.getAllGifts());
+    }, []);
     const onFinish = (values) => {
-        console.log("🚀 ~ file: CreateGift.js ~ line 20 ~ onFinish ~ values", values);
-        dispatch(actions.createGift(values));
+        console.log("🚀 ~ file: UpdateGift.js ~ line 20 ~ onFinish ~ values", values);
+        dispatch(actions.updateGift(values));
     };
-    const uploadImageToStorage = async (giftId) => {
-        if (!image) return;
-        const storageRef = firebase.storage().ref();
-        let fileRef = storageRef.child(`Gifts/${giftId}/${Object.entries(image)[0][1].name}`);
-        await fileRef.put(Object.entries(image)[0][1]);
-        const imageImgPath = await fileRef.getDownloadURL();
-        // edit gift in server with the image
-        const updateGift = { ...gift, image: imageImgPath }
-        dispatch(actions.updateGift(updateGift));
-        dispatch(actions.setGiftId(null));
+    const choose=(giftId)=>{
+        const gift=allGifts.find(gift=>gift._id===giftId);
+        console.log("🚀 ~ file: UpdateGift.js ~ line 29 ~ choose ~ gift", gift)
+        form.setFieldsValue(gift);
     }
 
+
     return (
-        <div className='p-auto CreateGift'>
-            <h1>יצירת מתנה</h1>
+        <div className='p-auto UpdateGift'>
+            <h1>עריכת מתנה</h1>
             <Form
                 labelCol={{
                     span: 4,
@@ -61,9 +42,35 @@ export default function CreateGift() {
                     span: 20,
                 }}
                 form={form}
-                name="CreateGift"
+                name="UpdateGift"
                 onFinish={onFinish}
             >
+                {/* gift */}
+                <Form.Item
+                    name="gift"
+                    rules={[
+                        {
+                            required: true,
+                            message: `אנא בחר מתנה!`,
+                        },
+                    ]}
+                >
+                    <Select
+                        allowClear
+                        showSearch
+                        // options={allGifts && allGifts.map(gift => {
+                        //     return { value: gift.name, label: gift.name }
+                        // })}
+                        onChange={choose}
+                        style={{ textAlign: 'right' }}
+                        dropdownStyle={{ textAlign: 'right' }}
+                        notFoundContent={<>לא נמצאו מתנות</>}
+                        placeholder={`בחר מתנה...`} >
+                        {allGifts && allGifts.map(gift => {
+                            return (<Select.Option key={gift._id}>{gift.name}</Select.Option>)
+                        })}
+                    </Select>
+                </Form.Item>
                 {/* name */}
                 <Form.Item
                     name="name"
@@ -89,7 +96,7 @@ export default function CreateGift() {
                     <Input placeholder={`הכנס כאן את תאור המתנה...`} />
                 </Form.Item>
                 {/* image */}
-                <Form.Item
+                {/* <Form.Item
                     name='image'
                 >
                     {image ?
@@ -103,7 +110,7 @@ export default function CreateGift() {
                             <PlusOutlined className='plusIcon' />
                             <div>בחר קובץ</div>
                         </div>}
-                </Form.Item>
+                </Form.Item> */}
                 {/* price */}
                 <Form.Item
                     name="price"
@@ -125,7 +132,7 @@ export default function CreateGift() {
                 {/* submit */}
                 <Form.Item className='submitFormItem'>
                     <Button type="primary" htmlType="submit">
-                        יצירת מתנה
+                        עריכת מתנה
                     </Button>
                 </Form.Item>
             </Form>

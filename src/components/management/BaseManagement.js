@@ -1,12 +1,14 @@
 import React from 'react';
 import { Tabs } from 'antd';
-import CreateCampaign from './CreateCampaign';
 import CreateCard from './CreateCard';
-import CreateGift from './CreateGift';
 import CreateRecruiter from './CreateRecruiter';
 import Applies from './Applies';
 import { useSelector } from 'react-redux';
-import Campaigns from './Campaigns';
+import Campaigns from './UpdateCampaign';
+import CampaignsManagment from './CampaignsManagment';
+import CardsManagment from './CardsManagment';
+import GiftsManagment from './GiftsManagment';
+import RecruitersManagment from './RecruitersManagment';
 
 
 const { TabPane } = Tabs;
@@ -19,25 +21,22 @@ export default function BaseManagement() {
     return (
         <div className='BaseManagement'>
             <Tabs defaultActiveKey="1" tabPosition='left'>
-                <TabPane tab="יצירת קמפיין" key="1">
-                    <CreateCampaign />
+                <TabPane tab="קמפיינים" key="1">
+                    <CampaignsManagment />
                 </TabPane>
-                <TabPane tab="הוסף מגייס" key="2">
-                    <CreateRecruiter />
+                <TabPane tab="כרטיסים" key="2">
+                    <CardsManagment />
+                </TabPane>
+                <TabPane tab="מגייסים" key="3">
+                    <RecruitersManagment />
                 </TabPane>
                 {admin &&
                     <>
-                        <TabPane tab="הוסף מתנה" key="3">
-                            <CreateGift />
-                        </TabPane>
-                        <TabPane tab="הוסף כרטיס" key="4">
-                            <CreateCard />
+                        <TabPane tab="מתנות" key="4">
+                            <GiftsManagment />
                         </TabPane>
                         <TabPane tab="בקשות" key="5">
                             <Applies />
-                        </TabPane>
-                        <TabPane tab="קמפיינים" key="6">
-                            <Campaigns />
                         </TabPane>
                     </>}
             </Tabs>

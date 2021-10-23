@@ -51,7 +51,6 @@ export default function CreateRecruiter() {
                 {/* campaign */}
                 <Form.Item
                     name="campaign"
-                    label={`קמפיין`}
                     rules={[
                         {
                             required: true,
@@ -78,7 +77,6 @@ export default function CreateRecruiter() {
                 {/* sum */}
                 <Form.Item
                     name="sum"
-                    label={`סכום התרומה`}
                     rules={[
                         {
                             required: true,
@@ -91,7 +89,6 @@ export default function CreateRecruiter() {
                 {/* name */}
                 <Form.Item
                     name="designName"
-                    label={`שם המגייס לתצוגה`}
                     rules={[{ required: true, message: 'הכנס שם!' }]}
 
                 >
@@ -100,7 +97,6 @@ export default function CreateRecruiter() {
                 {/* emil */}
                 <Form.Item
                     name="email"
-                    label={`כתובת אימייל`}
                     rules={[{ required: true, message: 'הכנס מייל!' }]}
                 >
                     <Input type='email' placeholder="מייל" />

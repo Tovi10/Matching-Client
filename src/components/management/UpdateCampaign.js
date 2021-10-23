@@ -9,7 +9,7 @@ import {
     Select,
 } from 'antd';
 import moment from 'moment';
-export default function Campaigns() {
+export default function UpdateCampaign() {
 
     const dispatch = useDispatch();
     const allCampaigns = useSelector(state => state.campaignReducer.allCampaigns);
@@ -41,7 +41,7 @@ export default function Campaigns() {
     }
 
     return (
-        <div className='Campaigns'>
+        <div className='UpdateCampaign'>
             <Select
                 size='large'
                 allowClear
@@ -55,7 +55,7 @@ export default function Campaigns() {
                 dropdownClassName='companiesSelectDropdown'>
                 {admin ? (allCampaigns && allCampaigns.map(item => (
                     <Select.Option key={item._id}>{item.campaignName}</Select.Option>
-                ))) : (user.campaigns && user.campaigns.mpa(item => (
+                ))) : (user.campaigns && user.campaigns.map(item => (
                     <Select.Option key={item._id}>{item.campaignName}</Select.Option>
                 )))}
             </Select>
