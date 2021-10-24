@@ -86,8 +86,8 @@ export default function Campaign(props) {
                                         </div>
                                         <Tooltip title={copy ? 'העתקת קישור' : 'הקישור הועתק'} onClick={() => {
                                             setCopy(false);
-                                            navigator.clipboard.writeText(`http://localhost:3000/current-campaign/${campaign._id}`);
-                                            // navigator.clipboard.writeText(`https://matching-try.herokuapp.com/current-campaign/${campaign._id}`);
+                                            // navigator.clipboard.writeText(`http://localhost:3000/current-campaign/${campaign._id}`);
+                                            navigator.clipboard.writeText(`https://matching-try.herokuapp.com/current-campaign/${campaign._id}`);
                                         }}>
                                             <div className='shareIcon'>
                                                 {copy ? <CopyOutlined /> : <CopyFilled />}
