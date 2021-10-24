@@ -36,10 +36,10 @@ export const updateRecruiterDetails = store => next => action => {
 
 export const getRecruiterById = store => next => action => {
     if (action.type === 'GET_RECRUITER_BY_ID') {
-        axios.get(`${SERVER_URL}/api/recruiter/getRecruiterById/${action.payload}`)
+        axios.get(`${SERVER_URL}/api/recruiter/getRecruiterById/${action.payload.recruiterId}`)
             .then(result => {
                 console.log("🚀 ~ file: recruiter.crud.js ~ line 41 ~ result", result);
-                store.dispatch(actions.setCurrentRecruiter(result.data));
+                store.dispatch(actions.setCurrentRecruiter(result.data.recruiter));
             })
             .catch(error => {
                 console.log("🚀 ~ file: recruiter.crud.js ~ line 44 ~ error", error);

@@ -15,7 +15,7 @@ const recruiterReducer = {
         state.recruiterDonations = action.payload;
     },
     setCurrentRecruiter(state, action) {
-        state.recruiterDonations = action.payload;
+        state.currentRecruiter = action.payload;
     },
 }
 export default produce((state, action) => createReducer(state, action, recruiterReducer), initialState);

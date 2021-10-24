@@ -22,7 +22,8 @@ export default function RecruiterArea() {
     return (
         <div className="RecruiterArea">
             <h5>{`שלום לך ${currentRecruiter ? currentRecruiter.designName : ""}`}</h5>
-            <h5>{`התרומות שנתרמו על ידך לקמפיין ${recruiterDonations[0] ? recruiterDonations[0].recruiter.campaign.campaignName : ""}`}</h5>
+            <h5>{`התרומות שנתרמו על ידך לקמפיין ${currentRecruiter ? currentRecruiter.campaign.campaignName : ""}`}</h5>
+            {currentRecruiter ? <h6>{`עד כה הושג ${currentRecruiter.sumRaised} מתוך ${currentRecruiter.sum} ש"ח`}</h6> : ""}
             <div className="row">
                 {recruiterDonations ? recruiterDonations.map((donation, i) => (
                     // <div>{JSON.stringify(donation)}
@@ -30,7 +31,7 @@ export default function RecruiterArea() {
                     <div className={`card col-4 m-3 ${i % 2 === 0 ? "cardModTwo" : ""}`} key={donation._id}>
                         <div class="card-body">
                             <h5 className="card-title">{donation.user.name}</h5>
-                            <p>{`תרם ${donation.card.text}`}</p>
+                            <p>{`תרם ${donation.card.sum} ש"ח עבור ${donation.card.text}`}</p>
                             <p>{`בתאריך ${donation.date}`}</p>
                             <p>{`וקבל ${donation.card.gift && donation.card.gift.name}`}</p>
                         </div>
