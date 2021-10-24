@@ -4,6 +4,7 @@ import {
     Form,
     Input,
     Button,
+    Checkbox,
 } from 'antd';
 import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons';
 import { firebase } from '../../services/firebase.service';
@@ -18,11 +19,12 @@ export default function CreateGift() {
 
     const [form] = Form.useForm();
     const [image, setImage] = useState(null);
+    const [coupon, setCoupon] = useState(false);
 
     const inputImageRef = useRef(null);
 
     useEffect(() => {
-        if (general.giftId) { 
+        if (general.giftId) {
             uploadImageToStorage(general.giftId)
         }
     }, [general.giftId]);
@@ -33,7 +35,7 @@ export default function CreateGift() {
             form.resetFields();
         }
     }, [general.currentNotification]);
-    
+
     const onFinish = (values) => {
         console.log("🚀 ~ file: CreateGift.js ~ line 20 ~ onFinish ~ values", values);
         dispatch(actions.createGift(values));
@@ -122,6 +124,24 @@ export default function CreateGift() {
                 >
                     <Input type='number' placeholder={`הכנס כאן את כמות המתנה...`} />
                 </Form.Item>
+                <Form.Item>
+                    <Checkbox onChange={() => setCoupon(!coupon)}>שובר</Checkbox>
+                </Form.Item>
+                {coupon &&
+                    <Form.Item
+                        name='from'
+                        rules={[
+                            {
+                                required: true,
+                                message: `הכנס מייל!`,
+                            },
+                            {
+                                type: 'email',
+                                message: `הכנס מייל!`,
+                            },
+                        ]}>
+                        <Input placeholder='הכנס מייל אליו ישלחו פרטי מקבלי השוברים' />
+                    </Form.Item>}
                 {/* submit */}
                 <Form.Item className='submitFormItem'>
                     <Button type="primary" htmlType="submit">
