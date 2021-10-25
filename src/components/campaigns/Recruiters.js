@@ -9,21 +9,22 @@ export default function Recruiters() {
 
     return (
         <div className='Recruiters'>
-                <div style={{ background: '#ace5ac', padding: '10px' }}>
-            {campaign.recruiters.length ?
+            <div style={{ background: '#ace5ac', padding: '10px' }}>
+                {campaign.recruiters.length ?
                     <Row gutter={[8, 8]}>
                         {campaign.recruiters.map(recruiter => {
                             return (
-                                <Col span={8} key={recruiter._id} >
-                                    <Card title={recruiter.user.name} bordered={false}>
+                                <Col style={{ cursor: 'pointer' }} span={8} key={recruiter._id} onClick={() => recruiter.link ? window.open(recruiter.link, "_blank") : ""}>
+                                    <Card style={{ height: '26vh' }} title={recruiter.user.name === undefined ? 'לא ידוע' : recruiter.user.name} bordered={false}>
                                         <div>{`לקח על עצמו ${recruiter.sum} ש"ח`}</div>
-                                        <div>{`ואסף ${recruiter.sumRaised}`}</div>
+                                        <div>{`ואסף ${recruiter.sumRaised === undefined ? 0 : recruiter.sumRaised}`}</div>
+                                        {recruiter.sumRaised > recruiter.sum ? <b style={{ backgroundColor: "yellow" }}>הגיע ליעד!!</b> : ""}
                                     </Card>
                                 </Col>
                             )
                         })}
-                    </Row>: 'אין מגייסים עדיין!'}
-                </div>
+                    </Row> : 'אין מגייסים עדיין!'}
+            </div>
         </div>
 
     )

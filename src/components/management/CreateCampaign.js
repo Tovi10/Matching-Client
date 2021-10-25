@@ -39,7 +39,6 @@ function CreateCampaign(props) {
     const [uploadErr, setUploadErr] = useState(false);
     const [logoURL, setLogoURL] = useState(null);
     const [imagesURL, setImagesURL] = useState([]);
-
     const [openModal, setOpenModal] = useState(false);
 
     const inputLogoRef = useRef(null), inputImagesRef = useRef(null);
@@ -80,14 +79,15 @@ function CreateCampaign(props) {
             // else
             setImageList(files)
         }
-
     }
+
     const removeImage = (key) => {
         const files = Object.entries(imageList).filter(file => file[0] !== key);
         setImageList(Object.fromEntries(files));
         // remove also from imagesURL
         setImagesURL(imagesURL.filter(img => img !== imagesURL[key]));
     }
+
     const onFinish = (values) => {
         setSpining(true);
         if (createCompany) {
@@ -98,7 +98,8 @@ function CreateCampaign(props) {
             const data = { ...values, duration: [moment(values.duration[0].toString()).format("DD/MM/YYYY"), moment(values.duration[1].toString()).format("DD/MM/YYYY")], userId: user._id };
             dispatch(actions.createCampaign(data));
         }
-    };
+    }
+
     const uploadImageToStorage = (campaignId) => {
         let images = [], imagePaths = [];
         if (!imageList) {

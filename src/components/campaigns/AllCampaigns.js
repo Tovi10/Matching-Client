@@ -34,7 +34,7 @@ function AllCampaigns(props) {
         let a = currentHeight;
         a.push({ key: i, value: height })
         setCurrentHeight([...a])
-        console.log({ key: i, value: height })
+        // console.log({ key: i, value: height })
     }
     return (
         <div className='AllCampaigns container-fluid'>

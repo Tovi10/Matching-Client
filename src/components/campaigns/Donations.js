@@ -1,29 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Card, Col, Row, } from 'antd';
-import moment from 'moment';
 
 export default function Donations() {
 
     const campaign = useSelector(state => state.campaignReducer.campaign);
+    const [sortedArray, setSortedArray] = useState([]);
+
+    useEffect(() => {
+        setSortedArray(campaign.donations.slice().sort((a, b) => b.date - a.date).reverse());
+    }, []);
+
+    useEffect(() => {
+        setSortedArray(campaign.donations.slice().sort((a, b) => b.date - a.date).reverse());
+    }, [campaign]);
 
     return (
         <div className='Donations'>
             <div style={{ background: '#ace5ac', padding: '10px' }}>
-                {campaign.donations.length ?
+                {sortedArray.length ?
                     <Row gutter={[8, 8]}>
-                        {campaign.donations.map(donation => {
+                        {sortedArray.map(donation => {
                             return (
                                 <Col span={8} key={donation._id} >
-                                    <Card title={donation.user.name} bordered={false}>
-                                        <div>{`תרם ${donation.card.text}`}</div>
+                                    <Card style={{ height: '30vh' }} title={donation.user.name ? donation.user.name : "לא ידוע"} bordered={false}>
+                                        <div>{`תרם ${donation.card.sum} ש"ח ${donation.card.text}`}</div>
                                         <div>{`בתאריך ${donation.date}`}</div>
-                                        <div>{`וקבל ${donation.card.gift && donation.card.gift.name}`}</div>
+                                        {donation && donation.recruiter ? <div>{`ע"י ${donation.recruiter.user.name === undefined ? "לא ידוע" : donation.recruiter.user.name}`}</div> : ""}
+                                        {/* <div>{`וקבל ${donation.card.gift && donation.card.gift.name}`}</div> */}
                                     </Card>
                                 </Col>
                             )
                         })}
-                    </Row> : 'אין תורמים עדיין!'}
+                    </Row> : 'אין תרומות עדיין!'}
             </div>
         </div>
     )

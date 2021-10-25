@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Modal, Button } from 'antd';
-import { GiftOutlined } from '@ant-design/icons';
+import { Modal } from 'antd';
 import { actions } from '../../redux/actions';
 import Login from '../login/Login';
 import Donate from './Donate';
