@@ -7,8 +7,6 @@ export default function Applies() {
 
     const dispatch = useDispatch();
     const applies = useSelector(state => state.applyReducer.applies);
-    const firebaseUser = useSelector(state => state.userReducer.firebaseUser);
-    const user = useSelector(state => state.userReducer.user);
 
     useEffect(() => {
         if (!applies)

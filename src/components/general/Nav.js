@@ -8,7 +8,6 @@ import Login from '../login/Login';
 
 export default function Nav() {
 
-    const firebaseUser = useSelector(state => state.userReducer.firebaseUser);
     const user = useSelector(state => state.userReducer.user);
     const admin = useSelector(state => state.userReducer.admin);
 
@@ -32,10 +31,6 @@ export default function Nav() {
                 </nav>
                 <Popover content={user ? <UserProfile close={handleVisibleChange} /> : <Login />} title="!פרופיל שלי" trigger="click" placement='topRight' visible={showPopover}
                     onVisibleChange={handleVisibleChange}>
-                    {/* {(firebaseUser && firebaseUser.photoURL) ?
-                        <Tooltip className='pointer' title={firebaseUser.displayName}>
-                            <Avatar src={firebaseUser.photoURL} />
-                        </Tooltip> : */}
                     {(user ?
                         (user.photoURL ?
                             <Tooltip className='pointer' title={user.name || user.email}>

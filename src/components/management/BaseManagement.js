@@ -1,10 +1,7 @@
 import React from 'react';
 import { Tabs } from 'antd';
-import CreateCard from './CreateCard';
-import CreateRecruiter from './CreateRecruiter';
-import Applies from './Applies';
 import { useSelector } from 'react-redux';
-import Campaigns from './UpdateCampaign';
+import Applies from './Applies';
 import CampaignsManagment from './CampaignsManagment';
 import CardsManagment from './CardsManagment';
 import GiftsManagment from './GiftsManagment';

@@ -21,7 +21,6 @@ import moment from 'moment';
 
 function CreateCampaign(props) {
 
-    const { history } = props;
 
     const dispatch = useDispatch();
 
@@ -105,7 +104,6 @@ function CreateCampaign(props) {
         if (!imageList) {
             // maybe move them to the end of the function;
             dispatch(actions.setCampaignId(null));
-            // history.push(`/new-campaign`);
             setOpenModal(true);
             return;
         };
@@ -123,7 +121,6 @@ function CreateCampaign(props) {
                 const updateCampaign = { ...campaign, images: imagePaths, create: true }
                 dispatch(actions.updateCampaign(updateCampaign))
                 dispatch(actions.setCampaignId(null));
-                // history.push(`/new-campaign`);
                 setOpenModal(true);
             }
         });
@@ -242,7 +239,7 @@ function CreateCampaign(props) {
                                 {logo ?
                                     <div className='wrapperImgs'>
                                         <DeleteTwoTone twoToneColor="#5ddf5d" className='deleteImgIcon' title={`מחק לוגו`} onClick={() => setLogo(null)} />
-                                        <img src={logoURL} style={{ width: '100%', height: '15vh', objectFit: 'contain' }} />
+                                        <img alt='img' src={logoURL} style={{ width: '100%', height: '15vh', objectFit: 'contain' }} />
                                     </div> :
                                     <div className='btn d-flex justify-content-center uploadLogoDiv'>
                                         <input type='file' accept='image/*' ref={inputLogoRef} className='uploadHiddenInput'
@@ -383,7 +380,7 @@ function CreateCampaign(props) {
                                         {Object.entries(imageList).map(([key, value], i) => (
                                             <div key={key} className='wrapperImgs' >
                                                 <DeleteTwoTone twoToneColor="#5ddf5d" className='deleteImgIcon' title={`מחק תמונה`} onClick={() => removeImage(key)} />
-                                                <img src={imagesURL[i]} style={{ width: '100%', height: '20vh', objectFit: 'contain' }} />
+                                                <img alt='img' src={imagesURL[i]} style={{ width: '100%', height: '20vh', objectFit: 'contain' }} />
                                             </div>
                                         ))}
                                     </div>}

@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { actions } from '../../redux/actions';
 import Routes from './Routes';
-import Footer from './Footer';
 import Nav from './Nav';
 import Notification from './Notification';
 
@@ -32,7 +31,6 @@ export default function Base() {
             <div className='Base container'>
                 <Nav />
                 <Routes />
-                {/* <Footer /> */}
                 <Notification />
             </div>
         </Router>

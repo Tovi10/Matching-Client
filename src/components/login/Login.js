@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Form, Input, Button } from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import { actions } from '../../redux/actions';
@@ -7,7 +7,6 @@ import { firebase } from '../../services/firebase.service';
 
 export default function Login() {
 
-    const user = useSelector(state => state.userReducer.user);
     const dispatch = useDispatch();
 
     const [isSignUp, setIsSignUp] = useState(false);
@@ -49,7 +48,6 @@ export default function Login() {
         // provider.addScope('https://www.googleapis.com/auth/contacts');
         firebase.auth().signInWithPopup(provider)
             .then(function (result) {
-                let token = result.credential.accessToken;
                 console.log("🚀 ~ file: Login.js ~ line 42 ~ result", result);
                 dispatch(actions.setFirebaseUser(result.user));
                 if (result.additionalUserInfo.isNewUser) {

@@ -46,7 +46,7 @@ export default function Campaign(props) {
                                         {/* <Spin style={{ display: showSpin ? 'block' : 'none' }} /> */}
                                         <SpinnerCircularFixed style={{ display: showSpin ? 'block' : 'none' }} size={73} thickness={100} speed={100} color="#252583" secondaryColor="#5ddf5d" />
                                         {(campaign && campaign.images && campaign.images.length) ?
-                                            <img style={{ width: '100%', height: '50vh', objectFit: 'contain', display: showSpin ? 'none' : 'block' }} className='rounded' src={campaign.images[0]} /> :
+                                            <img alt='img' style={{ width: '100%', height: '50vh', objectFit: 'contain', display: showSpin ? 'none' : 'block' }} className='rounded' src={campaign.images[0]} /> :
                                             <div style={{ display: showSpin ? 'none' : 'block' }}>no img!</div>}
                                     </div>
                                     <div className="col-4 d-flex align-items-center">
