@@ -141,7 +141,7 @@ export default function CreateGift() {
                             },
                         ]}>
                         <Input placeholder='הכנס מייל אליו ישלחו פרטי מקבלי השוברים' />
-                    </Form.Item>}
+                    </Form.Item>}   
                 {/* submit */}
                 <Form.Item className='submitFormItem'>
                     <Button type="primary" htmlType="submit">
