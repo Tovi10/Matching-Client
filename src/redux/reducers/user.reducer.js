@@ -11,7 +11,7 @@ const userReducer = {
     setUser(state, action) {
         state.user = action.payload;
         const cookie = document.cookie.split('giftMatchUserUid=');
-        if (!(cookie.length === 2 || cookie[1])) {
+        if (!(cookie.length === 2 && cookie[1])) {
             document.cookie = `giftMatchUserUid=${state.user.uid}`;
         }
         if (action.payload.email === 'theflow.leader@gmail.com') {

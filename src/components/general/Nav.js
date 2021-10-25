@@ -32,17 +32,25 @@ export default function Nav() {
                 </nav>
                 <Popover content={user ? <UserProfile close={handleVisibleChange} /> : <Login />} title="!פרופיל שלי" trigger="click" placement='topRight' visible={showPopover}
                     onVisibleChange={handleVisibleChange}>
-                    {(firebaseUser && firebaseUser.photoURL) ?
+                    {/* {(firebaseUser && firebaseUser.photoURL) ?
                         <Tooltip className='pointer' title={firebaseUser.displayName}>
                             <Avatar src={firebaseUser.photoURL} />
-                        </Tooltip> :
-                        (user && user.name) ?
-                            <Tooltip className='pointer' title={user.name}>
-                                <Avatar>{user.name[0]}</Avatar>
+                        </Tooltip> : */}
+                    {(user ?
+                        (user.photoURL ?
+                            <Tooltip className='pointer' title={user.name || user.email}>
+                                <Avatar src={user.photoURL} />
                             </Tooltip> :
-                            <Tooltip className='pointer' title='לחץ כדי להתחבר.'>
-                                <Avatar icon={<UserOutlined />} />
-                            </Tooltip>}
+                            (user.name ?
+                                <Tooltip className='pointer' title={user.name}>
+                                    <Avatar>{user.name[0]}</Avatar>
+                                </Tooltip> :
+                                <Tooltip className='pointer' title={user.email}>
+                                    <Avatar>{user.email[0]}</Avatar>
+                                </Tooltip>)) :
+                        <Tooltip className='pointer' title='לחץ כדי להתחבר.'>
+                            <Avatar icon={<UserOutlined />} />
+                        </Tooltip>)}
                 </Popover>
             </div>
         </div>

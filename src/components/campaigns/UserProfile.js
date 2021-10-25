@@ -21,9 +21,9 @@ export default function UserProfile(props) {
             <Form onFinish={onFinish} initialValues={user}>
                 <Form.Item
                     name="email"
-                    rules={[{ required: true, message: 'הכנס מייל!' }]}
+                    // rules={[{ required: true, message: 'הכנס מייל!' }]}
                 >
-                    <Input placeholder="מייל" />
+                    <Input placeholder="מייל" disabled={true}/>
                 </Form.Item>
                 <Form.Item
                     name="phone"
