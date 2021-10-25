@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Carousel } from 'react-carousel-minimal';
 import { Spin, Tooltip, Tabs } from 'antd';
 import { ShareAltOutlined, MailOutlined, CopyOutlined, CopyFilled } from '@ant-design/icons';
 import { numberWithCommas } from '../../services/service';
@@ -21,15 +20,44 @@ export default function Campaign(props) {
     const dispatch = useDispatch();
     const [showSpin, setShowSpin] = useState(true);
     const [copy, setCopy] = useState(true);
+    const [index, setIndex] = useState(1);
+
+    
+    const showCurrentImg = (n) => {
+        if (!campaign || !campaign.images.length) { return }
+        const x = document.getElementsByClassName("mySlides");
+        let slideIndex = n;
+        if (n > x.length) {
+            slideIndex = 1
+        }
+        if (n < 1) {
+            slideIndex = x.length
+        }
+        for (let i = 0; i < x.length; x[i].style.display = "none", i++);
+        x[slideIndex - 1].style.display = "block";
+        setIndex(slideIndex)
+    }
 
     useEffect(() => {
         if (!campaign) {
             dispatch(actions.getCampaignById(window.location.pathname.split('/')[2]));
         }
+        // time to get the images from firebase
         setTimeout(() => {
             setShowSpin(false)
         }, 2000);
     }, [])
+
+    // when spining finish -> its the time to display the images (by width);
+    useEffect(()=>{
+        if(!showSpin){
+            showCurrentImg(1)
+        }
+    },[showSpin])
+
+    useInterval(() => {
+        showCurrentImg(index + 1);
+    }, 10000);
 
     return (
         <div className='Campaign container-fluid'>
@@ -42,13 +70,22 @@ export default function Campaign(props) {
                         <div className="col-9">
                             <div className="row container" style={{ height: '50vh' }}>
                                 <div className='d-flex justify-content-center'>
-                                    <div className='col-8 d-flex align-items-center justify-content-center'>
-                                        {/* <Spin style={{ display: showSpin ? 'block' : 'none' }} /> */}
-                                        <SpinnerCircularFixed style={{ display: showSpin ? 'block' : 'none' }} size={73} thickness={100} speed={100} color="#252583" secondaryColor="#5ddf5d" />
-                                        {(campaign && campaign.images && campaign.images.length) ?
-                                            <img alt='img' style={{ width: '100%', height: '50vh', objectFit: 'contain', display: showSpin ? 'none' : 'block' }} className='rounded' src={campaign.images[0]} /> :
-                                            <div style={{ display: showSpin ? 'none' : 'block' }}>no img!</div>}
-                                    </div>
+                                    {campaign.images.length ?
+                                        <div className='col-7 offset-1 d-flex align-items-center justify-content-center'>
+                                            <SpinnerCircularFixed style={{ display: showSpin ? 'block' : 'none' }} size={73} thickness={100} speed={100} color="#252583" secondaryColor="#5ddf5d" />
+                                            {campaign.images.length > 1 && <div className='arrowSlide pointer notSelected' onClick={e => showCurrentImg(index + 1)} title={`הבא`}
+                                                style={{ display: showSpin ? 'none' : 'block' }}>&#10094;</div>}
+                                            {campaign.images.map((i, imgIndex) => {
+                                                return (<img key={imgIndex} alt='img' title={`תמונה מס' ${imgIndex + 1}`}
+                                                    // style={{ width: '100%', height: '50vh', objectFit: 'contain', display: showSpin ? 'none' : 'block' }}
+                                                    style={{ height: '50vh', objectFit: 'contain', width: showSpin ? '0px' : '100%' }}
+                                                    className='rounded mySlides notSelected' src={i} />)
+                                            })}
+                                            {campaign.images.length > 1 && <div className='arrowSlide pointer notSelected' onClick={e => showCurrentImg(index - 1)} title={`הקודם`} style={{ display: showSpin ? 'none' : 'block' }}>&#10095;</div>}
+                                        </div> :
+                                        <div className='col-8 d-flex align-items-center justify-content-center'>
+                                            <div>אין תמונות לקמפיין זה 📸</div>
+                                        </div>}
                                     <div className="col-4 d-flex align-items-center">
                                         <div className="blockquote-wrapper">
                                             <div className="blockquote">
@@ -126,79 +163,19 @@ export default function Campaign(props) {
 }
 
 
-// const data = [
-//     {
-//         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/GoldenGateBridge-001.jpg/1200px-GoldenGateBridge-001.jpg",
-//         caption: `<div>
-//                   San Francisco
-//                   <br/>
-//                   Next line
-//                 </div>`
-//     },
-//     {
-//         image: "https://cdn.britannica.com/s:800x450,c:crop/35/204435-138-2F2B745A/Time-lapse-hyper-lapse-Isle-Skye-Scotland.jpg",
-//         caption: "Scotland"
-//     },
-//     {
-//         image: "https://static2.tripoto.com/media/filter/tst/img/735873/TripDocument/1537686560_1537686557954.jpg",
-//         caption: "Darjeeling"
-//     },
-//     {
-//         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Palace_of_Fine_Arts_%2816794p%29.jpg/1200px-Palace_of_Fine_Arts_%2816794p%29.jpg",
-//         caption: "San Francisco"
-//     },
-//     {
-//         image: "https://i.natgeofe.com/n/f7732389-a045-402c-bf39-cb4eda39e786/scotland_travel_4x3.jpg",
-//         caption: "Scotland"
-//     },
-//     {
-//         image: "https://www.tusktravel.com/blog/wp-content/uploads/2020/07/Best-Time-to-Visit-Darjeeling-for-Honeymoon.jpg",
-//         caption: "Darjeeling"
-//     },
-//     {
-//         image: "https://www.omm.com/~/media/images/site/locations/san_francisco_780x520px.ashx",
-//         caption: "San Francisco"
-//     },
-//     {
-//         image: "https://images.ctfassets.net/bth3mlrehms2/6Ypj2Qd3m3jQk6ygmpsNAM/61d2f8cb9f939beed918971b9bc59bcd/Scotland.jpg?w=750&h=422&fl=progressive&q=50&fm=jpg",
-//         caption: "Scotland"
-//     },
-//     {
-//         image: "https://www.oyorooms.com/travel-guide/wp-content/uploads/2019/02/summer-7.jpg",
-//         caption: "Darjeeling"
-//     }
-// ];
-// const captionStyle = {
-//     fontSize: '2em',
-//     fontWeight: 'bold',
-// }
-// const slideNumberStyle = {
-//     fontSize: '20px',
-//     fontWeight: 'bold',
-// }
+function useInterval(callback, delay) {
+    const savedCallback = useRef();
 
-{/* <Carousel
-                                            data={campaign.images}
-                                            time={10000}
-                                            // width="100%"
-                                            // height="500px"
-                                            captionStyle={captionStyle}
-                                            radius="1px"
-                                            // slideNumber={true}
-                                            // slideNumberStyle={slideNumberStyle}
-                                            captionPosition="bottom"
-                                            automatic={true}
-                                            dots={true}
-                                            pauseIconColor="white"
-                                            pauseIconSize="40px"
-                                            slideBackgroundColor="darkgrey"
-                                            slideImageFit="cover"
-                                            // thumbnails={true}
-                                            // thumbnailWidth="100px"
-                                            style={{
-                                                textAlign: "center",
-                                                // maxWidth: "850px",
-                                                // maxHeight: "500px",
-                                                // margin: "40px auto",
-                                            }}
-                                        /> */}
+    useEffect(() => {
+        savedCallback.current = callback;
+    }, [callback]);
+
+    useEffect(() => {
+        function tick() {
+            savedCallback.current();
+        }
+
+        let id = setInterval(tick, delay);
+        return () => clearInterval(id);
+    }, [delay]);
+}
