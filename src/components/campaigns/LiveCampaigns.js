@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Progress } from 'antd';
 import { withRouter } from 'react-router';
 import { numberWithCommas } from '../../services/service';
+import moment from 'moment';
 
 import { actions } from '../../redux/actions';
 
@@ -19,8 +20,8 @@ function LiveCampaigns(props) {
     // }, []);
 
     useEffect(() => {
-        let currentDate = new Date(Date.now());
-        setLiveCampaigns(allCampaigns.filter(c => currentDate >= new Date(c.duration[0]) && currentDate <= new Date(c.duration[1])));
+        let currentDate = moment(Date.now()).format('DD/MM/YYYY');
+        setLiveCampaigns(allCampaigns.filter(c => currentDate >= new Date(c.duration[0]).toLocaleDateString('he-IL') && currentDate <= new Date(c.duration[1]).toLocaleDateString('he-IL')));
     }, []);
 
     const selectCampaign = (campaign) => {
