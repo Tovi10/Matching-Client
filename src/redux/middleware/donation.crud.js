@@ -7,9 +7,9 @@ export const createDonation = store => next => action => {
         axios.post(`${SERVER_URL}/api/donation/createDonation/${action.payload.campaignId}`, action.payload)
             .then(result => {
                 console.log("🚀 ~ file: donation.crud.js ~ line 8 ~ result", result);
-                store.dispatch(actions.setCampaignFromServer(result.data));
-                store.dispatch(actions.setCurrentNotification('התרומה התווספה בהצלחה!'));
-                store.getState().socketReducer.socket.emit('newDonation', { room: result.data._id });
+                store.dispatch(actions.setCampaignFromServer(result.data.campaign));
+                store.dispatch(actions.setCurrentNotification('התרומה שלך התווספה בהצלחה!'));
+                store.getState().socketReducer.socket.emit('newDonation', { room: result.data.campaign._id,donation:result.data.donation });
             })
             .catch(error => {
                 console.log("🚀 ~ file: donation.crud.js ~ line 14 ~ error", error);
