@@ -8,9 +8,11 @@ import {
     DatePicker,
     Select,
     Alert,
+    Spin,
 } from 'antd';
+import { DeleteTwoTone, UploadOutlined, } from '@ant-design/icons';
 import moment from 'moment';
-import {  DeleteTwoTone,  UploadOutlined, } from '@ant-design/icons';
+import { firebase } from '../../services/firebase.service';
 
 
 export default function UpdateCampaign() {
@@ -19,13 +21,24 @@ export default function UpdateCampaign() {
     const allCampaigns = useSelector(state => state.campaignReducer.allCampaigns);
     const user = useSelector(state => state.userReducer.user);
     const admin = useSelector(state => state.userReducer.admin);
+    const currentNotification = useSelector(state => state.generalReducer.currentNotification);
 
     const [form] = Form.useForm();
     const [campaign, setCampaign] = useState(null);
+    const [spining, setSpining] = useState(false);
     const [imagesFiles, setImagesFiles] = useState([]);
     const [imagesURLs, setImagesURLs] = useState([]);
     const [uploadErr, setUploadErr] = useState(false);
 
+    useEffect(() => {
+        setSpining(false)
+        if (currentNotification === 'הקמפיין התעדכן בהצלחה!' && campaign) {
+            form.resetFields();
+            setCampaign(null);
+            setImagesFiles([]);
+            setImagesURLs([]);
+        }
+    }, [currentNotification])
 
     useEffect(() => {
         if (!allCampaigns && admin)
@@ -34,19 +47,20 @@ export default function UpdateCampaign() {
 
     const onFinish = (values) => {
         console.log("🚀 ~ file: Campaigns.js ~ line 31 ~ onFinish ~ values", values);
+        setSpining(true);
         debugger
-        
-        dispatch(actions.updateCampaign({ ...campaign, ...values }));
+        uploadImageToStorage(values);
     };
 
     const choose = (campaignId) => {
         const campaignObj = allCampaigns.find(c => c._id === campaignId);
         console.log("🚀 ~ file: Campaigns.js ~ line 34 ~ choose ~ campaignObj", campaignObj)
         setCampaign(campaignObj)
+        if (!campaignObj) return
         setImagesURLs(campaignObj.images)
+        setImagesFiles(campaignObj.images)
         form.setFieldsValue({
             ...campaignObj,
-            // duration: [moment('01/01/1999', 'DD/MM/YYYY'), moment('01/03/1999', 'DD/MM/YYYY')]
             duration: [moment(campaignObj.duration[0], 'DD/MM/YYYY'), moment(campaignObj.duration[1], 'DD/MM/YYYY')]
         });
     }
@@ -68,7 +82,10 @@ export default function UpdateCampaign() {
     }
 
     const removeImage = (key) => {
-        setImagesFiles(imagesFiles.filter(file => file.name !== imagesFiles[key].name))
+        if (!imagesFiles[key].name)
+            setImagesFiles(imagesFiles.filter(file => file !== imagesFiles[key]))
+        else
+            setImagesFiles(imagesFiles.filter(file => file.name !== imagesFiles[key].name))
         setImagesURLs(imagesURLs.filter(img => img !== imagesURLs[key]))
     }
 
@@ -77,141 +94,220 @@ export default function UpdateCampaign() {
         setImagesURLs([]);
     }
 
+    const deleteFilesFromFirebase = async (images) => {
+        let fileRef;
+        for (let index = 0; index < images.length; index++) {
+            fileRef = await firebase.storage().refFromURL(images[index]);
+            await fileRef.delete().then(function () {
+                console.log("File Deleted")
+            }).catch(function (error) {
+                dispatch(actions.setCurrentNotification('ארעה שגיאה בעדכון הקמפיין!'))
+                console.log("🚀 ~ file: UpdateCampaign.js ~ line 97 ~ error", error);
+            });
+        }
+    }
+    const uploadImageToStorage = async (values) => {
+        let imagePaths = [];
+        if (!imagesURLs.length && campaign.images.length) {
+            // delete images from folder in firebase
+            await deleteFilesFromFirebase(campaign.images);
+            // updtae in server
+            dispatch(actions.updateCampaign({ ...campaign, ...values, duration: [moment(values.duration[0].toString()).format("DD/MM/YYYY"), moment(values.duration[1].toString()).format("DD/MM/YYYY")], images: [] }));
+            // setSpining(false);
+            return;
+        };
+
+        let toDeleteArray = [], toUploadArray = []
+        for (let index = 0; index < campaign.images.length; index++) {
+            if (imagesURLs.includes(campaign.images[index])) {
+                imagePaths.push(campaign.images[index]);
+            }
+            else {
+                toDeleteArray.push(campaign.images[index]);
+            }
+        }
+        for (let index = 0; index < imagesURLs.length; index++) {
+            if (!campaign.images.includes(imagesURLs[index])) {
+                toUploadArray.push(imagesFiles[index]);
+            }
+        }
+        // delete from firebase what deleted here
+        await deleteFilesFromFirebase(toDeleteArray);
+        if (!toUploadArray.length) {
+            const updateCampaign = { ...campaign, ...values, duration: [moment(values.duration[0].toString()).format("DD/MM/YYYY"), moment(values.duration[1].toString()).format("DD/MM/YYYY")], images: imagePaths }
+            dispatch(actions.updateCampaign(updateCampaign));
+            // setSpining(false);
+        }
+        // upload the news
+        const storageRef = firebase.storage().ref();
+        toUploadArray.map(async img => {
+            let fileRef = storageRef.child(`Campaigns/${campaign._id}/${img.name}`);
+            await fileRef.put(img);
+            const singleImgPath = await fileRef.getDownloadURL();
+            imagePaths.push(singleImgPath);
+            // the end :)
+            if (imagePaths.length === imagesFiles.length) {
+                const updateCampaign = { ...campaign, ...values, duration: [moment(values.duration[0].toString()).format("DD/MM/YYYY"), moment(values.duration[1].toString()).format("DD/MM/YYYY")], images: imagePaths }
+                dispatch(actions.updateCampaign(updateCampaign));
+                // setSpining(false);
+
+            }
+        });
+    }
+
+    const deleteFile = () => {
+        const fileUrl = 'https://firebasestorage.googleapis.com/v0/b/matching-599f8.appspot.com/o/Campaigns%2F614632dd070df86687d7f792%2F93f1657e1bcb8babe05229e2ce6fc28f.jpg?alt=media&token=fa32859f-7731-424c-998a-94630235d4f9';
+        // Create a reference to the file to delete
+        const fileRef = firebase.storage().refFromURL(fileUrl);
+        // Delete the file using the delete() method
+        fileRef.delete().then(function () {
+            // File deleted successfully
+            console.log("File Deleted")
+        }).catch(function (error) {
+            console.log("🚀 ~ file: UpdateCampaign.js ~ line 129 ~ error", error)
+        });
+
+
+    }
     return (
         <div className='UpdateCampaign'>
-            <Select
-                size='large'
-                allowClear
-                showSearch
-                style={{ textAlign: 'right' }}
-                dropdownStyle={{ textAlign: 'right' }}
-                onChange={choose}
-                notFoundContent={<>לא נמצאו נתונים</>}
-                placeholder={`בחר חברה...`}
-                virtual={false}
-                dropdownClassName='companiesSelectDropdown'>
-                {admin ? (allCampaigns && allCampaigns.map(item => (
-                    <Select.Option key={item._id}>{item.campaignName}</Select.Option>
-                ))) : (user.campaigns && user.campaigns.map(item => (
-                    <Select.Option key={item._id}>{item.campaignName}</Select.Option>
-                )))}
-            </Select>
-            <Form
-                className='p-3 customForm'
-                wrapperCol={{
-                    span: 24,
-                }}
-                form={form}
-                name="campaign"
-                onFinish={onFinish}
-            >
-                {/* campaignName */}
-                <Form.Item
-                    name="campaignName"
-                    rules={[
-                        {
-                            required: true,
-                            message: `אנא הכנס שם קמפיין!`,
-                        },
-                    ]}
-                    style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
-                >
-                    <Input size='large'
-                        placeholder={`הכנס כאן את השם לקמפיין שלך...`} />
-                </Form.Item>
-                {/* goal */}
-                <Form.Item
-                    name="goal"
-                    rules={[
-                        {
-                            required: true,
-                            message: `אנא הכנס יעד לקמפיין!`,
-                        },
-                    ]}
-                    style={{ display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px' }}
-                >
-                    <Input size='large'
-                        type='number' className='formItemInput' placeholder={`הכנס כאן את היעד לקמפיין שלך...`} />
-                </Form.Item>
-                {/* purposeOfCollecting */}
-                <Form.Item
-                    name="purposeOfCollecting"
-                    rules={[
-                        {
-                            required: true,
-                            message: `הכנס מטרה לקמפיין!`,
-                        },
-                        {
-                            max: 300,
-                            message: `הכנס מטרה לקמפיין עד 300 תווים!`,
-                        },
-                        {
-                            min: 50,
-                            message: `הכנס מטרה לקמפיין מינימום 50 תווים!`,
-                        },
-                    ]}
-                    style={{ display: 'inline-block', width: 'calc(100% - 8px)', marginLeft: '8px' }}                                >
-                    <Input.TextArea size='large' rows={4} placeholder={`פרט כאן על המטרה של הקמפיין שלך...`} />
-                </Form.Item>
-                {/* duration */}
-                <Form.Item
-                    name="duration"
-                    rules={[
-                        {
-                            required: true,
-                            message: `בחר תאריך התחלה וסיום לקמפיין!`,
-                        },
-                    ]}
-                    style={{ display: 'inline-block', width: 'calc(100% - 8px)', marginLeft: '8px' }}
-                >
-                    <DatePicker.RangePicker
-                        format='DD/MM/YYYY'
-                        placeholder={['תאריך התחלה', 'תאריך סיום']}
-                        direction='rtl'
-                        showNow={true}
+            <Spin size='large' spinning={spining}>
+                <div>
+                    <Select
                         size='large'
-                        className='formItemInput' />
-                </Form.Item>
-                {/* images */}
-                <Form.Item
-                    name="images"
-                    style={{ display: 'inline-block', width: 'calc(100% - 8px)', marginLeft: '8px' }}
-                // rules={[
-                //     {
-                //         required: uploadErr,
-                //         message: `העלה מקסימום 5 תמונות!`,
-                //     },
-                // ]}
-                >
-                    {/* limit num og images to 5 */}
-                    {imagesFiles.length < 5 &&
-                        <div className='btn mb-2 d-flex justify-content-center uploadLogoDiv'>
-                            <input type='file' accept='image/*' multiple={true}
-                                onChange={e => uploadImage(e)} className='uploadHiddenInput' />
-                            <UploadOutlined className='plusIcon' />
-                            <div>בחר תמונות לקמפיין</div>
-                        </div>}
-                    <div className='d-flex align-items-center justify-content-around'>
-                        {imagesURLs.length ? imagesURLs.map((i, key) => (
-                            <div key={key} className='wrapperImgs' >
-                                <DeleteTwoTone twoToneColor="#5ddf5d" className='deleteImgIcon' title={`מחק תמונה`} onClick={() => removeImage(key)} />
-                                <img alt='img' src={i} style={{ width: '100%', height: '20vh', objectFit: 'contain' }} />
+                        allowClear
+                        showSearch
+                        style={{ textAlign: 'right' }}
+                        dropdownStyle={{ textAlign: 'right' }}
+                        onChange={choose}
+                        notFoundContent={<>לא נמצאו נתונים</>}
+                        placeholder={`בחר חברה...`}
+                        virtual={false}
+                        dropdownClassName='companiesSelectDropdown'>
+                        {admin ? (allCampaigns && allCampaigns.map(item => (
+                            <Select.Option key={item._id}>{item.campaignName}</Select.Option>
+                        ))) : (user.campaigns && user.campaigns.map(item => (
+                            <Select.Option key={item._id}>{item.campaignName}</Select.Option>
+                        )))}
+                    </Select>
+                    <Form
+                        className='p-3 customForm'
+                        wrapperCol={{
+                            span: 24,
+                        }}
+                        form={form}
+                        name="campaign"
+                        onFinish={onFinish}
+                    >
+                        {/* campaignName */}
+                        <Form.Item
+                            name="campaignName"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: `אנא הכנס שם קמפיין!`,
+                                },
+                            ]}
+                            style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
+                        >
+                            <Input size='large'
+                                placeholder={`הכנס כאן את השם לקמפיין שלך...`} />
+                        </Form.Item>
+                        {/* goal */}
+                        <Form.Item
+                            name="goal"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: `אנא הכנס יעד לקמפיין!`,
+                                },
+                            ]}
+                            style={{ display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px' }}
+                        >
+                            <Input size='large'
+                                type='number' className='formItemInput' placeholder={`הכנס כאן את היעד לקמפיין שלך...`} />
+                        </Form.Item>
+                        {/* purposeOfCollecting */}
+                        <Form.Item
+                            name="purposeOfCollecting"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: `הכנס מטרה לקמפיין!`,
+                                },
+                                {
+                                    max: 300,
+                                    message: `הכנס מטרה לקמפיין עד 300 תווים!`,
+                                },
+                                {
+                                    min: 50,
+                                    message: `הכנס מטרה לקמפיין מינימום 50 תווים!`,
+                                },
+                            ]}
+                            style={{ display: 'inline-block', width: 'calc(100% - 8px)', marginLeft: '8px' }}                                >
+                            <Input.TextArea size='large' rows={4} placeholder={`פרט כאן על המטרה של הקמפיין שלך...`} />
+                        </Form.Item>
+                        {/* duration */}
+                        <Form.Item
+                            name="duration"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: `בחר תאריך התחלה וסיום לקמפיין!`,
+                                },
+                            ]}
+                            style={{ display: 'inline-block', width: 'calc(100% - 8px)', marginLeft: '8px' }}
+                        >
+                            <DatePicker.RangePicker
+                                format='DD/MM/YYYY'
+                                placeholder={['תאריך התחלה', 'תאריך סיום']}
+                                direction='rtl'
+                                showNow={true}
+                                size='large'
+                                className='formItemInput' />
+                        </Form.Item>
+                        {/* images */}
+                        <Form.Item
+                            name="images"
+                            style={{ display: 'inline-block', width: 'calc(100% - 8px)', marginLeft: '8px' }}
+                        // rules={[
+                        //     {
+                        //         required: uploadErr,
+                        //         message: `העלה מקסימום 5 תמונות!`,
+                        //     },
+                        // ]}
+                        >
+                            {/* limit num og images to 5 */}
+                            {imagesFiles.length < 5 &&
+                                <div className='btn mb-2 d-flex justify-content-center uploadLogoDiv'>
+                                    <input type='file' accept='image/*' multiple={true}
+                                        onChange={e => uploadImage(e)} className='uploadHiddenInput' />
+                                    <UploadOutlined className='plusIcon' />
+                                    <div>בחר תמונות לקמפיין</div>
+                                </div>}
+                            <div className='d-flex align-items-center justify-content-around'>
+                                {imagesURLs.length ? imagesURLs.map((i, key) => (
+                                    <div key={key} className='wrapperImgs' >
+                                        <DeleteTwoTone twoToneColor="#5ddf5d" className='deleteImgIcon' title={`מחק תמונה`} onClick={() => removeImage(key)} />
+                                        <img alt='img' src={i} style={{ width: '100%', height: '20vh', objectFit: 'contain' }} />
+                                    </div>
+                                )) : ''}
                             </div>
-                        )) : ''}
-                    </div>
-                    <div onClick={removeAll}>removeAll</div>
-                    {uploadErr && <Alert
-                        style={{ width: 'calc(100% - 8px)', margin: '10px 0 0 8px' }}
-                        message="העלה מקסימום 5 תמונות!" type="error" closable />}
-                </Form.Item>
-                {/* submit */}
-                <Form.Item
-                    style={{ display: 'inline-block', width: 'calc(100% - 8px)', marginLeft: '8px' }}
-                    className='submitFormItem'>
-                    <Button size='large' type="primary" htmlType="submit" className='btnSubmit'>
-                        SAVE                    </Button>
-                </Form.Item>
-            </Form>
+                            {imagesURLs.length ? <div onClick={removeAll}>removeAll</div> : ''}
+                            {uploadErr && <Alert
+                                style={{ width: 'calc(100% - 8px)', margin: '10px 0 0 8px' }}
+                                message="העלה מקסימום 5 תמונות!" type="error" closable />}
+                        </Form.Item>
+                        {/* submit */}
+                        <Form.Item
+                            style={{ display: 'inline-block', width: 'calc(100% - 8px)', marginLeft: '8px' }}
+                            className='submitFormItem'>
+                            <Button size='large' type="primary" htmlType="submit" className='btnSubmit'>
+                                SAVE                    </Button>
+                        </Form.Item>
+                    </Form>
+                </div>
+            </Spin>
         </div>
     )
 }
