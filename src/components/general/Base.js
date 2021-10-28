@@ -23,7 +23,7 @@ export default function Base() {
     useEffect(() => {
         const cookie = document.cookie.split('giftMatchUserUid=');
         if (cookie.length === 2 && cookie[1]) {
-            dispatch(actions.getUserByUid(cookie[1]))
+            dispatch(actions.getUserByUid(cookie[1].split(';')[0]))
         }
     }, [])
     return (

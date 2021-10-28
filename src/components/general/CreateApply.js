@@ -26,12 +26,8 @@ export default function CreateApply() {
             <h1>הגשת בקשה ליצירת קמפיין</h1>
             {user ?
                 <Form
-
-                    labelCol={{
-                        span: 4,
-                    }}
                     wrapperCol={{
-                        span: 20,
+                        span: 24,
                     }}
                     form={form}
                     name="CreateApply"
@@ -40,9 +36,14 @@ export default function CreateApply() {
                     {/* text */}
                     <Form.Item
                         name="text"
-                        label={`שם הקמפיין`}
+                        rules={[
+                            {
+                                required: true,
+                                message: `פרט על הקמפיין שברצונך ליצור...`,
+                            },
+                        ]}
                     >
-                        <Input.TextArea placeholder={`הכנס כאן את שם הקמפיין...`} />
+                        <Input.TextArea placeholder={`פרט על הקמפיין שברצונך ליצור...`}/>
                     </Form.Item>
                     {/* submit */}
                     <Form.Item className='submitFormItem'>
