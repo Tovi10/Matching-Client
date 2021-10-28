@@ -15,7 +15,7 @@ export default function Recruiters() {
                         {campaign.recruiters.map(recruiter => {
                             return (
                                 <Col style={{ cursor: 'pointer' }} span={8} key={recruiter._id} onClick={() => recruiter.link ? window.open(recruiter.link, "_blank") : ""}>
-                                    <Card style={{ height: '26vh' }} title={recruiter.user.name === undefined ? 'לא ידוע' : recruiter.user.name} bordered={false}>
+                                    <Card style={{ height: '26vh' }} title={recruiter.designName === undefined ? 'לא ידוע' : recruiter.designName} bordered={false}>
                                         <div>{`לקח על עצמו ${recruiter.sum} ש"ח`}</div>
                                         <div>{`ואסף ${recruiter.sumRaised === undefined ? 0 : recruiter.sumRaised}`}</div>
                                         {recruiter.sumRaised > recruiter.sum ? <b style={{ backgroundColor: "yellow" }}>הגיע ליעד!!</b> : ""}
