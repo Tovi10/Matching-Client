@@ -9,6 +9,7 @@ export const createDonation = store => next => action => {
                 console.log("🚀 ~ file: donation.crud.js ~ line 8 ~ result", result);
                 store.dispatch(actions.setCampaignFromServer(result.data));
                 store.dispatch(actions.setCurrentNotification('התרומה התווספה בהצלחה!'));
+                store.getState().socketReducer.socket.emit('newDonation', { room: result.data._id });
             })
             .catch(error => {
                 console.log("🚀 ~ file: donation.crud.js ~ line 14 ~ error", error);
