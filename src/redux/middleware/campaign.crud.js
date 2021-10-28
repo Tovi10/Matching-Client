@@ -52,7 +52,6 @@ export const createCampaign = store => next => action => {
 
 export const updateCampaign = store => next => action => {
     if (action.type === 'UPDATE_CAMPAIGN') {
-        debugger
         axios.put(`${SERVER_URL}/api/campaign/updateCampaign`, action.payload)
             .then(result => {
                 if (action.payload.create)

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Spin, Divider, Empty } from 'antd';
+import { Spin, Empty } from 'antd';
 import { numberWithCommas } from '../../services/service';
 
 export default function CampaignDetails(props) {

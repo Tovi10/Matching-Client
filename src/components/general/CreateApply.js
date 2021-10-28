@@ -1,15 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
     Form,
     Input,
     Button,
-    DatePicker,
 } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/actions';
-import TextArea from 'rc-textarea';
 import Login from '../login/Login';
-import moment from 'moment';
 
 export default function CreateApply() {
 

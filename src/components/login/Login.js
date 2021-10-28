@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Form, Input, Button } from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import { actions } from '../../redux/actions';
@@ -7,7 +7,6 @@ import { firebase } from '../../services/firebase.service';
 
 export default function Login() {
 
-    const user = useSelector(state => state.userReducer.user);
     const dispatch = useDispatch();
 
     const [isSignUp, setIsSignUp] = useState(false);
@@ -21,11 +20,13 @@ export default function Login() {
                 dispatch(actions.getUserByUid(result.user.uid));
             })
             .catch((error) => {
+                console.log("🚀 ~ file: Login.js ~ line 24 ~ signIn ~ error", error)
                 if (error.code === 'auth/user-not-found') {
-                    // signUp(email, password);
+                    dispatch(actions.setCurrentNotification('משתמש לא קיים!'))
                 }
-                dispatch(actions.setCurrentNotification(error.code))
-                console.log("🚀 ~ file: Login.js ~ line 12 ~ signIn ~ error", error)
+                else{
+                    dispatch(actions.setCurrentNotification(error.code))
+                }
             });
     }
 
@@ -47,10 +48,13 @@ export default function Login() {
         // provider.addScope('https://www.googleapis.com/auth/contacts');
         firebase.auth().signInWithPopup(provider)
             .then(function (result) {
-                let token = result.credential.accessToken;
                 console.log("🚀 ~ file: Login.js ~ line 42 ~ result", result);
                 dispatch(actions.setFirebaseUser(result.user));
-                dispatch(actions.getUserByUid(result.user.uid));
+                if (result.additionalUserInfo.isNewUser) {
+                    dispatch(actions.createUser(result.user));
+                } else {
+                    dispatch(actions.getUserByUid(result.user.uid));
+                }
             }).catch(function (error) {
                 dispatch(actions.setCurrentNotification(error.code))
                 console.log("🚀 ~ file: Login.js ~ line 45 ~ error", error)

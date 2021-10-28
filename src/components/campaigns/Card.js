@@ -20,6 +20,7 @@ export default function Card(props) {
                     setOpenModal(true)
             }}>
                 {card && <div className={`card-body ${card.gift.numOfUsed === card.gift.amount ? 'watermark notSelected' : ''}`}>
+                {/* {card && <div className={`card-body watermark notSelected`}> */}
                     <div className='d-flex align-items-center justify-content-center '>
                         {/* <GiftOutlined /> */}
                         <h3>{`${card.sum} ש"ח`}</h3>
