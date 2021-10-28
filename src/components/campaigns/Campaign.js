@@ -55,11 +55,11 @@ export default function Campaign(props) {
             console.log(event.msg);
         });
 
-        return () => socket.emit('leaveCampaign', { room: campaign._id });
+        return campaign ? () => socket.emit('leaveCampaign', { room: campaign._id }) : "No campaign!";
     }, [])
 
     useEffect(() => {
-        campaign ? socket.emit('enterCampaign', { room: campaign._id }) : console.log("No campaign");
+        campaign ? socket.emit('enterCampaign', { room: campaign._id }) : console.log("No campaign!");
     }, [campaign]);
 
     // when spining finish -> its the time to display the images (by width);
