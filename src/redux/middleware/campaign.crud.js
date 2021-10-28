@@ -59,7 +59,8 @@ export const updateCampaign = store => next => action => {
                 else
                     store.dispatch(actions.setCurrentNotification('הקמפיין התעדכן בהצלחה!'))
                 console.log("🚀 ~ file: campaign.crud.js ~ line 39 ~ result", result)
-                store.dispatch(actions.setCampaignFromServer(result.data));
+                store.dispatch(actions.setCampaignFromServer(result.data.campaign));
+                store.dispatch(actions.setAllCampaigns(result.data.allCampaigns));
             })
             .catch(error => {
                 if (action.payload.create)

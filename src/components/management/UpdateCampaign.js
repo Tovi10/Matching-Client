@@ -40,10 +40,6 @@ export default function UpdateCampaign() {
         }
     }, [currentNotification])
 
-    useEffect(() => {
-        if (!allCampaigns && admin)
-            dispatch(actions.getAllCampaigns())
-    }, [])
 
     const onFinish = (values) => {
         console.log("🚀 ~ file: Campaigns.js ~ line 31 ~ onFinish ~ values", values);

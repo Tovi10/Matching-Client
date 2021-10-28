@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Tabs } from 'antd';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Applies from './Applies';
 import CampaignsManagment from './CampaignsManagment';
 import CardsManagment from './CardsManagment';
 import GiftsManagment from './GiftsManagment';
 import RecruitersManagment from './RecruitersManagment';
+import { actions } from '../../redux/actions';
 
 
 const { TabPane } = Tabs;
@@ -13,7 +14,15 @@ const { TabPane } = Tabs;
 
 export default function BaseManagement() {
 
+    const dispatch = useDispatch();
+
     const admin = useSelector(state => state.userReducer.admin);
+    const allCampaigns = useSelector(state => state.campaignReducer.allCampaigns);
+    
+    useEffect(() => {
+        if (!allCampaigns && admin)
+            dispatch(actions.getAllCampaigns())
+    }, [])
 
     return (
         <div className='BaseManagement'>
