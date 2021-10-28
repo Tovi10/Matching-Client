@@ -53,7 +53,7 @@ export default function Campaign(props) {
         socket.on('newDonation', event => {
             notification.open({
                 message: 'תרומה חדשה!',
-                description: event.donation.user.name + ` תרם ` + event.donation.card.sum + ` וקבל `+event.donation.card.gift.advertising
+                description: event.donation.user.name + ` תרם ` + event.donation.card.sum + ` וקבל ` + event.donation.card.gift.advertising
             });
             console.log(event);
             dispatch(actions.getCampaignById(campaign._id));
@@ -141,8 +141,8 @@ export default function Campaign(props) {
                                         </div>
                                         <Tooltip title={copy ? 'העתקת קישור' : 'הקישור הועתק'} onClick={() => {
                                             setCopy(false);
-                                            navigator.clipboard.writeText(`http://localhost:3000/current-campaign/${campaign._id}`);
-                                            // navigator.clipboard.writeText(`https://matching-try.herokuapp.com/current-campaign/${campaign._id}`);
+                                            // navigator.clipboard.writeText(`http://localhost:3000/current-campaign/${campaign._id}`);
+                                            navigator.clipboard.writeText(`https://matching-try.herokuapp.com/current-campaign/${campaign._id}`);
                                         }}>
                                             <div className='shareIcon'>
                                                 {copy ? <CopyOutlined /> : <CopyFilled />}
