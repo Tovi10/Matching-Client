@@ -56,7 +56,7 @@ export default function Campaign(props) {
                 description: event.donation.user.name + ` תרם ` + event.donation.card.sum + ` וקבל ` + event.donation.card.gift.advertising
             });
             console.log(event);
-            dispatch(actions.getCampaignById(campaign._id));
+            campaign ? dispatch(actions.getCampaignById(campaign._id)) : dispatch(actions.getCampaignById(window.location.href.split('/')[4]));
         });
 
         return campaign ? () => socket.emit('leaveCampaign', { room: campaign._id }) : "No campaign!";
