@@ -48,7 +48,6 @@ export default function Campaign(props) {
             setShowSpin(false)
         }, 2000);
 
-        socket.emit('enterCampaign', { room: campaign._id });
         socket.on('gotEntered', event => console.log(event.msg));
         socket.on('leaveCampaign', event => console.log(event.msg));
         socket.on('newDonation', event => {
@@ -58,6 +57,10 @@ export default function Campaign(props) {
 
         return () => socket.emit('leaveCampaign', { room: campaign._id });
     }, [])
+
+    useEffect(() => {
+        campaign ? socket.emit('enterCampaign', { room: campaign._id }) : console.log("No campaign");
+    }, [campaign]);
 
     // when spining finish -> its the time to display the images (by width);
     useEffect(() => {
