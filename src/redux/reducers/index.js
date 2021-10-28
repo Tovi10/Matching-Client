@@ -7,7 +7,6 @@ import companyReducer from './company.reducer';
 import giftReducer from './gift.reducer';
 import applyReducer from './apply.reducer';
 import recruiterReducer from './recruiter.reducer';
-import socketReducer from './socket.reducer';
 
 export default combineReducers({
     generalReducer,
@@ -17,5 +16,4 @@ export default combineReducers({
     giftReducer,
     applyReducer,
     recruiterReducer,
-    socketReducer,
 });

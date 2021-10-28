@@ -17,14 +17,12 @@ const { TabPane } = Tabs;
 export default function Campaign(props) {
 
     const campaign = useSelector(state => state.campaignReducer.campaign);
-    const socket = useSelector(state => state.socketReducer.socket);
     const dispatch = useDispatch();
-
     const [showSpin, setShowSpin] = useState(true);
     const [copy, setCopy] = useState(true);
     const [index, setIndex] = useState(1);
 
-
+    
     const showCurrentImg = (n) => {
         if (!campaign || !campaign.images.length) { return }
         const x = document.getElementsByClassName("mySlides");
@@ -48,24 +46,14 @@ export default function Campaign(props) {
         setTimeout(() => {
             setShowSpin(false)
         }, 2000);
-
-        socket.emit('enterCampaign', { room: campaign._id });
-        socket.on('gotEntered', event => console.log(event.msg));
-        socket.on('leaveCampaign', event => console.log(event.msg));
-        socket.on('newDonation', event => {
-            dispatch(actions.setCurrentNotification('תרומה חדשה'));
-            console.log(event.msg);
-        });
-
-        return () => socket.emit('leaveCampaign', { room: campaign._id });
     }, [])
 
     // when spining finish -> its the time to display the images (by width);
-    useEffect(() => {
-        if (!showSpin) {
+    useEffect(()=>{
+        if(!showSpin){
             showCurrentImg(1)
         }
-    }, [showSpin])
+    },[showSpin])
 
     useInterval(() => {
         showCurrentImg(index + 1);

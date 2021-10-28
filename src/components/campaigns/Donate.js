@@ -9,7 +9,6 @@ export default function Donate(props) {
     const dispatch = useDispatch();
     const user = useSelector(state => state.userReducer.user);
     const campaign = useSelector(state => state.campaignReducer.campaign);
-    const socket = useSelector(state => state.socketReducer.socket);
 
 
     const onFinish = (values) => {
@@ -17,7 +16,6 @@ export default function Donate(props) {
             message: 'תרומה חדשה!',
             description: 'תרומה חדשה',
         });
-        socket.emit('newDonation', { room: campaign._id })
         console.log('Received values of form: ', values);
         dispatch(actions.createDonation({ ...values, campaignId: campaign._id, user: user._id, card: card._id, date: moment(new Date()).format('DD/MM/YYYY a h:mm:ss ') + "" }));
         props.close();
