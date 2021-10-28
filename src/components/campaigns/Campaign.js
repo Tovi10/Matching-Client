@@ -51,8 +51,12 @@ export default function Campaign(props) {
         socket.on('gotEntered', event => console.log(event.msg));
         socket.on('leaveCampaign', event => console.log(event.msg));
         socket.on('newDonation', event => {
-            dispatch(actions.setCurrentNotification('תרומה חדשה!'));
-            console.log(event.msg);
+            notification.open({
+                message: 'תרומה חדשה!',
+                description: event.donation.user.name + ` תרם ` + event.donation.card.sum + ` וקבל `+event.donation.card.gift.advertising
+            });
+            console.log(event);
+            dispatch(actions.getCampaignById(campaign._id));
         });
 
         return campaign ? () => socket.emit('leaveCampaign', { room: campaign._id }) : "No campaign!";
