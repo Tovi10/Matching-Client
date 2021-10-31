@@ -58,14 +58,12 @@ export default function Campaign(props) {
             console.log(event);
             console.log("🚀 ~ file: Campaign.js ~ line 60 ~ useEffect ~ campaign", campaign)
             campaign ? dispatch(actions.getCampaignById(campaign._id)) : dispatch(actions.getCampaignById(window.location.href.split('/')[4]));
-
-
         });
             return () => socket.emit('leaveCampaign', { room: campaign? campaign._id:window.location.href.split('/')[4] });
     }, [])
 
     useEffect(() => {
-        campaign ? socket.emit('enterCampaign', { room: campaign._id }) : console.log("No campaign");
+        campaign ? socket.emit('enterCampaign', { room: campaign._id }) : console.log("No campaign!");
     }, [campaign]);
 
     // when spining finish -> its the time to display the images (by width);
