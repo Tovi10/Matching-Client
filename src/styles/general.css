@@ -287,3 +287,7 @@ body {
     padding: 5px;
     color: #000000;
 }
+
+.ant-popover-buttons{
+  text-align: left !important;
+}

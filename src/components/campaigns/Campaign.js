@@ -53,13 +53,15 @@ export default function Campaign(props) {
         socket.on('newDonation', event => {
             notification.open({
                 message: 'תרומה חדשה!',
-                description: event.donation.user.name + ` תרם ` + event.donation.card.sum + ` וקבל `+event.donation.card.gift.advertising
+                description: event.donation.user.name + ` תרם ` + event.donation.card.sum + ` וקבל ` + event.donation.card.gift.advertising
             });
             console.log(event);
-            dispatch(actions.getCampaignById(campaign._id));
-        });
+            console.log("🚀 ~ file: Campaign.js ~ line 60 ~ useEffect ~ campaign", campaign)
+            campaign ? dispatch(actions.getCampaignById(campaign._id)) : dispatch(actions.getCampaignById(window.location.href.split('/')[4]));
 
-        return () => socket.emit('leaveCampaign', { room: campaign._id });
+
+        });
+            return () => socket.emit('leaveCampaign', { room: campaign? campaign._id:window.location.href.split('/')[4] });
     }, [])
 
     useEffect(() => {

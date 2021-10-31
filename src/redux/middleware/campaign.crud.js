@@ -72,3 +72,19 @@ export const updateCampaign = store => next => action => {
     }
     return next(action);
 }
+
+export const deleteCampaign = store => next => action => {
+    if (action.type === 'DELETE_CAMPAIGN') {
+        axios.delete(`${SERVER_URL}/api/campaign/deleteCampaign/${action.payload}`)
+            .then(result => {
+                console.log("🚀 ~ file: campaign.crud.js ~ line 80 ~ result", result)
+                store.dispatch(actions.setAllCampaigns(result.data));
+                store.dispatch(actions.setCurrentNotification('הקמפיין נמחק בהצלחה!'))
+            })
+            .catch(error => {
+                console.log("🚀 ~ file: campaign.crud.js ~ line 85 ~ error", error)
+                store.dispatch(actions.setCurrentNotification('ארעה שגיאה במחיקת הקמפיין!'))
+            });
+    }
+    return next(action);
+}

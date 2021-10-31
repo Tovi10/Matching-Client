@@ -12,7 +12,6 @@ export default function UpdateRecruiter() {
 
     const dispatch = useDispatch();
     const allCampaigns = useSelector(state => state.campaignReducer.allCampaigns);
-    // const userCampaigns = useSelector(state => state.userReducer.user.campaigns);
     const admin = useSelector(state => state.userReducer.admin);
     const user = useSelector(state => state.userReducer.user);
 
@@ -27,8 +26,7 @@ export default function UpdateRecruiter() {
 
     const onFinish = (values) => {
         console.log("🚀 ~ file: UpdateRecruiter.js ~ line 20 ~ onFinish ~ values", values);
-        const campaignId = allCampaigns.find(c => c.campaignName === values.campaign)._id;
-        dispatch(actions.updateRecruiter({ ...values, campaign: campaignId }));
+        dispatch(actions.updateRecruiter(values));
     };
 
     const chooseCampaign = (campaignId) => {
@@ -46,14 +44,10 @@ export default function UpdateRecruiter() {
         <div className='p-auto UpdateRecruiter'>
             <h1>עריכת מגייס</h1>
             <Form
-                labelCol={{
-                    span: 4,
-                }}
                 wrapperCol={{
-                    span: 20,
+                    span: 24,
                 }}
                 form={form}
-                // name="UpdateRecruiter"
                 onFinish={onFinish}
             >
                 {/* campaign */}
@@ -69,13 +63,6 @@ export default function UpdateRecruiter() {
                     <Select
                         allowClear
                         showSearch
-                        // options={admin ? (
-                        //     allCampaigns && allCampaigns.map(campaign => {
-                        //         return { value: campaign.campaignName, label: campaign.campaignName }
-                        //     })) :
-                        //     userCampaigns && userCampaigns.map(campaign => {
-                        //         return { value: campaign.campaignName, label: campaign.campaignName }
-                        //     })}
                         onChange={chooseCampaign}
                         style={{ textAlign: 'right' }}
                         dropdownStyle={{ textAlign: 'right' }}

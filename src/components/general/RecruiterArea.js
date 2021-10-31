@@ -20,24 +20,29 @@ export default function RecruiterArea() {
     // }, [recruiterDonations]);
 
     return (
-        <div className="RecruiterArea">
-            <h4>{`שלום לך ${currentRecruiter ? currentRecruiter.designName : ""}`}</h4>
-            <h4>{`התרומות שנתרמו על ידך לקמפיין ${currentRecruiter ? currentRecruiter.campaign.campaignName : ""}`}</h4>
-            {currentRecruiter ? <h6>{`עד כה הושג ${currentRecruiter.sumRaised === undefined ? 0 : currentRecruiter.sumRaised} מתוך ${currentRecruiter.sum} ש"ח`}</h6> : ""}
-            <div className="row">
-                {recruiterDonations ? recruiterDonations.map((donation, i) => (
-                    // <div>{JSON.stringify(donation)}
-                    //     <br /></div>
-                    <div className={`card col-4 m-3 ${i % 2 === 0 ? "cardModTwo" : ""}`} key={donation._id}>
-                        <div class="card-body">
-                            <h5 className="card-title">{donation.user.name ? donation.user.name : 'לא ידוע'}</h5>
-                            <p>{`תרם ${donation.card.sum} ש"ח עבור ${donation.card.text}`}</p>
-                            <p>{`בתאריך ${donation.date}`}</p>
-                            <p>{`וקבל ${donation.card.gift && donation.card.gift.name}`}</p>
+        <div className="RecruiterArea">{
+            currentRecruiter ? <div>
+                <h4>{`שלום לך ${currentRecruiter.designName !== undefined? currentRecruiter.designName : (currentRecruiter.user.name || currentRecruiter.user.email)}`}</h4>
+                <h4>{`התרומות שנתרמו על ידך לקמפיין ${currentRecruiter.campaign.campaignName}`}</h4>
+                {currentRecruiter ? <h6>{`עד כה הושג ${currentRecruiter.sumRaised === undefined ? 0 : currentRecruiter.sumRaised} מתוך ${currentRecruiter.sum} ש"ח`}</h6> : ""}
+                <div className="row">
+                    {recruiterDonations ? recruiterDonations.map((donation, i) => (
+                        // <div>{JSON.stringify(donation)}
+                        //     <br /></div>
+                        <div className={`card col-4 m-3 ${i % 2 === 0 ? "cardModTwo" : ""}`} key={donation._id}>
+                            <div class="card-body">
+                                <h5 className="card-title">{donation.user.name ? donation.user.name : 'לא ידוע'}</h5>
+                                <p>{`תרם ${donation.card.sum} ש"ח עבור ${donation.card.text}`}</p>
+                                <p>{`בתאריך ${donation.date}`}</p>
+                                <p>{`וקבל ${donation.card.gift && donation.card.gift.name}`}</p>
+                            </div>
                         </div>
-                    </div>
-                )) : "No Donations"}
+                    )) : "No Donations"}
+                </div>
             </div>
+                :
+                "No Recruiter"
+        }
         </div>
     );
 }

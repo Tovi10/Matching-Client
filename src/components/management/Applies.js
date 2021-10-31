@@ -32,12 +32,6 @@ export default function Applies() {
             ellipsis: true,
             className: 'rtlColumn'
         },
-        // {
-        //     title: 'סטטוס',
-        //     dataIndex: 'status',
-        //     render: (status, apply) => <Tag color={status ? 'blue' : 'green'} className='notSelected pointer'>{status ? '!אושר' : '.בטיפול'}</Tag>,
-        //     align: 'center',
-        // },
         {
             title: 'משתמש',
             dataIndex: 'user',

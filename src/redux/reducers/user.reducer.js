@@ -17,7 +17,7 @@ const userReducer = {
             date = new Date(date.getTime() + 1000 * 60 * 60 * 24 * 365);
             document.cookie = 'giftMatchUserUid='+state.user.uid+'; expires=' + date.toGMTString() + ';';
         }
-        if (action.payload.email === 'theflow.leader@gmail.com') {
+        if (action.payload.email === 'giftmatching@gmail.com') {
             state.admin = true;
         } else {
             state.admin = false;

@@ -8,9 +8,13 @@ export const getUserByUid = store => next => action => {
             .then(result => {
                 console.log("🚀 ~ file: user.crud.js ~ line 8 ~ result", result);
                 store.dispatch(actions.setUser(result.data));
+                if (!result.data)
+                    store.dispatch(actions.setCurrentNotification('משתמש לא קיים!'))
+
             })
             .catch(error => {
                 console.log("🚀 ~ file: user.crud.js ~ line 12 ~ error", error);
+                store.dispatch(actions.setCurrentNotification('ארעה שגיאה במציאת המשתמש!'))
             })
     }
     return next(action)
