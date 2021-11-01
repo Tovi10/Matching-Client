@@ -131,7 +131,8 @@ export default function Campaign(props) {
                                 <div className='row'>
                                     <div className='col-8'>
                                         <p>מתוך סכום של {numberWithCommas(campaign.goal)} ש"ח</p>
-                                        {campaign.donations.length ? <h4>מס' התרומות עד כה הינו {campaign.donations.length}</h4> : <h4>היה אתה התורם הראשון!</h4>}
+                                        {/* {campaign.donations.length ? <h4>מס' התרומות עד כה הינו {campaign.donations.length}</h4> : <h4>היה אתה התורם הראשון!</h4>} */}
+                                        {campaign.donations.length ? <h4>{`עד כה נתרם ${campaign.goalRaised} ש"ח, על ידי ${campaign.donations.length} תורמים.`}</h4> : <h4>היה אתה התורם הראשון!</h4>}
                                     </div>
                                     {/* <div className='col-4'></div> */}
                                     <div className='col-4 d-flex justify-content-around align-items-center Share'>
