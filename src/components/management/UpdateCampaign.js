@@ -44,7 +44,6 @@ export default function UpdateCampaign() {
     const onFinish = (values) => {
         console.log("🚀 ~ file: Campaigns.js ~ line 31 ~ onFinish ~ values", values);
         setSpining(true);
-        debugger
         uploadImageToStorage(values);
     };
 
@@ -151,20 +150,7 @@ export default function UpdateCampaign() {
         });
     }
 
-    const deleteFile = () => {
-        const fileUrl = 'https://firebasestorage.googleapis.com/v0/b/matching-599f8.appspot.com/o/Campaigns%2F614632dd070df86687d7f792%2F93f1657e1bcb8babe05229e2ce6fc28f.jpg?alt=media&token=fa32859f-7731-424c-998a-94630235d4f9';
-        // Create a reference to the file to delete
-        const fileRef = firebase.storage().refFromURL(fileUrl);
-        // Delete the file using the delete() method
-        fileRef.delete().then(function () {
-            // File deleted successfully
-            console.log("File Deleted")
-        }).catch(function (error) {
-            console.log("🚀 ~ file: UpdateCampaign.js ~ line 129 ~ error", error)
-        });
-
-
-    }
+  
     return (
         <div className='UpdateCampaign'>
             <Spin size='large' spinning={spining}>
@@ -177,7 +163,7 @@ export default function UpdateCampaign() {
                         dropdownStyle={{ textAlign: 'right' }}
                         onChange={choose}
                         notFoundContent={<>לא נמצאו נתונים</>}
-                        placeholder={`בחר חברה...`}
+                        placeholder={`בחר קמפיין...`}
                         virtual={false}
                         dropdownClassName='companiesSelectDropdown'>
                         {admin ? (allCampaigns && allCampaigns.map(item => (

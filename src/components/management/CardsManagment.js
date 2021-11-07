@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from 'antd';
 import CreateCard from './CreateCard';
 import UpdateCard from './UpdateCard';
+import DeleteCards from './DeleteCards';
 
 export default function CardsManagment() {
     
@@ -15,7 +16,7 @@ export default function CardsManagment() {
             <Button onClick={() => setAction('delete')}>מחיקה</Button>
             {action === 'create' && <CreateCard />}
             {action === 'update' && <UpdateCard/>}
-            {action === 'delete' && 'soon delete...'}
+            {action === 'delete' && <DeleteCards/>}
         </div>
     )
 }

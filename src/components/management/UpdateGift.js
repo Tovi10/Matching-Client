@@ -22,7 +22,8 @@ export default function UpdateGift() {
     }, []);
     const onFinish = (values) => {
         console.log("🚀 ~ file: UpdateGift.js ~ line 20 ~ onFinish ~ values", values);
-        dispatch(actions.updateGift(values));
+        // dispatch(actions.updateGift(values));
+        dispatch(actions.updateGift(values))
     };
     const choose=(giftId)=>{
         const gift=allGifts.find(gift=>gift._id===giftId);

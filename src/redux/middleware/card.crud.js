@@ -18,3 +18,37 @@ export const createCard = store => next => action => {
     }
     return next(action)
 }
+
+export const updateCard = store => next => action => {
+    if (action.type === 'UPDATE_CARD') {
+        axios.put(`${SERVER_URL}/api/card/updateCard`, action.payload)
+            .then(result => {
+                console.log("🚀 ~ file: card.crud.js ~ line 26 ~ result", result)
+                store.dispatch(actions.setAllCampaigns(result.data.campaigns));
+                store.dispatch(actions.setUser(result.data.user));
+                store.dispatch(actions.setCurrentNotification('הכרטיס התעדכן בהצלחה!'))
+            })
+            .catch(error => {
+                console.log("🚀 ~ file: card.crud.js ~ line 30 ~ error", error)
+                store.dispatch(actions.setCurrentNotification('ארעה שגיאה בעדכון הכרטיס!'))
+            })
+    }
+    return next(action)
+}
+
+export const deleteCard = store => next => action => {
+    if (action.type === 'DELETE_CARD') {
+        axios.delete(`${SERVER_URL}/api/card/deleteCard/${action.payload}/${store.getState().userReducer.user.uid}`)
+            .then(result => {
+                console.log("🚀 ~ file: card.crud.js ~ line 43 ~ result", result)
+                store.dispatch(actions.setAllCampaigns(result.data.campaigns));
+                store.dispatch(actions.setUser(result.data.user));
+                store.dispatch(actions.setCurrentNotification('הכרטיס נמחק בהצלחה!'))
+            })
+            .catch(error => {
+                console.log("🚀 ~ file: card.crud.js ~ line 49 ~ error", error)
+                store.dispatch(actions.setCurrentNotification('ארעה שגיאה במחיקת הכרטיס!'))
+            })
+    }
+    return next(action)
+}

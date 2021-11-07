@@ -47,3 +47,38 @@ export const getRecruiterById = store => next => action => {
     }
     return next(action);
 }
+
+export const updateRecruiter = store => next => action => {
+    if (action.type === 'UPDATE_RECRUITER') {
+        axios.put(`${SERVER_URL}/api/recruiter/updateRecruiter/${store.getState().userReducer.user.uid}`, action.payload)
+            .then(result => {
+                console.log("🚀 ~ file: recruiter.crud.js ~ line 55 ~ result", result)
+                store.dispatch(actions.setCurrentNotification('המגייס התעדכן בהצלחה!'))
+                store.dispatch(actions.setAllCampaigns(result.data.campaigns));
+                store.dispatch(actions.setUser(result.data.user));
+            })
+            .catch(error => {
+                console.log("🚀 ~ file: recruiter.crud.js ~ line 58 ~ error", error)
+                store.dispatch(actions.setCurrentNotification('ארעה שגיאה בעדכון המגייס!'))
+            })
+    }
+    return next(action);
+}
+
+
+export const deleteRecruiter = store => next => action => {
+    if (action.type === 'DELETE_RECRUITER') {
+        axios.delete(`${SERVER_URL}/api/recruiter/deleteRecruiter/${action.payload}/${store.getState().userReducer.user.uid}`)
+            .then(result => {
+                console.log("🚀 ~ file: recruiter.crud.js ~ line 71 ~ result", result)
+                store.dispatch(actions.setCurrentNotification('המגייס נמחק בהצלחה!'))
+                store.dispatch(actions.setAllCampaigns(result.data.campaigns));
+                store.dispatch(actions.setUser(result.data.user));
+            })
+            .catch(error => {
+                console.log("🚀 ~ file: recruiter.crud.js ~ line 75 ~ error", error)
+                store.dispatch(actions.setCurrentNotification('ארעה שגיאה במחיקת המגייס!'))
+            })
+    }
+    return next(action);
+}

@@ -4,6 +4,7 @@ import {
     Input,
     Button,
     Select,
+    Spin,
 } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/actions';
@@ -15,9 +16,12 @@ export default function UpdateCard() {
     const allGifts = useSelector(state => state.giftReducer.allGifts);
     const user = useSelector(state => state.userReducer.user);
     const admin = useSelector(state => state.userReducer.admin);
+    const currentNotification = useSelector(state => state.generalReducer.currentNotification);
+
     const [form] = Form.useForm();
 
     const [cards, setCards] = useState(null);
+    const [spining, setSpining] = useState(false);
 
     useEffect(() => {
         if (!allCampaigns)
@@ -26,11 +30,19 @@ export default function UpdateCard() {
             dispatch(actions.getAllGifts());
     }, []);
 
-
+    useEffect(() => {
+        setSpining(false)
+        if (currentNotification === 'הכרטיס התעדכן בהצלחה!' && cards) {
+            form.resetFields();
+            setCards(null);
+        }
+    }, [currentNotification])
 
     const onFinish = (values) => {
         console.log("🚀 ~ file: UpdateCard.js ~ line 30 ~ onFinish ~ values", values);
-        
+        const giftId = allGifts.find(gift => gift.name === values.gift)._id;
+        dispatch(actions.updateCard({ ...values, _id: values.card,gift:giftId,uid:user.uid }))
+        setSpining(true)
     };
     const chooseCampaign = (campaignId) => {
         const cardsObj = allCampaigns.find(c => c._id === campaignId).cards;
@@ -40,13 +52,14 @@ export default function UpdateCard() {
 
     const chooseCard = (cardId) => {
         const cardObj = cards.find(c => c._id === cardId);
-        form.setFieldsValue({ ...cardObj, gift: cardObj.text });
+        form.setFieldsValue({ ...cardObj, gift: cardObj.gift.name });
     }
-  
+
 
     return (
         <div className='p-auto UpdateCard'>
             <h1>עריכת כרטיס</h1>
+            <Spin size='large' spinning={spining}>
             <Form
                 wrapperCol={{
                     span: 20,
@@ -119,13 +132,13 @@ export default function UpdateCard() {
                     <Select
                         allowClear
                         showSearch
-                        options={allGifts && allGifts.map(gift => {
-                            return { value: gift.name, label: gift.name }
-                        })}
                         style={{ textAlign: 'right' }}
                         dropdownStyle={{ textAlign: 'right' }}
                         notFoundContent={<>לא נמצאו נתונים</>}
                         placeholder={`בחר מתנה...`} >
+                        {allGifts && allGifts.length && allGifts.map(gift => (
+                            <Select.Option key={gift.name}>{gift.name}</Select.Option>
+                        ))}
                     </Select>
                 </Form.Item>
                 {/* sum */}
@@ -151,6 +164,7 @@ export default function UpdateCard() {
                     </Button>
                 </Form.Item>
             </Form>
+            </Spin>
         </div >
     );
 };

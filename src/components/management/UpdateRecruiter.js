@@ -4,6 +4,7 @@ import {
     Input,
     Button,
     Select,
+    Spin,
 } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/actions';
@@ -14,18 +15,29 @@ export default function UpdateRecruiter() {
     const allCampaigns = useSelector(state => state.campaignReducer.allCampaigns);
     const admin = useSelector(state => state.userReducer.admin);
     const user = useSelector(state => state.userReducer.user);
+    const currentNotification = useSelector(state => state.generalReducer.currentNotification);
 
 
     const [form] = Form.useForm();
     const [campaign, setCampaign] = useState(null);
+    const [spining, setSpining] = useState(false);
 
     useEffect(() => {
         if (!allCampaigns)
             dispatch(actions.getAllCampaigns());
     }, []);
 
+    useEffect(() => {
+        setSpining(false)
+        if (currentNotification === 'המגייס התעדכן בהצלחה!' && campaign) {
+            form.resetFields();
+            setCampaign(null);
+        }
+    }, [currentNotification])
+
     const onFinish = (values) => {
         console.log("🚀 ~ file: UpdateRecruiter.js ~ line 20 ~ onFinish ~ values", values);
+        setSpining(true);
         dispatch(actions.updateRecruiter(values));
     };
 
@@ -43,6 +55,7 @@ export default function UpdateRecruiter() {
     return (
         <div className='p-auto UpdateRecruiter'>
             <h1>עריכת מגייס</h1>
+            <Spin size='large' spinning={spining}>
             <Form
                 wrapperCol={{
                     span: 24,
@@ -132,6 +145,7 @@ export default function UpdateRecruiter() {
                     </Button>
                 </Form.Item>
             </Form>
+            </Spin>
         </div >
     );
 };

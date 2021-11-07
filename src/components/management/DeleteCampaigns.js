@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
-import { Table, Button, Spin, Tag, Tooltip, Avatar, Popconfirm } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Table, Button, Spin, Popconfirm } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/actions';
 import { firebase } from '../../services/firebase.service';
+import moment from 'moment';
 
 export default function DeleteCampaigns() {
 
@@ -11,10 +12,19 @@ export default function DeleteCampaigns() {
     const user = useSelector(state => state.userReducer.user);
     const admin = useSelector(state => state.userReducer.admin);
 
+
+    const [campaigns, setCampaigns] = useState([]);
+
+
     useEffect(() => {
         if (!allCampaigns & admin)
             dispatch(actions.getAllCampaigns())
     }, [])
+
+    useEffect(() => {
+        if (!allCampaigns) return;
+        setCampaigns(allCampaigns.filter(c => !c.donations.length))
+    }, [allCampaigns]);
 
     const deleteFilesFromFirebase = async (images) => {
         let fileRef;
@@ -92,9 +102,16 @@ export default function DeleteCampaigns() {
     ];
     return (
         <div className='DeleteCampaigns'>
-            <Spin size='large' spinning={admin ? !allCampaigns : !user}>
+            {/* <Spin size='large' spinning={admin ? !allCampaigns : !user}>
                 <Table dataSource={admin ? allCampaigns : user.campaigns} columns={columns}
-                    rowKey={apply => apply._id}
+                    rowKey={campaign => campaign._id}
+                    pagination={{ position: ['bottomLeft', 'none'] }}
+                    style={{ direction: 'ltr' }} />
+            </Spin> */}
+            <h6>כאן מוצגים רק הקמפיינים שעוד לא תרמו להם במקום הקמפיינים שעוד לא התחילו כי זה לא עבד לי לצערי</h6>
+            <Spin size='large' spinning={!campaigns}>
+                <Table dataSource={campaigns} columns={columns}
+                    rowKey={campaign => campaign._id}
                     pagination={{ position: ['bottomLeft', 'none'] }}
                     style={{ direction: 'ltr' }} />
             </Spin>

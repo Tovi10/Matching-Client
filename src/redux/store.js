@@ -7,11 +7,11 @@ import reducers from './reducers/index';
 import { createUser, getUserByUid, updateUser } from './middleware/user.crud';
 import { getAllCampaigns, getCampaignById, createCampaign, updateCampaign, deleteCampaign, } from './middleware/campaign.crud';
 import { getAllGifts, createGift, getGiftById, updateGift } from './middleware/gift.crud';
-import { createCard } from './middleware/card.crud';
+import { createCard, deleteCard, updateCard } from './middleware/card.crud';
 import { getAllCompanies, createCompany, updateCompany } from './middleware/company.crud';
 import { setCurrentNotification } from './middleware/general.crud';
 import { createDonation, getDonationsByRecruiterId } from './middleware/donation.crud';
-import { createRecruiter, updateRecruiterDetails, getRecruiterById } from './middleware/recruiter.crud';
+import { createRecruiter, updateRecruiterDetails, getRecruiterById, updateRecruiter, deleteRecruiter } from './middleware/recruiter.crud';
 import { confirmApply, createApply, getApplies } from './middleware/apply.crud';
 
 const store = createStore(
@@ -42,6 +42,10 @@ const store = createStore(
         confirmApply,
         createUser,
         deleteCampaign,
+        updateCard,
+        deleteCard,
+        updateRecruiter,
+        deleteRecruiter,
     )));
 
 export default store;
