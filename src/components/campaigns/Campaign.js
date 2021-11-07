@@ -59,7 +59,7 @@ export default function Campaign(props) {
             console.log("🚀 ~ file: Campaign.js ~ line 60 ~ useEffect ~ campaign", campaign)
             campaign ? dispatch(actions.getCampaignById(campaign._id)) : dispatch(actions.getCampaignById(window.location.href.split('/')[4]));
         });
-            return () => socket.emit('leaveCampaign', { room: campaign? campaign._id:window.location.href.split('/')[4] });
+        return () => socket.emit('leaveCampaign', { room: campaign ? campaign._id : window.location.href.split('/')[4] });
     }, [])
 
     useEffect(() => {

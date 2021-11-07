@@ -3,6 +3,9 @@ import { Form, Select, Button, notification, } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/actions';
 import moment from 'moment';
+import axios from 'axios';
+
+import { SERVER_URL } from "../../constants"
 
 export default function Donate(props) {
     const { card } = props;
@@ -16,9 +19,19 @@ export default function Donate(props) {
         //     description: 'תרומה חדשה',
         // });
         console.log('Received values of form: ', values);
+        axios.post(`${SERVER_URL}/api/donation/clearingCredit`)
+            .then(result => {
+                window.open(result.data.url, "_blank")
+                console.log("🚀 ~ file: Donate.js ~ line 22 ~ onFinish ~ result", result)
+            })
+            .catch(error => {
+                console.log("🚀 ~ file: Donate.js ~ line 23 ~ onFinish ~ error", error)
+
+            })
         dispatch(actions.createDonation({ ...values, campaignId: campaign._id, user: user._id, card: card._id, date: moment(new Date()).format('DD/MM/YYYY a h:mm:ss ') + "" }));
         props.close();
     }
+
     return (
         <div className='Donate'>
             <Form onFinish={onFinish}>

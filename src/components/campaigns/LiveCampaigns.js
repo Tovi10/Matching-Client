@@ -20,8 +20,10 @@ function LiveCampaigns(props) {
     // }, []);
 
     useEffect(() => {
+        // let currentDate = moment(Date.now()).format('DD/MM/YYYY');
+        // setLiveCampaigns(allCampaigns.filter(c => currentDate >= new Date(c.duration[0]).toLocaleDateString('he-IL') && currentDate <= new Date(c.duration[1]).toLocaleDateString('he-IL')));
         let currentDate = moment(Date.now()).format('DD/MM/YYYY');
-        setLiveCampaigns(allCampaigns.filter(c => currentDate >= new Date(c.duration[0]).toLocaleDateString('he-IL') && currentDate <= new Date(c.duration[1]).toLocaleDateString('he-IL')));
+        setLiveCampaigns(allCampaigns.filter(c => currentDate >= c.duration[0] && currentDate <= c.duration[1]));
     }, []);
 
     const selectCampaign = (campaign) => {
@@ -34,6 +36,7 @@ function LiveCampaigns(props) {
         <div className="LiveCampaigns container-fluid">
             <div className='row'>
                 {liveCampaigns && liveCampaigns.map(campaign => (
+                    // {allCampaigns && allCampaigns.map(campaign => (
                     <div key={campaign._id} className="col-4 d-flex align-items-center justify-content-center">
                         <div className="shadow mb-5 bg-body rounded card liveCampaignCard" key={campaign._id} onClick={() => { selectCampaign(campaign) }}>
                             {(campaign.images && campaign.images[0]) ?
