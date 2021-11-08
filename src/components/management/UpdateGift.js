@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     Form,
@@ -6,8 +6,9 @@ import {
     Button,
     Select,
 } from 'antd';
-import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons';
+import { DeleteTwoTone, UploadOutlined, } from '@ant-design/icons';
 import { actions } from '../../redux/actions';
+import { firebase } from '../../services/firebase.service';
 
 export default function UpdateGift() {
 
@@ -15,20 +16,51 @@ export default function UpdateGift() {
     const allGifts = useSelector(state => state.giftReducer.allGifts);
 
     const [form] = Form.useForm();
-
+    const [imageFile, setImageFile] = useState();
+    const [imageURL, setImageURL] = useState();
     useEffect(() => {
         if (!allGifts)
             dispatch(actions.getAllGifts());
     }, []);
-    const onFinish = (values) => {
-        console.log("🚀 ~ file: UpdateGift.js ~ line 20 ~ onFinish ~ values", values);
-        // dispatch(actions.updateGift(values));
-        dispatch(actions.updateGift(values))
+    const onFinish = async (values) => {
+        if (imageFile && imageFile[0].name) {
+            // upload
+            const storageRef = firebase.storage().ref();
+            let fileRef = storageRef.child(`Gifts/${imageFile[0].name}`);
+            await fileRef.put(imageFile[0]);
+            const imageImgPath = await fileRef.getDownloadURL();
+            dispatch(actions.updateGift({ ...values, image: imageImgPath }))
+            return
+        }
+        if (!imageFile && values.image) {
+            const fileRef = await firebase.storage().refFromURL(values.image);
+            await fileRef.delete().then(function () {
+                console.log("File Deleted")
+            }).catch(function (error) {
+                console.log("🚀 ~ file: UpdateGift.js ~ line 42 ~ error", error)
+                dispatch(actions.setCurrentNotification('ארעה שגיאה בעדכון המתנה!'))
+            });
+            dispatch(actions.updateGift({ ...values, image: null }));
+            return;
+        }
+        dispatch(actions.updateGift(values));
     };
-    const choose=(giftId)=>{
-        const gift=allGifts.find(gift=>gift._id===giftId);
-        console.log("🚀 ~ file: UpdateGift.js ~ line 29 ~ choose ~ gift", gift)
+    const choose = (giftId) => {
+        const gift = allGifts.find(gift => gift._id === giftId);
         form.setFieldsValue(gift);
+        setImageURL(gift.image);
+        setImageFile(gift.image);
+    }
+    const uploadImage = (event) => {
+        setImageFile(event.target.files);
+        setImageURL(URL.createObjectURL(event.target.files[0]))
+    }
+    const removeImage = (key) => {
+        debugger
+        if (imageFile) {
+            setImageFile(null)
+        }
+        setImageURL(null);
     }
 
 
@@ -48,7 +80,7 @@ export default function UpdateGift() {
             >
                 {/* gift */}
                 <Form.Item
-                    name="gift"
+                    name="_id"
                     rules={[
                         {
                             required: true,
@@ -59,9 +91,6 @@ export default function UpdateGift() {
                     <Select
                         allowClear
                         showSearch
-                        // options={allGifts && allGifts.map(gift => {
-                        //     return { value: gift.name, label: gift.name }
-                        // })}
                         onChange={choose}
                         style={{ textAlign: 'right' }}
                         dropdownStyle={{ textAlign: 'right' }}
@@ -97,21 +126,23 @@ export default function UpdateGift() {
                     <Input placeholder={`הכנס כאן את תאור המתנה...`} />
                 </Form.Item>
                 {/* image */}
-                {/* <Form.Item
-                    name='image'
-                >
-                    {image ?
-                        <div>
-                            <DeleteTwoTone title={`מחק תמונה`} onClick={() => setImage(null)} />
-                            <span>{Object.entries(image)[0][1].name}</span>
-                        </div> :
-                        <div className='btn btn-primary d-flex justify-content-center uploadimageDiv'>
-                            <input type='file' ref={inputImageRef} className='uploadHiddenInput'
-                                onChange={() => setImage(inputImageRef.current.files)} />
-                            <PlusOutlined className='plusIcon' />
-                            <div>בחר קובץ</div>
+                <Form.Item
+                    name="image"
+                    style={{ display: 'inline-block', width: 'calc(100% - 8px)', marginLeft: '8px' }}>
+                    {!imageFile &&
+                        <div className='btn mb-2 d-flex justify-content-center uploadLogoDiv'>
+                            <input type='file' accept='image/*'
+                                onChange={e => uploadImage(e)} className='uploadHiddenInput' />
+                            <UploadOutlined className='plusIcon' />
+                            <div>בחר תמונות לקמפיין</div>
                         </div>}
-                </Form.Item> */}
+                    <div className='d-flex align-items-center justify-content-around'>
+                        {imageURL && <div className='wrapperImgs' >
+                            <DeleteTwoTone twoToneColor="#5ddf5d" className='deleteImgIcon' title={`מחק תמונה`} onClick={removeImage} />
+                            <img alt='img' src={imageURL} style={{ width: '100%', height: '20vh', objectFit: 'contain' }} />
+                        </div>}
+                    </div>
+                </Form.Item>
                 {/* price */}
                 <Form.Item
                     name="price"
@@ -125,9 +156,7 @@ export default function UpdateGift() {
                     <Input type='number' placeholder={`הכנס כאן את מחיר המתנה...`} />
                 </Form.Item>
                 {/* amount */}
-                <Form.Item
-                    name="amount"
-                >
+                <Form.Item name="amount">
                     <Input type='number' placeholder={`הכנס כאן את כמות המתנה...`} />
                 </Form.Item>
                 {/* submit */}

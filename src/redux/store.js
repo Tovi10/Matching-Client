@@ -6,7 +6,7 @@ import reducers from './reducers/index';
 
 import { createUser, getUserByUid, updateUser } from './middleware/user.crud';
 import { getAllCampaigns, getCampaignById, createCampaign, updateCampaign, deleteCampaign, } from './middleware/campaign.crud';
-import { getAllGifts, createGift, getGiftById, updateGift } from './middleware/gift.crud';
+import { getAllGifts, createGift, getGiftById, updateGift, deleteGift } from './middleware/gift.crud';
 import { createCard, deleteCard, updateCard } from './middleware/card.crud';
 import { getAllCompanies, createCompany, updateCompany } from './middleware/company.crud';
 import { setCurrentNotification } from './middleware/general.crud';
@@ -46,6 +46,7 @@ const store = createStore(
         deleteCard,
         updateRecruiter,
         deleteRecruiter,
+        deleteGift,
     )));
 
 export default store;

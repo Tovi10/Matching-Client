@@ -30,9 +30,9 @@ export default function DeleteCards() {
     }
     const confirm = async (cardId) => {
         console.log("🚀 ~ file: DeleteCards.js ~ line 45 ~ confirm ~ cardId", cardId)
-        // let card = cards.find(c => c._id === cardId);
+        const card = cards.find(c => c._id === cardId);
         // delete card from server
-        dispatch(actions.deleteCard(cardId));
+        dispatch(actions.deleteCard(card));
     }
 
     const columns = [

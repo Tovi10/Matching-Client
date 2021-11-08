@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from 'antd';
 import CreateGift from './CreateGift';
 import UpdateGift from './UpdateGift';
+import DeleteGifts from './DeleteGifts';
 
 export default function GiftsManagment() {
     
@@ -15,7 +16,7 @@ export default function GiftsManagment() {
             <Button onClick={() => setAction('delete')}>מחיקה</Button>
             {action === 'create' && <CreateGift />}
             {action === 'update' && <UpdateGift/>}
-            {action === 'delete' && 'soon delete...'}
+            {action === 'delete' && <DeleteGifts/>}
         </div>
     )
 }

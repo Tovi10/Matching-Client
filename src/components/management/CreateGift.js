@@ -5,9 +5,10 @@ import {
     Input,
     Button,
     Checkbox,
+    Spin,
 } from 'antd';
-import { PlusOutlined, DeleteTwoTone } from '@ant-design/icons';
 import { firebase } from '../../services/firebase.service';
+import { DeleteTwoTone, UploadOutlined, } from '@ant-design/icons';
 
 import { actions } from '../../redux/actions';
 
@@ -19,7 +20,9 @@ export default function CreateGift() {
 
     const [form] = Form.useForm();
     const [image, setImage] = useState(null);
+    const [imageURL, setImageURL] = useState(null);
     const [coupon, setCoupon] = useState(false);
+    const [spining, setSpining] = useState(false);
 
     const inputImageRef = useRef(null);
 
@@ -30,6 +33,7 @@ export default function CreateGift() {
     }, [general.giftId]);
 
     useEffect(() => {
+        setSpining(false)
         if (general.currentNotification === 'המתנה התווספה בהצלחה!') {
             setImage(null);
             form.resetFields();
@@ -38,117 +42,130 @@ export default function CreateGift() {
 
     const onFinish = (values) => {
         console.log("🚀 ~ file: CreateGift.js ~ line 20 ~ onFinish ~ values", values);
+        setSpining(true);
         dispatch(actions.createGift(values));
     };
     const uploadImageToStorage = async (giftId) => {
-        if (!image) return;
-        const storageRef = firebase.storage().ref();
-        let fileRef = storageRef.child(`Gifts/${giftId}/${Object.entries(image)[0][1].name}`);
-        await fileRef.put(Object.entries(image)[0][1]);
-        const imageImgPath = await fileRef.getDownloadURL();
-        // edit gift in server with the image
-        const updateGift = { ...gift, image: imageImgPath }
-        dispatch(actions.updateGift(updateGift));
-        dispatch(actions.setGiftId(null));
+        if (!image) {
+            dispatch(actions.setCurrentNotification('המתנה התווספה בהצלחה'))
+        }
+        else {
+            const storageRef = firebase.storage().ref();
+            let fileRef = storageRef.child(`Gifts/${Object.entries(image)[0][1].name}`);
+            await fileRef.put(Object.entries(image)[0][1]);
+            const imageImgPath = await fileRef.getDownloadURL();
+            // edit gift in server with the image
+            const updateGift = { ...gift, image: imageImgPath, create: true }
+            dispatch(actions.updateGift(updateGift));
+            dispatch(actions.setGiftId(null));
+        }
     }
+
 
     return (
         <div className='p-auto CreateGift'>
             <h1>יצירת מתנה</h1>
-            <Form
-                labelCol={{
-                    span: 4,
-                }}
-                wrapperCol={{
-                    span: 20,
-                }}
-                form={form}
-                name="CreateGift"
-                onFinish={onFinish}
-            >
-                {/* name */}
-                <Form.Item
-                    name="name"
-                    rules={[
-                        {
-                            required: true,
-                            message: `הכנס שם למתנה!`,
-                        },
-                    ]}
+            <Spin size='large' spinning={spining}>
+
+                <Form
+                    labelCol={{
+                        span: 4,
+                    }}
+                    wrapperCol={{
+                        span: 20,
+                    }}
+                    form={form}
+                    name="CreateGift"
+                    onFinish={onFinish}
                 >
-                    <Input placeholder={`הכנס כאן את שם המתנה...`} />
-                </Form.Item>
-                {/* advertising */}
-                <Form.Item
-                    name="advertising"
-                    rules={[
-                        {
-                            max: 50,
-                            message: `הכנס תאור למתנה עד 50 תווים!`,
-                        },
-                    ]}
-                >
-                    <Input placeholder={`הכנס כאן את תאור המתנה...`} />
-                </Form.Item>
-                {/* image */}
-                <Form.Item
-                    name='image'
-                >
-                    {image ?
-                        <div>
-                            <DeleteTwoTone title={`מחק תמונה`} onClick={() => setImage(null)} />
-                            <span>{Object.entries(image)[0][1].name}</span>
-                        </div> :
-                        <div className='btn btn-primary d-flex justify-content-center uploadimageDiv'>
-                            <input type='file' ref={inputImageRef} className='uploadHiddenInput'
-                                onChange={() => setImage(inputImageRef.current.files)} />
-                            <PlusOutlined className='plusIcon' />
-                            <div>בחר קובץ</div>
-                        </div>}
-                </Form.Item>
-                {/* price */}
-                <Form.Item
-                    name="price"
-                    rules={[
-                        {
-                            required: true,
-                            message: `הכנס מחיר למתנה!`,
-                        },
-                    ]}
-                >
-                    <Input type='number' placeholder={`הכנס כאן את מחיר המתנה...`} />
-                </Form.Item>
-                {/* amount */}
-                <Form.Item
-                    name="amount"
-                >
-                    <Input type='number' placeholder={`הכנס כאן את כמות המתנה...`} />
-                </Form.Item>
-                <Form.Item>
-                    <Checkbox onChange={() => setCoupon(!coupon)}>שובר</Checkbox>
-                </Form.Item>
-                {coupon &&
+                    {/* name */}
                     <Form.Item
-                        name='from'
+                        name="name"
                         rules={[
                             {
                                 required: true,
-                                message: `הכנס מייל!`,
+                                message: `הכנס שם למתנה!`,
                             },
+                        ]}
+                    >
+                        <Input placeholder={`הכנס כאן את שם המתנה...`} />
+                    </Form.Item>
+                    {/* advertising */}
+                    <Form.Item
+                        name="advertising"
+                        rules={[
                             {
-                                type: 'email',
-                                message: `הכנס מייל!`,
+                                max: 50,
+                                message: `הכנס תאור למתנה עד 50 תווים!`,
                             },
-                        ]}>
-                        <Input placeholder='הכנס מייל אליו ישלחו פרטי מקבלי השוברים' />
-                    </Form.Item>}   
-                {/* submit */}
-                <Form.Item className='submitFormItem'>
-                    <Button type="primary" htmlType="submit">
-                        יצירת מתנה
-                    </Button>
-                </Form.Item>
-            </Form>
+                        ]}
+                    >
+                        <Input placeholder={`הכנס כאן את תאור המתנה...`} />
+                    </Form.Item>
+                    {/* image */}
+                    <Form.Item
+                        name='image'
+                        style={{ display: 'inline-block', width: 'calc(100% - 8px)', marginLeft: '8px' }}
+                    >
+                        {image ?
+                            <div className='wrapperImgs'>
+                                <DeleteTwoTone twoToneColor="#5ddf5d" className='deleteImgIcon' title={`מחק לוגו`} onClick={() => setImage(null)} />
+                                <img alt='img' src={imageURL} style={{ width: '100%', height: '15vh', objectFit: 'contain' }} />
+                            </div> :
+                            <div className='btn d-flex justify-content-center uploadLogoDiv'>
+                                <input type='file' accept='image/*' ref={inputImageRef} className='uploadHiddenInput'
+                                    onChange={event => {
+                                        setImage(inputImageRef.current.files);
+                                        setImageURL(URL.createObjectURL(event.target.files[0]))
+                                    }} />
+                                <UploadOutlined className='plusIcon' />
+                                <div>בחר תמונה</div>
+                            </div>}
+                    </Form.Item>
+                    {/* price */}
+                    <Form.Item
+                        name="price"
+                        rules={[
+                            {
+                                required: true,
+                                message: `הכנס מחיר למתנה!`,
+                            },
+                        ]}
+                    >
+                        <Input type='number' placeholder={`הכנס כאן את מחיר המתנה...`} />
+                    </Form.Item>
+                    {/* amount */}
+                    <Form.Item
+                        name="amount"
+                    >
+                        <Input type='number' placeholder={`הכנס כאן את כמות המתנה...`} />
+                    </Form.Item>
+                    <Form.Item>
+                        <Checkbox onChange={() => setCoupon(!coupon)}>שובר</Checkbox>
+                    </Form.Item>
+                    {coupon &&
+                        <Form.Item
+                            name='from'
+                            rules={[
+                                {
+                                    required: true,
+                                    message: `הכנס מייל!`,
+                                },
+                                {
+                                    type: 'email',
+                                    message: `הכנס מייל!`,
+                                },
+                            ]}>
+                            <Input placeholder='הכנס מייל אליו ישלחו פרטי מקבלי השוברים' />
+                        </Form.Item>}
+                    {/* submit */}
+                    <Form.Item className='submitFormItem'>
+                        <Button type="primary" htmlType="submit">
+                            יצירת מתנה
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </Spin>
         </div >
     );
 };

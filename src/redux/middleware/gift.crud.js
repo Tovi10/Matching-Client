@@ -2,13 +2,16 @@ import axios from 'axios';
 
 import { SERVER_URL } from "../../constants";
 import { actions } from '../actions';
+import { firebase } from '../../services/firebase.service';
+
 
 export const createGift = store => next => action => {
     if (action.type === 'CREATE_GIFT') {
         axios.post(`${SERVER_URL}/api/gift/createGift`, action.payload)
             .then(result => {
                 console.log("🚀 ~ file: gift.crud.js ~ line 10 ~ result", result);
-                store.dispatch(actions.setCurrentNotification('המתנה התווספה בהצלחה!'));
+                // if(action.payload.create){}
+                // store.dispatch(actions.setCurrentNotification('המתנה התווספה בהצלחה!'));
                 store.dispatch(actions.setGift(result.data));
                 store.dispatch(actions.setGiftId(result.data._id));
             })
@@ -25,10 +28,17 @@ export const updateGift = store => next => action => {
     if (action.type === 'UPDATE_GIFT') {
         axios.put(`${SERVER_URL}/api/gift/updateGift`, action.payload)
             .then(result => {
+                if (action.payload.create) {
+                    store.dispatch(actions.setCurrentNotification('המתנה התווספה בהצלחה!'));
+                }
+                else {
+                    store.dispatch(actions.setCurrentNotification('המתנה התעדכנה בהצלחה!'));
+                }
                 console.log("🚀 ~ file: gift.crud.js ~ line 24 ~ result", result)
             })
             .catch(error => {
                 console.log("🚀 ~ file: gift.crud.js ~ line 27 ~ error", error)
+                store.dispatch(actions.setCurrentNotification('ארעה שגיאה בעדכון המתנה!'))
             });
     }
     return next(action);
@@ -57,6 +67,33 @@ export const getAllGifts = store => next => action => {
             })
             .catch(error => {
                 console.log("🚀 ~ file: gift.crud.js ~ line 26 ~ error", error)
+            })
+    }
+    return next(action)
+}
+
+export const deleteGift = store => next => action => {
+    if (action.type === 'DELETE_GIFT') {
+        axios.delete(`${SERVER_URL}/api/gift/deleteGift/${action.payload._id}`)
+            .then(result => {
+                console.log("🚀 ~ file: gift.crud.js ~ line 77 ~ result", result)
+                if (action.payload.image) {
+                    const fileRef = firebase.storage().refFromURL(action.payload.image);
+                    fileRef.delete().then(function () {
+                        console.log("File Deleted")
+                        store.dispatch(actions.setCurrentNotification('המתנה נמחקה בהצלחה!'));
+
+                    }).catch(function (error) {
+                        console.log("🚀 ~ file: gift.crud.js ~ line 85 ~ error", error)
+                        store.dispatch(actions.setCurrentNotification('ארעה שגיאה במחיקת המתנה!'))
+                    });
+                }
+                else
+                    store.dispatch(actions.setCurrentNotification('המתנה נמחקה בהצלחה!'));
+            })
+            .catch(error => {
+                console.log("🚀 ~ file: gift.crud.js ~ line 81 ~ error", error)
+                store.dispatch(actions.setCurrentNotification('ארעה שגיאה במחיקת המתנה!'))
             })
     }
     return next(action)
