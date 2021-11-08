@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from 'antd';
 import CreateRecruiter from './CreateRecruiter';
 import UpdateRecruiter from './UpdateRecruiter';
+import DeleteRecruiters from './DeleteRecruiters';
 
 export default function RecruitersManagment() {
     
@@ -15,7 +16,7 @@ export default function RecruitersManagment() {
             <Button onClick={() => setAction('delete')}>מחיקה</Button>
             {action === 'create' && <CreateRecruiter />}
             {action === 'update' && <UpdateRecruiter/>}
-            {action === 'delete' && 'soon delete...'}
+            {action === 'delete' && <DeleteRecruiters/>}
         </div>
     )
 }

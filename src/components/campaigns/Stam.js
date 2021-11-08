@@ -74,7 +74,6 @@ export default function Stam() {
             // the end :)
             if (imagePaths.length === images.length) {
                 const updateCampaign = { ...campaign, images: imagePaths, create: true }
-                debugger
                 // dispatch(actions.updateCampaign(updateCampaign))
             }
         });
