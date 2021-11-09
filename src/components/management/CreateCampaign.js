@@ -131,11 +131,11 @@ function CreateCampaign() {
             // edit compny in server with the logo
             const updateCompany = { ...company, logo: logoImgPath }
             dispatch(actions.updateCompany(updateCompany));
-            dispatch(actions.setCompanyId(null));
         }
         else {
             dispatch(actions.setCurrentNotification(`החברה נוצרה בהצלחה!`))
         }
+        dispatch(actions.setCompanyId(null));
         setLogo(null);
         form.resetFields();
         setLogo(null);
