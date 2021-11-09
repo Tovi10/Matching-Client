@@ -8,8 +8,8 @@ export const createRecruiter = store => next => action => {
             .then(result => {
                 console.log("🚀 ~ file: recruiter.crud.js ~ line 5 ~ result", result);
                 store.dispatch(actions.setCurrentNotification('המגייס נוצר בהצלחה!'));
-                // let link = "http://localhost:3000/recruiters/" + result.data.recruiter._id;
-                let link = "https://matching-try.herokuapp.com/recruiters/" + result.data.recruiter._id;
+                let link = "http://localhost:3000/recruiters/" + result.data.recruiter._id;
+                // let link = "https://matching-try.herokuapp.com/recruiters/" + result.data.recruiter._id;
                 store.dispatch(actions.setRecruiterLink(link));
                 debugger
                 store.dispatch(actions.updateRecruiterDetails({ id: result.data.recruiter._id, link, uid: store.getState().userReducer.user.uid }));
