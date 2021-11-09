@@ -11,7 +11,8 @@ export const createRecruiter = store => next => action => {
                 let link = "http://localhost:3000/recruiters/" + result.data.recruiter._id;
                 // let link = "https://matching-try.herokuapp.com/recruiters/" + result.data.recruiter._id;
                 store.dispatch(actions.setRecruiterLink(link));
-                store.dispatch(actions.updateRecruiterDetails({ id: result.data.recruiter._id, data: { link: link } }));
+                debugger
+                store.dispatch(actions.updateRecruiterDetails({ id: result.data.recruiter._id, link, uid: store.getState().userReducer.user.uid }));
             })
             .catch(error => {
                 console.log("🚀 ~ file: recruiter.crud.js ~ line 9 ~ error", error);
@@ -23,9 +24,11 @@ export const createRecruiter = store => next => action => {
 
 export const updateRecruiterDetails = store => next => action => {
     if (action.type === 'UPDATE_RECRUITER_DETAILS') {
-        axios.put(`${SERVER_URL}/api/recruiter/updateRecruiterDetails/${action.payload.id}`, action.payload.data)
+        axios.put(`${SERVER_URL}/api/recruiter/updateRecruiterDetails/${action.payload.id}`, action.payload)
             .then(result => {
                 console.log("🚀 ~ file: recruiter.crud.js ~ line 26 ~ result", result)
+                store.dispatch(actions.setAllCampaigns(result.data.allCampaigns));
+                store.dispatch(actions.setUser(result.data.user))
             })
             .catch(error => {
                 console.log("🚀 ~ file: recruiter.crud.js ~ line 29 ~ error", error)

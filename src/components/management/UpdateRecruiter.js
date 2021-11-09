@@ -56,95 +56,96 @@ export default function UpdateRecruiter() {
         <div className='p-auto UpdateRecruiter'>
             <h1>עריכת מגייס</h1>
             <Spin size='large' spinning={spining}>
-            <Form
-                wrapperCol={{
-                    span: 24,
-                }}
-                form={form}
-                onFinish={onFinish}
-            >
-                {/* campaign */}
-                <Form.Item
-                    name="campaign"
-                    rules={[
-                        {
-                            required: true,
-                            message: `אנא בחר קמפיין!`,
-                        },
-                    ]}
+                <Form
+                    wrapperCol={{
+                        span: 24,
+                    }}
+                    form={form}
+                    onFinish={onFinish}
                 >
-                    <Select
-                        allowClear
-                        showSearch
-                        onChange={chooseCampaign}
-                        style={{ textAlign: 'right' }}
-                        dropdownStyle={{ textAlign: 'right' }}
-                        notFoundContent={<>לא נמצאו נתונים</>}
-                        placeholder={`בחר קמפיין...`} >
-                        {admin ? (allCampaigns && allCampaigns.map(item => (
-                            <Select.Option key={item._id}>{item.campaignName}</Select.Option>
-                        ))) : (user.campaigns && user.campaigns.map(item => (
-                            <Select.Option key={item._id}>{item.campaignName}</Select.Option>
-                        )))}
-                    </Select>
-                </Form.Item>
-                {/* recruiter */}
-                <Form.Item
-                    name="recruiter"
-                    rules={[
-                        {
-                            required: true,
-                            message: `אנא בחר מגייס!`,
-                        },
-                    ]}
-                >
-                    <Select
-                        allowClear
-                        showSearch
-                        style={{ textAlign: 'right' }}
-                        dropdownStyle={{ textAlign: 'right' }}
-                        onChange={chooseRecruiter}
-                        notFoundContent={<>לא נמצאו מגייסים</>}
-                        placeholder={`בחר מגיס...`} >
-                        {campaign && campaign.recruiters.length && campaign.recruiters.map(recruiter => {
-                            return (<Select.Option key={recruiter._id}>{recruiter.designName}</Select.Option>)
-                        })}
-                    </Select>
-                </Form.Item>
-                {/* sum */}
-                <Form.Item
-                    name="sum"
-                    rules={[
-                        {
-                            required: true,
-                            message: `הכנס סכום תרומה!`,
-                        },
-                    ]}
-                >
-                    <Input type='number' placeholder={`הכנס כאן את סכום התרומה...`} />
-                </Form.Item>
-                {/* name */}
-                <Form.Item
-                    name="designName"
-                    rules={[{ required: true, message: 'הכנס שם!' }]}
+                    {/* campaign */}
+                    <Form.Item
+                        name="campaign"
+                        rules={[
+                            {
+                                required: true,
+                                message: `אנא בחר קמפיין!`,
+                            },
+                        ]}
+                    >
+                        <Select
+                            allowClear
+                            showSearch
+                            onChange={chooseCampaign}
+                            style={{ textAlign: 'right' }}
+                            dropdownStyle={{ textAlign: 'right' }}
+                            notFoundContent={<>לא נמצאו נתונים</>}
+                            placeholder={`בחר קמפיין...`} >
+                            {admin ? (allCampaigns && allCampaigns.map(item => (
+                                <Select.Option key={item._id}>{item.campaignName}</Select.Option>
+                            ))) : (user.campaigns && user.campaigns.map(item => (
+                                <Select.Option key={item._id}>{item.campaignName}</Select.Option>
+                            )))}
+                        </Select>
+                    </Form.Item>
+                    {/* recruiter */}
+                    <Form.Item
+                        name="recruiter"
+                        rules={[
+                            {
+                                required: true,
+                                message: `אנא בחר מגייס!`,
+                            },
+                        ]}
+                    >
+                        <Select
+                            allowClear
+                            showSearch
+                            style={{ textAlign: 'right' }}
+                            dropdownStyle={{ textAlign: 'right' }}
+                            onChange={chooseRecruiter}
+                            notFoundContent={<>לא נמצאו מגייסים</>}
+                            placeholder={`בחר מגיס...`} >
+                            {campaign && campaign.recruiters.length && campaign.recruiters.map(recruiter => {
+                                return (
+                                    !recruiter.sumRaised && <Select.Option key={recruiter._id}>{recruiter.designName}</Select.Option>)
+                            })}
+                        </Select>
+                    </Form.Item>
+                    {/* sum */}
+                    <Form.Item
+                        name="sum"
+                        rules={[
+                            {
+                                required: true,
+                                message: `הכנס סכום תרומה!`,
+                            },
+                        ]}
+                    >
+                        <Input type='number' placeholder={`הכנס כאן את סכום התרומה...`} />
+                    </Form.Item>
+                    {/* name */}
+                    <Form.Item
+                        name="designName"
+                        rules={[{ required: true, message: 'הכנס שם!' }]}
 
-                >
-                    <Input placeholder={`הכנס כאן את שם המגייס לתצוגה...`} />
-                </Form.Item>
-                {/* emil */}
-                {/* <Form.Item
+                    >
+                        <Input placeholder={`הכנס כאן את שם המגייס לתצוגה...`} />
+                    </Form.Item>
+                    {/* emil */}
+                    {/* <Form.Item
                     name="email"
                     rules={[{ required: true, message: 'הכנס מייל!' }]}
                 >
                     <Input type='email' placeholder="מייל" />
                 </Form.Item> */}
-                {/* submit */}
-                <Form.Item className='submitFormItem'>
-                    <Button type="primary" htmlType="submit">
-                        עריכת מגייס
-                    </Button>
-                </Form.Item>
-            </Form>
+                    {/* submit */}
+                    <Form.Item className='submitFormItem'>
+                        <Button type="primary" htmlType="submit">
+                            עריכת מגייס
+                        </Button>
+                    </Form.Item>
+                </Form>
             </Spin>
         </div >
     );

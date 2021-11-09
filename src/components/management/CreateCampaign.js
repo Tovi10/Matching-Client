@@ -19,7 +19,7 @@ import CampaignDetails from './CampaignDetails';
 import '../../styles/createCampaign.css';
 import moment from 'moment';
 
-function CreateCampaign(props) {
+function CreateCampaign() {
 
 
     const dispatch = useDispatch();
@@ -93,19 +93,19 @@ function CreateCampaign(props) {
             setCreateCompany(false)
         }
         else {
-            const data = { ...values, duration: [moment(values.duration[0].toString()).format("DD/MM/YYYY"), moment(values.duration[1].toString()).format("DD/MM/YYYY")], userId: user._id };
+            const data = { ...values, images: imagesURLs, duration: [moment(values.duration[0].toString()).format("DD/MM/YYYY"), moment(values.duration[1].toString()).format("DD/MM/YYYY")], userId: user._id };
             dispatch(actions.createCampaign(data));
         }
     }
 
     const uploadImageToStorage = (campaignId) => {
-        let imagePaths = [];
-        if (!imagesURLs) {
+        if (!imagesURLs.length) {
             // maybe move them to the end of the function;
             dispatch(actions.setCampaignId(null));
             setOpenModal(true);
             return;
         };
+        let imagePaths = [];
         const storageRef = firebase.storage().ref();
         imagesFiles.map(async img => {
             let fileRef = storageRef.child(`Campaigns/${campaignId}/${img.name}`);
@@ -114,7 +114,7 @@ function CreateCampaign(props) {
             imagePaths.push(singleImgPath);
             // the end :)
             if (imagePaths.length === imagesFiles.length) {
-                const updateCampaign = { ...campaign, images: imagePaths, create: true }
+                const updateCampaign = { ...campaign, images: imagePaths, create: true}
                 dispatch(actions.updateCampaign(updateCampaign))
                 dispatch(actions.setCampaignId(null));
                 setOpenModal(true);
@@ -138,6 +138,8 @@ function CreateCampaign(props) {
         }
         setLogo(null);
         form.resetFields();
+        setLogo(null);
+        setLogoURL(null);
         setSpining(false);
     }
 
@@ -358,12 +360,12 @@ function CreateCampaign(props) {
                                 <Form.Item
                                     name="images"
                                     style={{ display: 'inline-block', width: 'calc(100% - 8px)', marginLeft: '8px' }}
-                                    // rules={[
-                                    //     {
-                                    //         required: uploadErr,
-                                    //         message: `העלה מקסימום 5 תמונות!`,
-                                    //     },
-                                    // ]}
+                                // rules={[
+                                //     {
+                                //         required: uploadErr,
+                                //         message: `העלה מקסימום 5 תמונות!`,
+                                //     },
+                                // ]}
                                 >
                                     {/* limit num og images to 5 */}
                                     {imagesFiles.length < 5 &&
@@ -381,7 +383,7 @@ function CreateCampaign(props) {
                                             </div>
                                         )) : ''}
                                     </div>
-                                    <div onClick={removeAll}>removeAll</div>
+                                    {imagesURLs.length ? <div onClick={removeAll}>מחק הכל</div> : ''}
                                     {uploadErr && <Alert
                                         style={{ width: 'calc(100% - 8px)', margin: '10px 0 0 8px' }}
                                         message="העלה מקסימום 5 תמונות!" type="error" closable />}
@@ -398,7 +400,7 @@ function CreateCampaign(props) {
                     </Form>
                 </Spin>
             </div >
-            <Modal footer={false} title='קמפיין חדש' visible={openModal} onCancel={() => { setOpenModal(false); setSpining(false); form.resetFields() }} centered={true} width={1000}>
+            <Modal footer={false} title='קמפיין חדש' visible={openModal} onCancel={() => { setOpenModal(false); setSpining(false); form.resetFields(); removeAll(); }} centered={true} width={1000}>
                 <CampaignDetails />
             </Modal>
         </div >

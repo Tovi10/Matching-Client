@@ -30,7 +30,7 @@ export default function RecruiterArea() {
                         // <div>{JSON.stringify(donation)}
                         //     <br /></div>
                         <div className={`card col-4 m-3 ${i % 2 === 0 ? "cardModTwo" : ""}`} key={donation._id}>
-                            <div class="card-body">
+                            <div className="card-body">
                                 <h5 className="card-title">{donation.user.name ? donation.user.name : 'לא ידוע'}</h5>
                                 <p>{`תרם ${donation.card.sum} ש"ח עבור ${donation.card.text}`}</p>
                                 <p>{`בתאריך ${donation.date}`}</p>

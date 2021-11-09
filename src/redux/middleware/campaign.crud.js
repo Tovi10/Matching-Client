@@ -41,6 +41,7 @@ export const createCampaign = store => next => action => {
                 store.dispatch(actions.setCampaignFromServer(result.data.campaign));
                 store.dispatch(actions.setUser(result.data.user));
                 store.dispatch(actions.setCampaignId(result.data.campaign._id))
+                store.dispatch(actions.setAllCampaigns(result.data.allCampaigns));
             })
             .catch(error => {
                 store.dispatch(actions.setCurrentNotification('ארעה שגיאה ביצירת הקמפיין!'))
@@ -52,7 +53,8 @@ export const createCampaign = store => next => action => {
 
 export const updateCampaign = store => next => action => {
     if (action.type === 'UPDATE_CAMPAIGN') {
-        axios.put(`${SERVER_URL}/api/campaign/updateCampaign`, action.payload)
+        const data=action.payload;
+        axios.put(`${SERVER_URL}/api/campaign/updateCampaign`, {...data,uid:store.getState().userReducer.user.uid})
             .then(result => {
                 if (action.payload.create)
                     store.dispatch(actions.setCurrentNotification('הקמפיין נוצר בהצלחה!'));
@@ -61,6 +63,8 @@ export const updateCampaign = store => next => action => {
                 console.log("🚀 ~ file: campaign.crud.js ~ line 39 ~ result", result)
                 store.dispatch(actions.setCampaignFromServer(result.data.campaign));
                 store.dispatch(actions.setAllCampaigns(result.data.allCampaigns));
+                store.dispatch(actions.setUser(result.data.user));
+
             })
             .catch(error => {
                 if (action.payload.create)
@@ -75,10 +79,11 @@ export const updateCampaign = store => next => action => {
 
 export const deleteCampaign = store => next => action => {
     if (action.type === 'DELETE_CAMPAIGN') {
-        axios.delete(`${SERVER_URL}/api/campaign/deleteCampaign/${action.payload}`)
+        axios.delete(`${SERVER_URL}/api/campaign/deleteCampaign/${action.payload.campaignId}/${action.payload.userId}`)
             .then(result => {
                 console.log("🚀 ~ file: campaign.crud.js ~ line 80 ~ result", result)
-                store.dispatch(actions.setAllCampaigns(result.data));
+                store.dispatch(actions.setAllCampaigns(result.data.allCampaigns));
+                store.dispatch(actions.setUser(result.data.user));
                 store.dispatch(actions.setCurrentNotification('הקמפיין נמחק בהצלחה!'))
             })
             .catch(error => {

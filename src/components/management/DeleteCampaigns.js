@@ -23,18 +23,17 @@ export default function DeleteCampaigns() {
 
     useEffect(() => {
         if (!allCampaigns) return;
-        setCampaigns(allCampaigns.filter(c => !c.donations.length))
+        setCampaigns(allCampaigns.filter(c => !c.goalRaised))
     }, [allCampaigns]);
 
     const deleteFilesFromFirebase = async (images) => {
         let fileRef;
         for (let index = 0; index < images.length; index++) {
             fileRef = await firebase.storage().refFromURL(images[index]);
-            await fileRef.delete().then(function () {
+            fileRef.delete().then(function () {
                 console.log("File Deleted")
             }).catch(function (error) {
-                console.log("🚀 ~ file: DeleteCampaigns.js ~ line 25 ~ error", error)
-                dispatch(actions.setCurrentNotification('ארעה שגיאה במחיקת הקמפיין!'))
+                console.log("🚀 ~ file: DeleteCampaigns.js ~ err with delete img of campaign ~ error", error)
             });
         }
     }
@@ -46,9 +45,9 @@ export default function DeleteCampaigns() {
         else
             campaign = user.campaigns.find(c => c._id === campaignId);
         // delete images from firebase
-        await deleteFilesFromFirebase(campaign.images);
+        deleteFilesFromFirebase(campaign.images);
         // delete campaigns from server
-        dispatch(actions.deleteCampaign(campaignId));
+        dispatch(actions.deleteCampaign({ campaignId, userId: user._id }));
     }
 
     const columns = [
@@ -102,13 +101,7 @@ export default function DeleteCampaigns() {
     ];
     return (
         <div className='DeleteCampaigns'>
-            {/* <Spin size='large' spinning={admin ? !allCampaigns : !user}>
-                <Table dataSource={admin ? allCampaigns : user.campaigns} columns={columns}
-                    rowKey={campaign => campaign._id}
-                    pagination={{ position: ['bottomLeft', 'none'] }}
-                    style={{ direction: 'ltr' }} />
-            </Spin> */}
-            <h6>כאן מוצגים רק הקמפיינים שעוד לא תרמו להם במקום הקמפיינים שעוד לא התחילו כי זה לא עבד לי לצערי</h6>
+            <h6>כאן מוצגים רק הקמפיינים שעוד לא תרמו להם</h6>
             <Spin size='large' spinning={!campaigns}>
                 <Table dataSource={campaigns} columns={columns}
                     rowKey={campaign => campaign._id}

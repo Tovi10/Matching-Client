@@ -42,14 +42,12 @@ export default function UpdateCampaign() {
 
 
     const onFinish = (values) => {
-        console.log("🚀 ~ file: Campaigns.js ~ line 31 ~ onFinish ~ values", values);
         setSpining(true);
         uploadImageToStorage(values);
     };
 
     const choose = (campaignId) => {
         const campaignObj = allCampaigns.find(c => c._id === campaignId);
-        console.log("🚀 ~ file: Campaigns.js ~ line 34 ~ choose ~ campaignObj", campaignObj)
         setCampaign(campaignObj)
         if (!campaignObj) return
         setImagesURLs(campaignObj.images)
@@ -93,11 +91,9 @@ export default function UpdateCampaign() {
         let fileRef;
         for (let index = 0; index < images.length; index++) {
             fileRef = await firebase.storage().refFromURL(images[index]);
-            await fileRef.delete().then(function () {
+            fileRef.delete().then(function () {
                 console.log("File Deleted")
             }).catch(function (error) {
-                dispatch(actions.setCurrentNotification('ארעה שגיאה בעדכון הקמפיין!'))
-                console.log("🚀 ~ file: UpdateCampaign.js ~ line 97 ~ error", error);
             });
         }
     }
@@ -108,7 +104,6 @@ export default function UpdateCampaign() {
             await deleteFilesFromFirebase(campaign.images);
             // updtae in server
             dispatch(actions.updateCampaign({ ...campaign, ...values, duration: [moment(values.duration[0].toString()).format("DD/MM/YYYY"), moment(values.duration[1].toString()).format("DD/MM/YYYY")], images: [] }));
-            // setSpining(false);
             return;
         };
 
@@ -150,7 +145,7 @@ export default function UpdateCampaign() {
         });
     }
 
-  
+
     return (
         <div className='UpdateCampaign'>
             <Spin size='large' spinning={spining}>
@@ -162,14 +157,15 @@ export default function UpdateCampaign() {
                         style={{ textAlign: 'right' }}
                         dropdownStyle={{ textAlign: 'right' }}
                         onChange={choose}
+                        onClear={()=>{form.resetFields();removeAll()}}
                         notFoundContent={<>לא נמצאו נתונים</>}
                         placeholder={`בחר קמפיין...`}
                         virtual={false}
                         dropdownClassName='companiesSelectDropdown'>
                         {admin ? (allCampaigns && allCampaigns.map(item => (
-                            <Select.Option key={item._id}>{item.campaignName}</Select.Option>
+                            !item.goalRaised && <Select.Option key={item._id}>{item.campaignName}</Select.Option>
                         ))) : (user.campaigns && user.campaigns.map(item => (
-                            <Select.Option key={item._id}>{item.campaignName}</Select.Option>
+                            !item.goalRaised && <Select.Option key={item._id}>{item.campaignName}</Select.Option>
                         )))}
                     </Select>
                     <Form
@@ -275,7 +271,7 @@ export default function UpdateCampaign() {
                                     </div>
                                 )) : ''}
                             </div>
-                            {imagesURLs.length ? <div onClick={removeAll}>removeAll</div> : ''}
+                            {imagesURLs.length ? <div onClick={removeAll}>מחק הכל</div> : ''}
                             {uploadErr && <Alert
                                 style={{ width: 'calc(100% - 8px)', margin: '10px 0 0 8px' }}
                                 message="העלה מקסימום 5 תמונות!" type="error" closable />}

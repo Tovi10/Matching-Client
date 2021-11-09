@@ -6,7 +6,8 @@ import DeleteCampaigns from './DeleteCampaigns';
 
 export default function CampaignsManagment() {
 
-    const [action,setAction]=useState(null)
+    const [action,setAction]=useState(null);
+    
     return (
         <div className='CampaignsManagment'>
             <h1>מה ברצונך לעשות?</h1>

@@ -22,11 +22,19 @@ export default function DeleteCards() {
             dispatch(actions.getAllCampaigns())
     }, [])
 
+    useEffect(() => {
+
+        if (allCampaigns&&form.getFieldValue('campaign')) {
+            const campaign = allCampaigns.find(c => c._id === form.getFieldValue('campaign'));
+            setCards(campaign.cards.filter(c => !c.used));
+        }
+    }, [allCampaigns])
+
 
     const choose = (campaignId) => {
         const campaign = allCampaigns.find(c => c._id === campaignId);
         console.log("🚀 ~ file: DeleteCards.js ~ line 41 ~ choose ~ campaign", campaign)
-        setCards(campaign.cards.filter(c=>!c.used));
+        setCards(campaign.cards.filter(c => !c.used));
     }
     const confirm = async (cardId) => {
         console.log("🚀 ~ file: DeleteCards.js ~ line 45 ~ confirm ~ cardId", cardId)

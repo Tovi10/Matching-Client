@@ -5,10 +5,12 @@ import { actions } from '../actions';
 
 export const createCard = store => next => action => {
     if (action.type === 'CREATE_CARD') {
-        axios.post(`${SERVER_URL}/api/card/createCard/${action.payload.campaignId}`, action.payload.card)
+        axios.post(`${SERVER_URL}/api/card/createCard/${action.payload.campaignId}/${store.getState().userReducer.user.uid}`, action.payload.card)
             .then(result => {
                 console.log("🚀 ~ file: card.crud.js ~ line 9 ~ result", result)
                 store.dispatch(actions.setCurrentNotification('הכרטיס התווסף בהצלחה!'))
+                store.dispatch(actions.setAllCampaigns(result.data.allCampaigns));
+                store.dispatch(actions.setUser(result.data.user));
             })
             .catch(error => {
                 console.log("🚀 ~ file: card.crud.js ~ line 12 ~ error", error)
@@ -43,6 +45,7 @@ export const deleteCard = store => next => action => {
                 console.log("🚀 ~ file: card.crud.js ~ line 43 ~ result", result)
                 store.dispatch(actions.setAllCampaigns(result.data.campaigns));
                 store.dispatch(actions.setUser(result.data.user));
+                store.dispatch(actions.setAllGifts(result.data.allGifts));
                 store.dispatch(actions.setCurrentNotification('הכרטיס נמחק בהצלחה!'))
             })
             .catch(error => {

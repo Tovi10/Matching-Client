@@ -112,10 +112,10 @@ export default function UpdateCard() {
                         onChange={chooseCard}
                         style={{ textAlign: 'right' }}
                         dropdownStyle={{ textAlign: 'right' }}
-                        notFoundContent={<>לא נמצאו נתונים</>}
+                        notFoundContent={<>לא נמצאו כרטיסים או שכולם בשימוש</>}
                         placeholder={`בחר כרטיס...`} >
                         {cards && cards.length && cards.map(item => (
-                            <Select.Option key={item._id}>{item.text}</Select.Option>
+                           !item.used&& <Select.Option key={item._id}>{item.text}</Select.Option>
                         ))}
                     </Select>
                 </Form.Item>

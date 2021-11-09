@@ -13,6 +13,7 @@ export default function CreateRecruiter() {
     const dispatch = useDispatch();
     const allCampaigns = useSelector(state => state.campaignReducer.allCampaigns);
     const userCampaigns = useSelector(state => state.userReducer.user.campaigns);
+    const uid = useSelector(state => state.userReducer.user.uid);
     const admin = useSelector(state => state.userReducer.admin);
     const recruiterLink = useSelector(state => state.recruiterReducer.recruiterLink);
 
@@ -31,7 +32,7 @@ export default function CreateRecruiter() {
     const onFinish = (values) => {
         console.log("🚀 ~ file: CreateRecruiter.js ~ line 20 ~ onFinish ~ values", values);
         const campaignId = allCampaigns.find(c => c.campaignName === values.campaign)._id;
-        dispatch(actions.createRecruiter({ ...values, campaign: campaignId }));
+        dispatch(actions.createRecruiter({ ...values, campaign: campaignId ,uid}));
     };
 
     return (
@@ -110,10 +111,10 @@ export default function CreateRecruiter() {
             </Form>
             {
                 recruiterLink != '' ?
-                    <spna>
+                    <span>
                         לינק לאזור האישי של המגייס החדש :<br />
                         <a href={recruiterLink} className="recruiterLink" >{recruiterLink}</a>
-                    </spna>
+                    </span>
                     : ""
             }
         </div >

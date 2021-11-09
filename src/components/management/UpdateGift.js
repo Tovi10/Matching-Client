@@ -5,6 +5,7 @@ import {
     Input,
     Button,
     Select,
+    Spin,
 } from 'antd';
 import { DeleteTwoTone, UploadOutlined, } from '@ant-design/icons';
 import { actions } from '../../redux/actions';
@@ -14,15 +15,36 @@ export default function UpdateGift() {
 
     const dispatch = useDispatch();
     const allGifts = useSelector(state => state.giftReducer.allGifts);
+    const currentNotification = useSelector(state => state.generalReducer.currentNotification);
 
     const [form] = Form.useForm();
     const [imageFile, setImageFile] = useState();
     const [imageURL, setImageURL] = useState();
+    const [gifts, setGifts] = useState();
+    const [spining, setSpining] = useState(false);
+
+    useEffect(() => {
+        setSpining(false)
+        if (currentNotification === 'המתנה התעדכנה בהצלחה!') {
+            form.resetFields();
+            removeImage();
+        }
+    }, [currentNotification]);
+
+
     useEffect(() => {
         if (!allGifts)
             dispatch(actions.getAllGifts());
     }, []);
+
+    useEffect(() => {
+        if (allGifts)
+            setGifts(allGifts.filter(g => !g.used));
+    }, [allGifts]);
+
+
     const onFinish = async (values) => {
+        setSpining(true);
         if (imageFile && imageFile[0].name) {
             // upload
             const storageRef = firebase.storage().ref();
@@ -56,7 +78,6 @@ export default function UpdateGift() {
         setImageURL(URL.createObjectURL(event.target.files[0]))
     }
     const removeImage = (key) => {
-        debugger
         if (imageFile) {
             setImageFile(null)
         }
@@ -67,105 +88,107 @@ export default function UpdateGift() {
     return (
         <div className='p-auto UpdateGift'>
             <h1>עריכת מתנה</h1>
-            <Form
-                labelCol={{
-                    span: 4,
-                }}
-                wrapperCol={{
-                    span: 20,
-                }}
-                form={form}
-                name="UpdateGift"
-                onFinish={onFinish}
-            >
-                {/* gift */}
-                <Form.Item
-                    name="_id"
-                    rules={[
-                        {
-                            required: true,
-                            message: `אנא בחר מתנה!`,
-                        },
-                    ]}
+            <Spin size='large' spinning={spining}>
+                <Form
+                    labelCol={{
+                        span: 4,
+                    }}
+                    wrapperCol={{
+                        span: 20,
+                    }}
+                    form={form}
+                    name="UpdateGift"
+                    onFinish={onFinish}
                 >
-                    <Select
-                        allowClear
-                        showSearch
-                        onChange={choose}
-                        style={{ textAlign: 'right' }}
-                        dropdownStyle={{ textAlign: 'right' }}
-                        notFoundContent={<>לא נמצאו מתנות</>}
-                        placeholder={`בחר מתנה...`} >
-                        {allGifts && allGifts.map(gift => {
-                            return (<Select.Option key={gift._id}>{gift.name}</Select.Option>)
-                        })}
-                    </Select>
-                </Form.Item>
-                {/* name */}
-                <Form.Item
-                    name="name"
-                    rules={[
-                        {
-                            required: true,
-                            message: `הכנס שם למתנה!`,
-                        },
-                    ]}
-                >
-                    <Input placeholder={`הכנס כאן את שם המתנה...`} />
-                </Form.Item>
-                {/* advertising */}
-                <Form.Item
-                    name="advertising"
-                    rules={[
-                        {
-                            max: 50,
-                            message: `הכנס תאור למתנה עד 50 תווים!`,
-                        },
-                    ]}
-                >
-                    <Input placeholder={`הכנס כאן את תאור המתנה...`} />
-                </Form.Item>
-                {/* image */}
-                <Form.Item
-                    name="image"
-                    style={{ display: 'inline-block', width: 'calc(100% - 8px)', marginLeft: '8px' }}>
-                    {!imageFile &&
-                        <div className='btn mb-2 d-flex justify-content-center uploadLogoDiv'>
-                            <input type='file' accept='image/*'
-                                onChange={e => uploadImage(e)} className='uploadHiddenInput' />
-                            <UploadOutlined className='plusIcon' />
-                            <div>בחר תמונות לקמפיין</div>
-                        </div>}
-                    <div className='d-flex align-items-center justify-content-around'>
-                        {imageURL && <div className='wrapperImgs' >
-                            <DeleteTwoTone twoToneColor="#5ddf5d" className='deleteImgIcon' title={`מחק תמונה`} onClick={removeImage} />
-                            <img alt='img' src={imageURL} style={{ width: '100%', height: '20vh', objectFit: 'contain' }} />
-                        </div>}
-                    </div>
-                </Form.Item>
-                {/* price */}
-                <Form.Item
-                    name="price"
-                    rules={[
-                        {
-                            required: true,
-                            message: `הכנס מחיר למתנה!`,
-                        },
-                    ]}
-                >
-                    <Input type='number' placeholder={`הכנס כאן את מחיר המתנה...`} />
-                </Form.Item>
-                {/* amount */}
-                <Form.Item name="amount">
-                    <Input type='number' placeholder={`הכנס כאן את כמות המתנה...`} />
-                </Form.Item>
-                {/* submit */}
-                <Form.Item className='submitFormItem'>
-                    <Button type="primary" htmlType="submit">
-                        עריכת מתנה
-                    </Button>
-                </Form.Item>
-            </Form>
+                    {/* gift */}
+                    <Form.Item
+                        name="_id"
+                        rules={[
+                            {
+                                required: true,
+                                message: `אנא בחר מתנה!`,
+                            },
+                        ]}
+                    >
+                        <Select
+                            allowClear
+                            showSearch
+                            onChange={choose}
+                            style={{ textAlign: 'right' }}
+                            dropdownStyle={{ textAlign: 'right' }}
+                            notFoundContent={<>לא נמצאו מתנות</>}
+                            placeholder={`בחר מתנה...`} >
+                            {gifts && gifts.map(gift => {
+                                return (<Select.Option key={gift._id}>{gift.name}</Select.Option>)
+                            })}
+                        </Select>
+                    </Form.Item>
+                    {/* name */}
+                    <Form.Item
+                        name="name"
+                        rules={[
+                            {
+                                required: true,
+                                message: `הכנס שם למתנה!`,
+                            },
+                        ]}
+                    >
+                        <Input placeholder={`הכנס כאן את שם המתנה...`} />
+                    </Form.Item>
+                    {/* advertising */}
+                    <Form.Item
+                        name="advertising"
+                        rules={[
+                            {
+                                max: 50,
+                                message: `הכנס תאור למתנה עד 50 תווים!`,
+                            },
+                        ]}
+                    >
+                        <Input placeholder={`הכנס כאן את תאור המתנה...`} />
+                    </Form.Item>
+                    {/* image */}
+                    <Form.Item
+                        name="image"
+                        style={{ display: 'inline-block', width: 'calc(100% - 8px)', marginLeft: '8px' }}>
+                        {!imageFile &&
+                            <div className='btn mb-2 d-flex justify-content-center uploadLogoDiv'>
+                                <input type='file' accept='image/*'
+                                    onChange={e => uploadImage(e)} className='uploadHiddenInput' />
+                                <UploadOutlined className='plusIcon' />
+                                <div>בחר תמונות לקמפיין</div>
+                            </div>}
+                        <div className='d-flex align-items-center justify-content-around'>
+                            {imageURL && <div className='wrapperImgs' >
+                                <DeleteTwoTone twoToneColor="#5ddf5d" className='deleteImgIcon' title={`מחק תמונה`} onClick={removeImage} />
+                                <img alt='img' src={imageURL} style={{ width: '100%', height: '20vh', objectFit: 'contain' }} />
+                            </div>}
+                        </div>
+                    </Form.Item>
+                    {/* price */}
+                    <Form.Item
+                        name="price"
+                        rules={[
+                            {
+                                required: true,
+                                message: `הכנס מחיר למתנה!`,
+                            },
+                        ]}
+                    >
+                        <Input type='number' placeholder={`הכנס כאן את מחיר המתנה...`} />
+                    </Form.Item>
+                    {/* amount */}
+                    <Form.Item name="amount">
+                        <Input type='number' placeholder={`הכנס כאן את כמות המתנה...`} />
+                    </Form.Item>
+                    {/* submit */}
+                    <Form.Item className='submitFormItem'>
+                        <Button type="primary" htmlType="submit">
+                            עריכת מתנה
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </Spin>
         </div >
     );
 };

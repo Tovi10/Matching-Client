@@ -10,10 +10,9 @@ export const createGift = store => next => action => {
         axios.post(`${SERVER_URL}/api/gift/createGift`, action.payload)
             .then(result => {
                 console.log("🚀 ~ file: gift.crud.js ~ line 10 ~ result", result);
-                // if(action.payload.create){}
-                // store.dispatch(actions.setCurrentNotification('המתנה התווספה בהצלחה!'));
-                store.dispatch(actions.setGift(result.data));
-                store.dispatch(actions.setGiftId(result.data._id));
+                store.dispatch(actions.setGift(result.data.ansGift));
+                store.dispatch(actions.setGiftId(result.data.ansGift._id));
+                store.dispatch(actions.setAllGifts(result.data.allGifts))
             })
             .catch(error => {
                 console.log("🚀 ~ file: gift.crud.js ~ line 13 ~ error", error);
@@ -35,6 +34,7 @@ export const updateGift = store => next => action => {
                     store.dispatch(actions.setCurrentNotification('המתנה התעדכנה בהצלחה!'));
                 }
                 console.log("🚀 ~ file: gift.crud.js ~ line 24 ~ result", result)
+                store.dispatch(actions.setAllGifts(result.data.allGifts))
             })
             .catch(error => {
                 console.log("🚀 ~ file: gift.crud.js ~ line 27 ~ error", error)
@@ -74,22 +74,21 @@ export const getAllGifts = store => next => action => {
 
 export const deleteGift = store => next => action => {
     if (action.type === 'DELETE_GIFT') {
+        debugger
         axios.delete(`${SERVER_URL}/api/gift/deleteGift/${action.payload._id}`)
             .then(result => {
+                debugger
                 console.log("🚀 ~ file: gift.crud.js ~ line 77 ~ result", result)
+                store.dispatch(actions.setAllGifts(result.data))
                 if (action.payload.image) {
                     const fileRef = firebase.storage().refFromURL(action.payload.image);
                     fileRef.delete().then(function () {
                         console.log("File Deleted")
-                        store.dispatch(actions.setCurrentNotification('המתנה נמחקה בהצלחה!'));
-
                     }).catch(function (error) {
                         console.log("🚀 ~ file: gift.crud.js ~ line 85 ~ error", error)
-                        store.dispatch(actions.setCurrentNotification('ארעה שגיאה במחיקת המתנה!'))
                     });
-                }
-                else
                     store.dispatch(actions.setCurrentNotification('המתנה נמחקה בהצלחה!'));
+                }
             })
             .catch(error => {
                 console.log("🚀 ~ file: gift.crud.js ~ line 81 ~ error", error)

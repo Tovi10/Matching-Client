@@ -36,6 +36,7 @@ export default function CreateGift() {
         setSpining(false)
         if (general.currentNotification === 'המתנה התווספה בהצלחה!') {
             setImage(null);
+            setCoupon(false);
             form.resetFields();
         }
     }, [general.currentNotification]);
@@ -66,7 +67,6 @@ export default function CreateGift() {
         <div className='p-auto CreateGift'>
             <h1>יצירת מתנה</h1>
             <Spin size='large' spinning={spining}>
-
                 <Form
                     labelCol={{
                         span: 4,
@@ -141,7 +141,7 @@ export default function CreateGift() {
                         <Input type='number' placeholder={`הכנס כאן את כמות המתנה...`} />
                     </Form.Item>
                     <Form.Item>
-                        <Checkbox onChange={() => setCoupon(!coupon)}>שובר</Checkbox>
+                        <Checkbox checked={coupon} onChange={() => setCoupon(!coupon)}>שובר</Checkbox>
                     </Form.Item>
                     {coupon &&
                         <Form.Item

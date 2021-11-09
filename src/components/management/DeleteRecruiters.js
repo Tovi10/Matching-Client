@@ -36,7 +36,8 @@ export default function DeleteRecruiters() {
         const campaignObj = allCampaigns.find(c => c._id === campaignId);
         console.log("🚀 ~ file: DeleteRecruiters.js ~ line 31 ~ choose ~ campaignObj", campaignObj)
         setCampaign(campaignObj);
-        setRecruiters(campaignObj.recruiters.filter(r => !r.sumRaised));
+        if (campaignObj)
+            setRecruiters(campaignObj.recruiters.filter(r => !r.sumRaised));
     }
     const confirm = async (recruiterId) => {
         console.log("🚀 ~ file: DeleteRecruiters.js ~ line 45 ~ confirm ~ recruiterId", recruiterId)
@@ -70,14 +71,14 @@ export default function DeleteRecruiters() {
             dataIndex: 'designName',
             align: 'right',
             className: 'rtlColumn'
-        }, {
-            title: 'משתמש',
-            dataIndex: 'user',
-            render: (user) =>
-                <Tooltip className='pointer' title={user.name}>
-                    <Avatar>{user.name[0]}</Avatar>
-                </Tooltip>,
-            align: 'center',
+            // }, {
+            //     title: 'משתמש',
+            //     dataIndex: 'user',
+            //     render: (user) =>
+            //         <Tooltip className='pointer' title={user.name}>
+            //             <Avatar>{user.name[0]}</Avatar>
+            //         </Tooltip>,
+            //     align: 'center',
         },
     ];
     return (
