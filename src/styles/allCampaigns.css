@@ -4,6 +4,7 @@
     padding: 15px;
     display: inline-block;
     column-break-inside: avoid;
+    border: rgb(12, 84, 156) 1px solid;
 }
 
 .AllCampaigns .card-img-top {

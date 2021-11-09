@@ -34,6 +34,29 @@ function LiveCampaigns(props) {
 
     return (
         <div className="LiveCampaigns container-fluid">
+            <div classname="card" style={{ width: "18rem" }}>
+                <div classname="card-body">
+                    <h5 classname="card-title">Special title treatment</h5>
+                    <p classname="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" classname="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+
+            <div classname="card text-center" style={{ width: "18rem" }}>
+                <div classname="card-body">
+                    <h5 classname="card-title">Special title treatment</h5>
+                    <p classname="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" classname="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+
+            <div classname="card text-end" style={{ width: "18rem" }}>
+                <div classname="card-body">
+                    <h5 classname="card-title">Special title treatment</h5>
+                    <p classname="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" classname="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
             <div className='row'>
                 {liveCampaigns && liveCampaigns.map(campaign => (
                     // {allCampaigns && allCampaigns.map(campaign => (

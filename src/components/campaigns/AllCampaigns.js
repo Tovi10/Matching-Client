@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Progress, Spin } from 'antd';
-import { LoadingOutlined, RedditCircleFilled } from '@ant-design/icons';
 import { actions } from '../../redux/actions';
 import { numberWithCommas } from '../../services/service';
 import Stamp from './Stamp';
