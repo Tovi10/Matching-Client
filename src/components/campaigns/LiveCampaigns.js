@@ -15,13 +15,7 @@ function LiveCampaigns(props) {
     const allCampaigns = useSelector(state => state.campaignReducer.allCampaigns);
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     dispatch(actions.getAllCampaigns());
-    // }, []);
-
     useEffect(() => {
-        // let currentDate = moment(Date.now()).format('DD/MM/YYYY');
-        // setLiveCampaigns(allCampaigns.filter(c => currentDate >= new Date(c.duration[0]).toLocaleDateString('he-IL') && currentDate <= new Date(c.duration[1]).toLocaleDateString('he-IL')));
         let currentDate = moment(Date.now()).format('DD/MM/YYYY');
         setLiveCampaigns(allCampaigns.filter(c => currentDate >= c.duration[0] && currentDate <= c.duration[1]));
     }, []);
@@ -34,32 +28,8 @@ function LiveCampaigns(props) {
 
     return (
         <div className="LiveCampaigns container-fluid">
-            <div classname="card" style={{ width: "18rem" }}>
-                <div classname="card-body">
-                    <h5 classname="card-title">Special title treatment</h5>
-                    <p classname="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" classname="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-
-            <div classname="card text-center" style={{ width: "18rem" }}>
-                <div classname="card-body">
-                    <h5 classname="card-title">Special title treatment</h5>
-                    <p classname="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" classname="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-
-            <div classname="card text-end" style={{ width: "18rem" }}>
-                <div classname="card-body">
-                    <h5 classname="card-title">Special title treatment</h5>
-                    <p classname="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" classname="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
             <div className='row'>
                 {liveCampaigns && liveCampaigns.map(campaign => (
-                    // {allCampaigns && allCampaigns.map(campaign => (
                     <div key={campaign._id} className="col-4 d-flex align-items-center justify-content-center">
                         <div className="shadow mb-5 bg-body rounded card liveCampaignCard" key={campaign._id} onClick={() => { selectCampaign(campaign) }}>
                             {(campaign.images && campaign.images[0]) ?
@@ -68,7 +38,6 @@ function LiveCampaigns(props) {
                             <div className="card-body">
                                 <div className="companyDetails">
                                     <img alt='img' className="logoImg" style={{ maxWidth: '50%', minWidth: '40%', height: '5vh', objectFit: 'contain', display: 'inline-block' }} src={campaign.company.logo}></img>
-                                    {/* <p className="companyName">{campaign.company.companyName}</p> */}
                                 </div>
                                 <h5 className="card-title">{campaign.campaignName}</h5>
                                 <div className="progress">
