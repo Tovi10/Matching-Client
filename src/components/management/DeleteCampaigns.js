@@ -3,7 +3,6 @@ import { Table, Button, Spin, Popconfirm } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/actions';
 import { firebase } from '../../services/firebase.service';
-import moment from 'moment';
 
 export default function DeleteCampaigns() {
 
@@ -12,9 +11,7 @@ export default function DeleteCampaigns() {
     const user = useSelector(state => state.userReducer.user);
     const admin = useSelector(state => state.userReducer.admin);
 
-
     const [campaigns, setCampaigns] = useState([]);
-
 
     useEffect(() => {
         if (!allCampaigns & admin)
@@ -22,10 +19,14 @@ export default function DeleteCampaigns() {
     }, [])
 
     useEffect(() => {
-        if (!allCampaigns) return;
-        setCampaigns(allCampaigns.filter(c => !c.goalRaised))
+        if (admin && allCampaigns) {
+            setCampaigns(allCampaigns.filter(c => !c.goalRaised))
+        }
     }, [allCampaigns]);
 
+    useEffect(() => {
+        setCampaigns(user.campaigns.filter(c => !c.goalRaised))
+    }, [user]);
     const deleteFilesFromFirebase = async (images) => {
         let fileRef;
         for (let index = 0; index < images.length; index++) {

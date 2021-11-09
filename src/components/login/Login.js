@@ -24,7 +24,10 @@ export default function Login() {
                 if (error.code === 'auth/user-not-found') {
                     dispatch(actions.setCurrentNotification('משתמש לא קיים!'))
                 }
-                else{
+                if (error.code === 'auth/wrong-password') {
+                    dispatch(actions.setCurrentNotification('סיסמא לא תקינה!'))
+                }
+                else {
                     dispatch(actions.setCurrentNotification(error.code))
                 }
             });
@@ -38,7 +41,11 @@ export default function Login() {
                 dispatch(actions.createUser(result.user));
             })
             .catch((error) => {
-                dispatch(actions.setCurrentNotification(error.code))
+                if (error.code === 'auth/email-already-in-use') {
+                    dispatch(actions.setCurrentNotification('כתובת מייל בשימוש!'))
+                }
+                else
+                    dispatch(actions.setCurrentNotification(error.code))
                 console.log("🚀 ~ file: Login.js ~ line 27 ~ signUp ~ error", error)
             });
     }
