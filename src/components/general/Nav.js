@@ -6,6 +6,7 @@ import { UserOutlined } from '@ant-design/icons';
 import UserProfile from '../campaigns/UserProfile';
 import Login from '../login/Login';
 
+import logo from '../../assets/logo.png'
 export default function Nav() {
 
     const user = useSelector(state => state.userReducer.user);
@@ -20,9 +21,12 @@ export default function Nav() {
     return (
         <div className='Nav'>
             <div className="row d-dlex align-items-center">
-                <div className="navbar-brand col-1">גיפטמאצ'</div>
+                {/* <div className="navbar-brand col-1">גיפטמאצ'</div> */}
+                <div className="navbar-brand col-2">
+                    <img src={logo} width='100%'/>
+                </div>
                 {/* <nav className="nav d-dlex justify-content-end col-10"> */}
-                <nav className="linksMenu nav d-dlex justify-content-end col-10">
+                <nav className="linksMenu nav d-dlex justify-content-end col-9">
                     <Link className={`nav-link ${(current === 'home' || current === '') ? 'navLinkActive' : ''}`} onClick={() => setCurrent('home')} to='/home'>דף הבית</Link>
                     <Link className={`nav-link ${current === 'about' ? 'navLinkActive' : ''}`} onClick={() => setCurrent('about')} to='/about'>אודות</Link>
                     <Link className={`nav-link ${current === 'all-campaigns' ? 'navLinkActive' : ''}`} onClick={() => setCurrent('all-campaigns')} to='/all-campaigns'>קמפיינים</Link>
