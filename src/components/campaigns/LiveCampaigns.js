@@ -10,6 +10,7 @@ import { actions } from '../../redux/actions';
 function LiveCampaigns(props) {
 
     const [liveCampaigns, setLiveCampaigns] = useState([]);
+    // const [isCampaignHover, setIsCampaignHover] = useState('618ab19d0ff3d6ae11866283');
     const [isCampaignHover, setIsCampaignHover] = useState(null);
 
     const { history } = props;
@@ -32,23 +33,31 @@ function LiveCampaigns(props) {
 
             <div className='row'>
                 {liveCampaigns && liveCampaigns.map(campaign => (
-                    // {allCampaigns && allCampaigns.map(campaign => (
                     <div key={campaign._id} className="col-4 d-flex align-items-center justify-content-center"
                         onClick={() => { selectCampaign(campaign) }}
-                        onMouseEnter={() => setIsCampaignHover(campaign._id)}
-                        onMouseLeave={() => setIsCampaignHover(null)}>
+                    onMouseEnter={() => setIsCampaignHover(campaign._id)}
+                    onMouseLeave={() => setIsCampaignHover(null)}
+                    >
                         <div className={`shadow mb-5 bg-body rounded card liveCampaignCard HHH`}                            >
                             <div style={{ backgroundImage: campaign.images[0] ? `url(${campaign.images[0]})` : 'linear-gradient(to right, rgb(124, 51, 98), rgb(41, 3, 28))' }}
                                 className={`cardImg card-img-top ${isCampaignHover === campaign._id ? 'HHH' : ''}`} alt="..." >
-                                {isCampaignHover === campaign._id && <div className="companyDetails">
-                                    <img alt='img' className="logoImg" style={{ maxWidth: '50%', minWidth: '40%', height: '5vh', objectFit: 'contain', display: 'inline-block' }} src={campaign.company.logo}></img>
-                                    <p className="companyName">{campaign.company.companyName}</p>
-                                </div>}
+                                {isCampaignHover === campaign._id &&
+                                    <div className='d-flex flex-column px-2' style={{ textAlign: 'left',color:'#45022D' }}>
+                                        <div className='' style={{ paddingTop:'20%',fontSize:'20px',fontWeight:'bold' }}>
+                                            <div className="">{campaign.company.companyName}</div>
+                                        </div>
+                                        <div style={{paddingTop:'5%'}}>
+                                            <div style={{fontSize:'16px'}}>{campaign.campaignName}</div>
+                                            <div>{campaign.purposeOfCollecting}</div>
+                                        </div>
+                                        <div style={{paddingTop:'5%'}}>
+                                            <div style={{fontSize:'16px'}}>יעד:  {numberWithCommas(campaign.goal)} ש"ח</div>
+                                            <div>עד כה גויס:  {numberWithCommas(campaign.goalRaised)} ש"ח</div>
+                                        </div>
+                                    </div>
+                                }
                             </div>
                         </div>
-                        {/* {(campaign.images && campaign.images[0]) ?
-                                <div style={{ backgroundImage: `url(${campaign.images[0]})` }} className="cardImg card-img-top" alt="..." /> :
-                                <img alt='img' className="cardImg card-img-top" src="https://firebasestorage.googleapis.com/v0/b/matching-599f8.appspot.com/o/Companies%2F6140542c341303e08fd8e6a6%2F1.jpg?alt=media&token=da0a0364-7440-4bf4-85dd-9dec67ea5109" alt="..." />} */}
                         {/* <div className="card-body">
                                 <div className="companyDetails">
                                     <img alt='img' className="logoImg" style={{ maxWidth: '50%', minWidth: '40%', height: '5vh', objectFit: 'contain', display: 'inline-block' }} src={campaign.company.logo}></img>
