@@ -16,13 +16,7 @@ function LiveCampaigns(props) {
     const allCampaigns = useSelector(state => state.campaignReducer.allCampaigns);
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     dispatch(actions.getAllCampaigns());
-    // }, []);
-
     useEffect(() => {
-        // let currentDate = moment(Date.now()).format('DD/MM/YYYY');
-        // setLiveCampaigns(allCampaigns.filter(c => currentDate >= new Date(c.duration[0]).toLocaleDateString('he-IL') && currentDate <= new Date(c.duration[1]).toLocaleDateString('he-IL')));
         let currentDate = moment(Date.now()).format('DD/MM/YYYY');
         setLiveCampaigns(allCampaigns.filter(c => currentDate >= c.duration[0] && currentDate <= c.duration[1]));
     }, []);
