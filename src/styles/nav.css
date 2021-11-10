@@ -8,6 +8,8 @@
 .Nav {
     margin: unset !important;
     height: 10vh;
+    padding-bottom: 10%;
+    padding-top: 2%;
 }
 
 .navbar-brand {
@@ -31,7 +33,7 @@
     z-index: 3;
 }
 
-.profileLetter{
-    z-index:  1;
+.profileLetter {
+    z-index: 1;
     color: #FFFF;
 }

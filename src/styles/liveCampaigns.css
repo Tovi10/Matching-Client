@@ -1,3 +1,7 @@
+.LiveCampaigns {
+    padding-top: 10vh;
+}
+
 .LiveCampaigns .cardImg {
     position: relative;
     background-position: center;
@@ -68,7 +72,8 @@
     height: 5vh;
     align-self: flex-end;
 }
-.liveCampaignCard{
+
+.liveCampaignCard {
     height: 70vh;
     display: inline-block;
     cursor: pointer;
@@ -78,7 +83,8 @@
     border: 0;
     border-radius: 1rem
 }
-.hoverCampaign{
+
+.hoverCampaign {
     box-shadow: inset 2000px 0 0 0 rgba(255, 255, 255, 0.8) !important;
 }
 
@@ -90,47 +96,44 @@
     display: inline-block;
 }
 
-.pAbsolute{
-    position:absolute;
-  }
-
-
-  /* border */
-  
-.r-link{
-	display: var(--rLinkDisplay, inline-flex) !important;
+.pAbsolute {
+    position: absolute;
 }
 
-.r-link[href]{
-	color: var(--rLinkColor) !important;
-	text-decoration: var(--rLinkTextDecoration, none) !important;
+/* border */
+
+.r-link {
+    display: var(--rLinkDisplay, inline-flex) !important;
 }
 
-.text-underlined{
+.r-link[href] {
+    color: var(--rLinkColor) !important;
+    text-decoration: var(--rLinkTextDecoration, none) !important;
+}
+
+.text-underlined {
     /*
         1. I use pixels units because others units (em, rem, vw, vh, etc) can
         lead to the mistake of displaying a circumcised line
     */
-
-    --uiTextUnderlinedLineHeight: var(--textUnderlinedLineHeight, 2px); /* 1 */
+    --uiTextUnderlinedLineHeight: var(--textUnderlinedLineHeight, 2px);
+    /* 1 */
     --uiTextUnderlinedLineGap: var(--textUnderlinedLineGap, .5rem);
     --uiTextUnderlinedPaddingBottom: calc(var(--uiTextUnderlinedLineHeight) + var(--uiTextUnderlinedLineGap));
-
     padding-bottom: var(--uiTextUnderlinedPaddingBottom) !important;
     position: var(--textUnderlinedPosition, relative) !important;
-		z-index: var(--textUnderlinedZindex, 1) !important;
+    z-index: var(--textUnderlinedZindex, 1) !important;
 }
 
-.text-underlined::after{
+.text-underlined::after {
     content: "";
     width: var(--textUnderlinedLineWidht, 100%) !important;
     height: var(--uiTextUnderlinedLineHeight) !important;
-		background-image: var(--textUnderlinedBackgroundImage, linear-gradient(to top, var(--textUnderlinedLineColor, currentColor) 30%, rgba(0, 0, 0, 0) 45%)) !important;
-
+    background-image: var(--textUnderlinedBackgroundImage, linear-gradient(to top, var(--textUnderlinedLineColor, currentColor) 30%, rgba(0, 0, 0, 0) 45%)) !important;
     position: absolute;
     left: var(--textUnderlinedLineLeft, 0) !important;
     bottom: var(--textUnderlinedLineBottom, 0) !important;
-		z-index: var(--textUnderlinedLineZindex, -1) !important;
+    z-index: var(--textUnderlinedLineZindex, -1) !important;
 }
 
 /*
@@ -139,11 +142,10 @@ CORE
 =====
 */
 
-.aaa{
-	--textUnderlinedLineHeight: 100%;
-	--textUnderlinedLineGap: 0;
-	--textUnderlinedLineColor: #FFFF;
-	
-	padding-left: .75rem;
-	padding-right: .75rem;
+.aaa {
+    --textUnderlinedLineHeight: 100%;
+    --textUnderlinedLineGap: 0;
+    --textUnderlinedLineColor: #FFFF;
+    padding-left: .75rem;
+    padding-right: .75rem;
 }
