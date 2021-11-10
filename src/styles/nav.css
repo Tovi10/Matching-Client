@@ -30,3 +30,8 @@
 .linksMenu {
     z-index: 3;
 }
+
+.profileLetter{
+    z-index:  1;
+    color: #FFFF;
+}
