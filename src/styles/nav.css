@@ -1,9 +1,8 @@
 .nav-link {
-    color: #5ddf5d;
-    padding: .5rem !important;
-    border-bottom: thin solid #5ddf5d;
+    color: #FFFF !important;
+    padding: .1rem !important;
     margin: 10px;
-    transition: all 0.4s ease-in;
+    /* transition: all 0.4s ease-in; */
 }
 
 .Nav {
@@ -13,21 +12,19 @@
 
 .navbar-brand {
     margin: unset !important;
-    color: #252583;
+    color: #FAE01A !important;
     font-size: 20px;
     z-index: 3;
 }
 
 .nav-link:hover {
-    transition: all 0.4s ease-in;
-    transform: translateY(2px);
-    border-bottom: thin solid #252583;
-    color: #252583;
+    /* transition: all 0.4s ease-in; */
+    /* transform: translateY(2px); */
+    color: #FAE01A !important;
 }
 
 .navLinkActive {
-    border-bottom: thin solid #252583;
-    color: #252583;
+    color: #FAE01A !important;
 }
 
 .linksMenu {
