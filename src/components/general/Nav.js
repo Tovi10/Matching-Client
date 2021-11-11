@@ -7,6 +7,9 @@ import UserProfile from '../campaigns/UserProfile';
 import Login from '../login/Login';
 
 import logo from '../../assets/logo.png'
+import profileInNav from '../../assets/profileInNav.svg'
+import allCampaigns from '../../assets/allCampaigns.svg'
+
 export default function Nav() {
 
     const user = useSelector(state => state.userReducer.user);
@@ -38,6 +41,7 @@ export default function Nav() {
                                 <Tooltip title={user.name}>
                                     <div className='d-flex justify-content-center align-items-center'>
                                         <svg className="pAbsolute" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 600 600"><path d="M449.5 177.2C485.4 225.8 500.5 287.5 483.9 334.8 467.4 382 419.3 414.9 370.7 433 322.1 451.1 273.1 454.4 221.4 438.8 169.8 423.3 115.5 388.9 103.6 343.1 91.8 297.3 122.4 240 162.2 190.6 202 141.2 251 99.6 303.9 96.5 356.8 93.4 413.6 128.7 449.5 177.2Z" fill="#FAE01A" /></svg>
+                                        {/* <img src={profileInNav} /> */}
                                         <div className='profileLetter'>{user.name[0]}</div>
                                     </div>
                                 </Tooltip> :

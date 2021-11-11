@@ -24,7 +24,7 @@ export default function DeleteCards() {
 
     useEffect(() => {
 
-        if (allCampaigns&&form.getFieldValue('campaign')) {
+        if (allCampaigns && form.getFieldValue('campaign')) {
             const campaign = allCampaigns.find(c => c._id === form.getFieldValue('campaign'));
             setCards(campaign.cards.filter(c => !c.used));
         }
@@ -34,13 +34,14 @@ export default function DeleteCards() {
     const choose = (campaignId) => {
         const campaign = allCampaigns.find(c => c._id === campaignId);
         console.log("🚀 ~ file: DeleteCards.js ~ line 41 ~ choose ~ campaign", campaign)
-        setCards(campaign.cards.filter(c => !c.used));
+        if (campaign)
+            setCards(campaign.cards.filter(c => !c.used));
     }
     const confirm = async (cardId) => {
         console.log("🚀 ~ file: DeleteCards.js ~ line 45 ~ confirm ~ cardId", cardId)
         const card = cards.find(c => c._id === cardId);
         // delete card from server
-        dispatch(actions.deleteCard(card));
+        dispatch(actions.deleteCard({ card, campaignId: form.getFieldValue('campaign') }));
     }
 
     const columns = [
