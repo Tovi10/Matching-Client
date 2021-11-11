@@ -8,7 +8,7 @@ export default function About() {
 
     return (
         <div className='About'>
-            
+
             {/* <div className="aboutText">
                 <p>
                     מחפש קריאה מהירה באינטרנט? להלן תמצא את האתרים האהובים עלינו לקרוא עליהם סיפורים קצרים.
@@ -39,25 +39,26 @@ export default function About() {
             {/* <h1 className="animate__animated animate__flipOutY">An animated element</h1> */}
             {/* <div className="bg"></div>
             <div className="bg bg2"></div>
-            <div className="bg bg3"></div>
-            <div className="content"> */}
-            {/* <div id="bars1">
+            <div className="bg bg3"></div> */}
+            {/* <div className="content">
+                <div id="bars1">
                     <span></span>
                     <span></span>
                     <span></span>
                     <span></span>
                     <span></span>
-                </div> */}
-            {/* <div className="wrapper" >
-                    <div className="typing-demo" >
-                        זה המקום לספר על האתר שלנו כמה הוא יפה ומשוכלל!!
-                    </div >
-                </div> */}
+                </div>
+            </div> */}
+            <div className="wrapper" >
+                <div className="typing-demo" >
+                    זה המקום לספר על האתר שלנו כמה הוא יפה ומשוכלל!!
+                </div >
+            </div>
             {/* </div> */}
             {/* </div >
                 </div> */}
-            <ApplyCreateCampaign />
             {/* </div> */}
+            {/* <ApplyCreateCampaign /> */}
         </div >
     )
 }

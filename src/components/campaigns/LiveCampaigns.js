@@ -41,7 +41,7 @@ function LiveCampaigns(props) {
                         onMouseEnter={() => setIsCampaignHover(campaign._id)}
                         onMouseLeave={() => setIsCampaignHover(null)}
                     >
-                        <div className={`shadow mb-5 bg-body rounded card liveCampaignCard`}                            >
+                        <div className={`shadow mb-5 bg-body card liveCampaignCard`}                            >
                             <div style={{ backgroundImage: campaign.images[0] ? `url(${campaign.images[0]})` : 'linear-gradient(to right, rgb(124, 51, 98), rgb(41, 3, 28))' }}
                                 className={`cardImg card-img-top ${isCampaignHover === campaign._id ? 'hoverCampaign' : ''}`} alt="..." >
                                 {isCampaignHover === campaign._id &&
