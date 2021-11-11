@@ -57,6 +57,9 @@ function LiveCampaigns(props) {
                                             <div style={{ fontSize: '16px' }}>יעד:  {numberWithCommas(campaign.goal)} ש"ח</div>
                                             <div>עד כה גויס:  {numberWithCommas(campaign.goalRaised)} ש"ח</div>
                                         </div>
+                                        <div className="progress">
+                                            {campaign.goal ? <Progress percent={Math.round(100 / campaign.goal * campaign.goalRaised)} /> : <Progress percent={0} />}
+                                        </div>
                                     </div>
                                 }
                             </div>

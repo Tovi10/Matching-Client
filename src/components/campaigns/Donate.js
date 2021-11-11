@@ -16,10 +16,7 @@ export default function Donate(props) {
     const campaign = useSelector(state => state.campaignReducer.campaign);
 
     const onFinish = (values) => {
-        // notification.open({
-        //     message: 'תרומה חדשה!',
-        //     description: 'תרומה חדשה',
-        // });
+debugger
         console.log('Received values of form: ', values);
         axios.post(`${SERVER_URL}/api/donation/clearingCredit`, {
             description: card.text,
@@ -59,14 +56,8 @@ export default function Donate(props) {
                         ]}
                         style={{ display: 'inline-block', width: 'calc(90% - 8px)' }}
                     >
-                        <Input
-                            min={1}
-                            max={6}
-                            style={{ margin: '0 16px' }}
-                        />‏
-
+                        <InputNumber min={1} max={6} />
                     </Form.Item>
-
                     <Form.Item
                         name="recruiter"
                         // rules={createCompany ? [] : [
