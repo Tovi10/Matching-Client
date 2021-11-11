@@ -1,21 +1,14 @@
-/* body {
-    background: url(../assets/imgHomePage.png) no-repeat center center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-} */
-
-body {
-    background-image: linear-gradient(to right, rgb(167, 106, 131), rgb(119, 57, 88));
+.App {
+    /* background-image: linear-gradient(to right, rgb(167, 106, 131), rgb(119, 57, 88)); */
     /* background-image: linear-gradient(to right, rgb(124, 51, 98), rgb(41, 3, 28)); */
     /* background: url(../assets/imgHomePage.png) no-repeat left top, linear-gradient(to right, rgb(124, 51, 98), rgb(41, 3, 28)); */
+    /* background: url(../assets/backgroundHomePage.png) no-repeat left top, linear-gradient(to left, rgb(41, 3, 28), rgb(124, 51, 98)); */
+    background: linear-gradient(to bottom left, rgb(41, 3, 28), rgb(124, 51, 98));
     /* background: url(../assets/backgroundHomePage.png) no-repeat left top, linear-gradient(to bottom left, rgb(41, 3, 28), rgb(124, 51, 98)); */
-    background: url(../assets/backgroundHomePage.png) no-repeat left top, linear-gradient(to left, rgb(41, 3, 28), rgb(124, 51, 98));
-    min-height: 100vh;
+    height: 100%;
+    width: 99.8vw;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    /* color: rgb(143, 36, 105) */
 }
