@@ -91,15 +91,15 @@ export default function Campaign(props) {
                                     {campaign.images.length ?
                                         <div className='col-7 offset-1 d-flex align-items-center justify-content-center'>
                                             <SpinnerCircularFixed style={{ display: showSpin ? 'block' : 'none' }} size={73} thickness={100} speed={100} color="#252583" secondaryColor="#5ddf5d" />
-                                            {campaign.images.length > 1 && <div className='arrowSlide pointer notSelected' onClick={e => showCurrentImg(index + 1)} title={`הבא`}
-                                                style={{ display: showSpin ? 'none' : 'block' }}>&#10094;</div>}
+                                            {/* {campaign.images.length > 1 && <div className='arrowSlide pointer notSelected' onClick={e => showCurrentImg(index + 1)} title={`הבא`}
+                                                style={{ display: showSpin ? 'none' : 'block' }}>&#10094;</div>} */}
                                             {campaign.images.map((i, imgIndex) => {
                                                 return (<img key={imgIndex} alt='img' title={`תמונה מס' ${imgIndex + 1}`}
                                                     // style={{ width: '100%', height: '50vh', objectFit: 'contain', display: showSpin ? 'none' : 'block' }}
                                                     style={{ height: '50vh', objectFit: 'contain', width: showSpin ? '0px' : '100%' }}
                                                     className='rounded mySlides notSelected' src={i} />)
                                             })}
-                                            {campaign.images.length > 1 && <div className='arrowSlide pointer notSelected' onClick={e => showCurrentImg(index - 1)} title={`הקודם`} style={{ display: showSpin ? 'none' : 'block' }}>&#10095;</div>}
+                                            {/* {campaign.images.length > 1 && <div className='arrowSlide pointer notSelected' onClick={e => showCurrentImg(index - 1)} title={`הקודם`} style={{ display: showSpin ? 'none' : 'block' }}>&#10095;</div>} */}
                                         </div> :
                                         <div className='col-8 d-flex align-items-center justify-content-center'>
                                             <div>אין תמונות לקמפיין זה 📸</div>

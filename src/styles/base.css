@@ -7,13 +7,15 @@
 } */
 
 body {
+    background-image: linear-gradient(to right, rgb(167, 106, 131), rgb(119, 57, 88));
     /* background-image: linear-gradient(to right, rgb(124, 51, 98), rgb(41, 3, 28)); */
     /* background: url(../assets/imgHomePage.png) no-repeat left top, linear-gradient(to right, rgb(124, 51, 98), rgb(41, 3, 28)); */
-    background: url(../assets/imgHomePage.png) no-repeat left top, linear-gradient(to right, rgb(167, 106, 131), rgb(119, 57, 88));
+    /* background: url(../assets/imgHomePage.png) no-repeat left top, linear-gradient(to right, rgb(167, 106, 131), rgb(119, 57, 88));
+    
     ;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
+    background-size: cover; */
     /* color: rgb(143, 36, 105) */
 }

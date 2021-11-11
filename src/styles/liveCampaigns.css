@@ -10,7 +10,7 @@
     /* height: 40vh; */
     height: 100%;
     object-fit: contain;
-    border-radius: 5px 5px 0px 0px;
+    border-radius: 15px;
 }
 
 .LiveCampaigns .card-body {
@@ -74,14 +74,15 @@
 }
 
 .liveCampaignCard {
-    height: 70vh;
+    height: 80vh;
     display: inline-block;
     cursor: pointer;
     margin: 2%;
     width: 100%;
     background: #fff;
     border: 0;
-    border-radius: 1rem
+    border-radius: 15px;
+    /* border-radius: 1rem */
 }
 
 .hoverCampaign {

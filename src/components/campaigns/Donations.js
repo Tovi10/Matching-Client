@@ -17,13 +17,13 @@ export default function Donations() {
 
     return (
         <div className='Donations'>
-            <div style={{ background: '#ace5ac', padding: '10px' }}>
+            <div style={{ padding: '10px' }}>
                 {sortedArray.length ?
                     <Row gutter={[8, 8]}>
                         {sortedArray.map(donation => {
                             return (
                                 <Col span={8} key={donation._id} >
-                                    <Card style={{ height: '30vh' }} title={donation.user.name ? donation.user.name : "לא ידוע"} bordered={false}>
+                                    <Card style={{ height: '30vh' ,borderRadius:'15px'  }} title={donation.user.name ? donation.user.name : "לא ידוע"} bordered={false}>
                                         <div>{`תרם ${donation.card.sum} ש"ח ${donation.card.text}`}</div>
                                         <div>{`בתאריך ${donation.date}`}</div>
                                         {/* {donation && donation.recruiter ? <div>{`ע"י ${donation.recruiter.user.name === undefined ? "לא ידוע" : donation.recruiter.user.name}`}</div> : ""} */}

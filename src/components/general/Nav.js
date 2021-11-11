@@ -20,7 +20,6 @@ export default function Nav() {
     return (
         <div className='Nav'>
             <div className="row d-dlex align-items-center">
-                {/* <div className="navbar-brand col-1">גיפטמאצ'</div> */}
                 <div className="navbar-brand col-2">
                     <img src={logo} width='100%' />
                 </div>
@@ -33,7 +32,7 @@ export default function Nav() {
                 </nav>
                 <Popover content={user ? <UserProfile close={handleVisibleChange} /> : <Login />} title="!פרופיל שלי" trigger="click" visible={showPopover}
                     onVisibleChange={handleVisibleChange}>
-                    <div className='d-flex justify-content-center align-items-center col-1 pointer'>
+                    <div className='d-flex justify-content-center align-items-center col-1 pointer profileInNav'>
                         {user ?
                             (user.name ?
                                 <Tooltip title={user.name}>
