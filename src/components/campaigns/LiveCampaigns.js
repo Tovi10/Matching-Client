@@ -57,13 +57,16 @@ function LiveCampaigns(props) {
                                             <div style={{ fontSize: '16px' }}>יעד:  {numberWithCommas(campaign.goal)} ש"ח</div>
                                             <div>עד כה גויס:  {numberWithCommas(campaign.goalRaised)} ש"ח</div>
                                         </div>
+                                        <div className="progress">
+                                            {campaign.goal ? <Progress percent={Math.round(100 / campaign.goal * campaign.goalRaised)} /> : <Progress percent={0} />}
+                                        </div>
                                     </div>
                                 }
                             </div>
                         </div>
                     </div>
                 ))}
-                <div className='aaa r-link link text-underlined' style={{color:'#FAE01A',fontSize:'30px',fontWeight:'bolder'}}>לכל הקמפיינים</div>
+                <div className='aaa r-link link text-underlined' style={{ color: '#FAE01A', fontSize: '30px', fontWeight: 'bolder' }}>לכל הקמפיינים</div>
                 <div className='d-flex justify-content-center'>
                     {allCompanies && allCompanies.map(company => (
                         <div className='d-flex justify-content-center align-items-center' key={company._id}>

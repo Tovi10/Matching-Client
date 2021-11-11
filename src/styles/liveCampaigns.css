@@ -26,7 +26,7 @@
 }
 
 .LiveCampaigns p {
-    color: #252583;
+    /* color: #252583; */
     /* font-weight: bolder; */
     /* width: 70%; */
     /* height: 5vh; */
@@ -43,7 +43,7 @@
 }
 
 .LiveCampaigns h5 {
-    color: #252583;
+    /* color: #252583; */
     font-weight: bolder;
     width: 100%;
     height: 12vh;
@@ -59,9 +59,9 @@
     background-color: #dddeea;
 }
 
-.LiveCampaigns .ant-progress-success-bg, .ant-progress-bg {
+/* .LiveCampaigns .ant-progress-success-bg, .ant-progress-bg {
     background-color: #5572bf;
-}
+} */
 
 .LiveCampaigns .ant-progress-text {
     color: #6c757d!important;
