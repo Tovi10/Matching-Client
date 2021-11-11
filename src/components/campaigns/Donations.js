@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Card, Col, Row, } from 'antd';
+import Moment from 'react-moment';
 
+import 'moment-timezone'
 export default function Donations() {
 
     const campaign = useSelector(state => state.campaignReducer.campaign);

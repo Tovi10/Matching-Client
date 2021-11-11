@@ -9,9 +9,16 @@
 }
 
 .progress {
-    width: 80%;
+    width: 100%;
     height: 15px;
     background-color: rgb(212, 212, 212);
+}
+.progress-bar {
+    background-color:#FAE01A;
+}
+
+.clrWhite{
+color: #FFFF;
 }
 
 /* scrolbar style */
@@ -53,11 +60,12 @@
 }
 
 .shareIcon {
-    background: #fae01a9c;
+    /* background: #fae01a9c; */
+    /* border-radius: 5px; */
+    /* border: solid 1px; */
     padding: 0px 5px 5px 5px;
-    border-radius: 5px;
-    border: solid 1px;
     cursor: pointer;
+    font-size: 20px;
 }
 
 .purposeOfCollectingTxt {
@@ -98,8 +106,8 @@
 
 .blockquote h4 {
     position: relative;
-    color: #292a2b;
-    font-size: 14px;
+    color: #FFFF;
+    font-size: 18px;
     font-weight: normal;
     line-height: 1;
     z-index: 1;
@@ -108,3 +116,12 @@
 }
 
 /* END QOUTE */
+
+.ant-tabs-tab{
+    margin-left: 10px !important;
+    border-radius: 15px 15px 0px 0px !important;
+}
+
+.ant-tabs-tab-active{
+    background: #FAE01A !important;
+}
