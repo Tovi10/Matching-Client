@@ -26,7 +26,7 @@ export default function BaseManagement() {
 
     return (
         <div className='BaseManagement'>
-            <Tabs defaultActiveKey="1" tabPosition='left'>
+            <Tabs defaultActiveKey="1" tabPosition='left' className='clrWhite' animated={false} >
                 <TabPane tab="קמפיינים" key="1">
                     <CampaignsManagment />
                 </TabPane>

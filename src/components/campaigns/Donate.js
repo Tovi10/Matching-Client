@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Select, Button, Input, notification, InputNumber } from 'antd';
+import { Form, Select, Button, InputNumber } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/actions';
 import moment from 'moment';
 import axios from 'axios';
+import { Steps } from 'antd';
+import { UserOutlined, SolutionOutlined,FileTextOutlined, LoadingOutlined, SmileOutlined } from '@ant-design/icons';
+import Login from '../login/Login'
+
 
 import { SERVER_URL } from "../../constants"
+const { Step } = Steps;
 
 export default function Donate(props) {
 
     const { card } = props;
-    const [iframeUrl, setIframeUrl] = useState(null);
+
     const dispatch = useDispatch();
+
     const user = useSelector(state => state.userReducer.user);
     const campaign = useSelector(state => state.campaignReducer.campaign);
 
+    const [iframeUrl, setIframeUrl] = useState(null);
+
     const onFinish = (values) => {
-debugger
         console.log('Received values of form: ', values);
         axios.post(`${SERVER_URL}/api/donation/clearingCredit`, {
             description: card.text,
@@ -36,68 +43,55 @@ debugger
 
             })
         dispatch(actions.createDonation({ ...values, campaignId: campaign._id, user: user._id, card: card._id, date: moment(new Date()).format('DD/MM/YYYY a h:mm:ss ') + "" }));
-        // props.close();
     }
 
     return (
-        <div className='Donate'>
-            {!iframeUrl ?
-                <Form onFinish={onFinish}
-                    initialValues={{ paymentsNum: 1 }}
-                >
-                    <p>{`תרום ${card.sum} וקבל ${card.gift ? card.gift.name : 'אין שם למתנה'}`}</p>
-                    <Form.Item
-                        name="paymentsNum"
-                        rules={[
-                            {
-                                required: true,
-                                message: `אנא הכנס מס' תשלומים!`,
-                            },
-                        ]}
-                        style={{ display: 'inline-block', width: 'calc(90% - 8px)' }}
-                    >
-                        <InputNumber min={1} max={6} />
-                    </Form.Item>
-                    <Form.Item
-                        name="recruiter"
-                        // rules={createCompany ? [] : [
-                        //     {
-                        //         required: true,
-                        //         message: `אנא בחר חברה!`,
-                        //     },
-                        // ]}
-                        style={{ display: 'inline-block', width: 'calc(90% - 8px)' }}
-                    >
-                        <Select
-                            size='large'
-                            allowClear
-                            showSearch
-                            style={{ textAlign: 'right' }}
-                            dropdownStyle={{ textAlign: 'right' }}
-                            // onChange={() => { setCreateCompany(false) }}
-                            notFoundContent={<>לא נמצאו נתונים</>}
-                            placeholder={`בחר מגייס...`}
-                            virtual={false}
-                            dropdownClassName='companiesSelectDropdown'>
-                            {campaign && campaign.recruiters && campaign.recruiters.map(item => (
-                                <Select.Option key={item._id}>{item.designName}</Select.Option>
-                            ))}
-                        </Select>
-                    </Form.Item>
+        <div className='Donate' style={{ height: 'inherit' }}>
+            <Steps size='small' style={{ direction: 'ltr' }} className='mb-3'>
+                <Step status="wait" title="!תודה" icon={<SmileOutlined />} />
+                <Step status={iframeUrl?'process':'wait'} title="תשלום" icon={<UserOutlined />} />
+                <Step status={(user&&!iframeUrl)?'process':(!user?'wait':'finish')} title="הכנס פרטים" icon={(user&&!iframeUrl)?<LoadingOutlined/>:<FileTextOutlined />} />
+                <Step status={user ? 'finish' : 'process'} title="הרשמה" icon={<UserOutlined />} />
+            </Steps>
+            {user ?
+                !iframeUrl ?
+                    <Form onFinish={onFinish}
+                        labelCol={{
+                            span: 10,
+                        }}
+                        wrapperCol={{
+                            span: 14,
+                        }}
+                        layout="horizontal"
+                        initialValues={{ paymentsNum: 1 }}>
+                        <Form.Item
+                            name="paymentsNum"
+                            label='בחר מס תשלומים בין 1 ל6'>
+                            <InputNumber min={1} max={6} style={{ width: '100%' }} />
+                        </Form.Item>
+                        <Form.Item name="recruiter" label={`בחר מגייס`}>
+                            <Select
+                                allowClear
+                                showSearch
+                                style={{ textAlign: 'right' }}
+                                dropdownStyle={{ textAlign: 'right' }}
+                                notFoundContent={<>לא נמצאו מגייסים</>}
+                                // placeholder={`בחר מגייס...`}
+                                virtual={false}
+                                dropdownClassName='companiesSelectDropdown'>
+                                {campaign && campaign.recruiters && campaign.recruiters.map(item => (
+                                    <Select.Option key={item._id}>{item.designName}</Select.Option>
+                                ))}
+                            </Select>
+                        </Form.Item>
+                        <Form.Item>
+                            <Button type="primary" htmlType="submit">המשך</Button>
+                        </Form.Item>
+                    </Form>
+                    :
+                    <iframe src={iframeUrl} style={{ width: '100%', height: '80%' }} />
+                : <Login />}
 
-                    {/* <Form.Item
-                    name="credutCard"
-                    rules={[{ required: true, message: 'הכנס מספר אשראי!' }]}
-                >
-                    <Input type='text' placeholder='מספר אשראי' />
-                </Form.Item> */}
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit">תרום</Button>
-                    </Form.Item>
-                </Form>
-                :
-                <iframe src={iframeUrl}></iframe>
-            }
 
         </div >
     )

@@ -23,7 +23,7 @@ export default function Card(props) {
                 {/* {card && <div className={`card-body watermark notSelected`}> */}
                     <div className='d-flex align-items-center justify-content-center '>
                         {/* <GiftOutlined /> */}
-                        <h3>{`${card.sum} ש"ח`}</h3>
+                        <h3>{`${card.sum} ₪`}</h3>
                     </div>
                     <b className="card-text">{card.text}</b>
                     {card.gift && <>
@@ -35,8 +35,15 @@ export default function Card(props) {
                     <p>{`נותרו עוד ${card.gift.amount - card.gift.numOfUsed}`}</p>
                 </div>}
             </div>
-            <Modal footer={false} title='תרום כאן!' visible={openModal} onCancel={() => setOpenModal(false)}>
-                {user ? <Donate card={card} close={() => setOpenModal(false)} /> : <Login />}
+            <Modal footer={false}
+             title={`תרום ${card.sum} ₪ וקבל ${card.gift ? card.gift.name : 'אין שם למתנה'}`}
+            width={800}
+            bodyStyle={{height:'85vh'}}
+            centered={true}
+            style={{textAlign:'center'}}
+            visible={openModal} onCancel={() => setOpenModal(false)}>
+                {/* {user ? <Donate card={card} close={() => setOpenModal(false)} /> : <Login />} */}
+                <Donate card={card} close={() => setOpenModal(false)}/>
             </Modal>
         </div >
     )

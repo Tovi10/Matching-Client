@@ -86,6 +86,9 @@ export default function DeleteGifts() {
                 <Table dataSource={gifts} columns={columns}
                     rowKey={gift => gift._id}
                     pagination={{ position: ['bottomLeft', 'none'] }}
+                    locale={{
+                        emptyText: 'לא נמצאו מתנות',
+                    }}
                     style={{ direction: 'ltr' }} />
             </Spin>
         </div>

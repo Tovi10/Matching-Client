@@ -19,7 +19,7 @@ export default function GiftDetails(props) {
                             <div className="card-body">
                                 <h5 className="card-title">{`רוצים לדעת עוד על ${currentGift ? currentGift.name : ""}?`}</h5>
                                 <p className="card-text">{currentGift ? currentGift.advertising : ""}</p>
-                                <p className="card-text"><small className="text-muted">{`מחיר בחנויות ${currentGift ? currentGift.price : ""} ש"ח`}</small></p>
+                                <p className="card-text"><small className="text-muted">{`מחיר בחנויות ${currentGift ? currentGift.price : ""} ₪`}</small></p>
                             </div>
                         </div>
                     </div>

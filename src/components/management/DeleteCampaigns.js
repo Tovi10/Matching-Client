@@ -76,7 +76,7 @@ export default function DeleteCampaigns() {
         }, {
             title: 'יעד',
             dataIndex: 'goal',
-            render: (text) => <div>{text} ש"ח</div>,
+            render: (text) => <div>{text} ₪</div>,
             align: 'right',
             className: 'rtlColumn'
         }, {
@@ -107,6 +107,9 @@ export default function DeleteCampaigns() {
                 <Table dataSource={campaigns} columns={columns}
                     rowKey={campaign => campaign._id}
                     pagination={{ position: ['bottomLeft', 'none'] }}
+                    locale={{
+                        emptyText: 'לא נמצאו קמפיינים',
+                    }}
                     style={{ direction: 'ltr' }} />
             </Spin>
         </div>

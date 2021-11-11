@@ -124,7 +124,7 @@ export default function Campaign(props) {
                                                 aria-valuemax="100"
                                                 style={{ width: `${Math.round(100 / campaign.goal * campaign.goalRaised)}%` }}></div>
                                         </div>
-                                        <div>מתוך סכום של {numberWithCommas(campaign.goal)} ש"ח</div>
+                                        <div>מתוך סכום של {numberWithCommas(campaign.goal)} ₪</div>
                                     </div>
                                     <div className="col-2" style={{fontSize:'20px'}}>
                                         {Math.round(100 / campaign.goal * campaign.goalRaised)}%
@@ -132,8 +132,8 @@ export default function Campaign(props) {
                                 </div>
                                 <div className='row mt-5 d-flex align-items-center clrWhite'>
                                     <div className='col-9'  style={{fontSize:'20px'}}>
-                                        {/* {campaign.donations.length ? `עד כה נתרם ${campaign.goalRaised} ש"ח, על ידי ${campaign.donations.length} תרומות.` : `היה אתה התורם הראשון!`} */}
-                                        {campaign.donations.length ? `עד כה נתרם ${numberWithCommas(campaign.goalRaised)} ש"ח.  ` : `היה אתה התורם הראשון!`}
+                                        {/* {campaign.donations.length ? `עד כה נתרם ${campaign.goalRaised} ₪, על ידי ${campaign.donations.length} תרומות.` : `היה אתה התורם הראשון!`} */}
+                                        {campaign.donations.length ? `עד כה נתרם ${numberWithCommas(campaign.goalRaised)} ₪.  ` : `היה אתה התורם הראשון!`}
                                     </div>
                                     <div className='col-3 d-flex justify-content-around align-items-center Share'>
                                         <div>

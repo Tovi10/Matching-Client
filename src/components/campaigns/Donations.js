@@ -26,7 +26,7 @@ export default function Donations() {
                             return (
                                 <Col span={8} key={donation._id} >
                                     <Card style={{ height: '30vh' ,borderRadius:'15px'  }} title={donation.user.name ? donation.user.name : "לא ידוע"} bordered={false}>
-                                        <div>{`תרם ${donation.card.sum} ש"ח ${donation.card.text}`}</div>
+                                        <div>{`תרם ${donation.card.sum} ₪ ${donation.card.text}`}</div>
                                         <div>{`בתאריך ${donation.date}`}</div>
                                         {/* {donation && donation.recruiter ? <div>{`ע"י ${donation.recruiter.user.name === undefined ? "לא ידוע" : donation.recruiter.user.name}`}</div> : ""} */}
                                         {donation && donation.recruiter ? <div>{`ע"י ${donation.recruiter.designName}`}</div> : ""}

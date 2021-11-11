@@ -1,6 +1,7 @@
 .uploadLogoDiv{
     width: 100%;
-    background-image: linear-gradient(-144deg, #b7e7b7 0%, #5ddf5d 100%);
+    /* background-image: linear-gradient(-144deg, #b7e7b7 0%, #FAE01A 100%); */
+    background: #FFFF;
 }
 
 .uploadHiddenInput{
@@ -66,16 +67,17 @@ font-size: x-large!important;
   }
 
   .customForm{
-    height: 73vh;
-    overflow-y: auto;
-    overflow-x: hidden;
+    /* height: 73vh; */
+    /* overflow-y: auto; */
+    /* overflow-x: hidden; */
   }
 
   .wrapForm{
-    height: 80vh;
-    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    /* height: 80vh; */
+    /* box-shadow: 0 15px 25px rgba(0,0,0,.6); */
     border-radius: 10px;
-    background: #5ddf5d33;
+    /* background: #FAE01A33; */
+    background-color: #FFFF;
   }
 .createCampaignTxt{
   height: 5vh;
@@ -84,15 +86,15 @@ font-size: x-large!important;
 }
   .btnSubmit{
     width: 100%;
-    background-image: linear-gradient(to left, #76768f,#252583 , #76768f)!important;
-      transition: .5s;
+    /* background-image: linear-gradient(to left, #76768f,#252583 , #76768f)!important;
+      transition: .5s; */
 }
-.btnSubmit:hover{
+/* .btnSubmit:hover{
     background: #252583 !important;
     border-radius: 5px;
     box-shadow: 0 0 5px #5c5cc48f,
                 0 0 25px #5c5cc48f,
                 0 0 50px #5c5cc48f,
                 0 0 100px #5c5cc48f;
-}
+} */
 

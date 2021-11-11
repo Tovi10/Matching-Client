@@ -114,7 +114,7 @@ function CreateCampaign() {
             imagePaths.push(singleImgPath);
             // the end :)
             if (imagePaths.length === imagesFiles.length) {
-                const updateCampaign = { ...campaign, images: imagePaths, create: true}
+                const updateCampaign = { ...campaign, images: imagePaths, create: true }
                 dispatch(actions.updateCampaign(updateCampaign))
                 dispatch(actions.setCampaignId(null));
                 setOpenModal(true);
@@ -236,7 +236,7 @@ function CreateCampaign() {
                             >
                                 {logo ?
                                     <div className='wrapperImgs'>
-                                        <DeleteTwoTone twoToneColor="#5ddf5d" className='deleteImgIcon' title={`מחק לוגו`} onClick={() => setLogo(null)} />
+                                        <DeleteTwoTone twoToneColor="#FAE01A" className='deleteImgIcon' title={`מחק לוגו`} onClick={() => setLogo(null)} />
                                         <img alt='img' src={logoURL} style={{ width: '100%', height: '15vh', objectFit: 'contain' }} />
                                     </div> :
                                     <div className='btn d-flex justify-content-center uploadLogoDiv'>
@@ -378,7 +378,7 @@ function CreateCampaign() {
                                     <div className='d-flex align-items-center justify-content-around'>
                                         {imagesURLs.length ? imagesURLs.map((i, key) => (
                                             <div key={key} className='wrapperImgs' >
-                                                <DeleteTwoTone twoToneColor="#5ddf5d" className='deleteImgIcon' title={`מחק תמונה`} onClick={() => removeImage(key)} />
+                                                <DeleteTwoTone twoToneColor="#FAE01A" className='deleteImgIcon' title={`מחק תמונה`} onClick={() => removeImage(key)} />
                                                 <img alt='img' src={i} style={{ width: '100%', height: '20vh', objectFit: 'contain' }} />
                                             </div>
                                         )) : ''}

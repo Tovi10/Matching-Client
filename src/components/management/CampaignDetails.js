@@ -20,7 +20,7 @@ export default function CampaignDetails(props) {
                 <div className="col-md-8">
                     <div className="card-body">
                         <h2 className="card-title">{campaign.campaignName}</h2>
-                        <h1 className="card-text">{numberWithCommas(campaign.goal)} ש"ח</h1>
+                        <h1 className="card-text">{numberWithCommas(campaign.goal)} ₪</h1>
                         <h4 className="card-text">{campaign.purposeOfCollecting}</h4>
                         <h5>{`הקמפיין יהיה פעיל מיום ${campaign.duration[0]} עד ${campaign.duration[1]}`}</h5>
                         <label>{`קמפיין זה שייך לארגון ${campaign.company.companyName}`}</label>

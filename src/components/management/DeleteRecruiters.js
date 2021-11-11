@@ -119,7 +119,10 @@ export default function DeleteRecruiters() {
                 <Table dataSource={recruiters} columns={columns}
                     rowKey={recruiter => recruiter._id}
                     pagination={{ position: ['bottomLeft', 'none'] }}
-                    style={{ direction: 'ltr' }} />
+                    locale={{
+                        emptyText: 'לא נמצאו מגייסים',
+                    }}
+style={{ direction: 'ltr' }} />
             </Spin>
         </div>
     )

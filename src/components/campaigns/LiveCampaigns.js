@@ -54,8 +54,8 @@ function LiveCampaigns(props) {
                                             <div>{campaign.purposeOfCollecting}</div>
                                         </div>
                                         <div style={{ paddingTop: '5%' }}>
-                                            <div style={{ fontSize: '16px' }}>יעד:  {numberWithCommas(campaign.goal)} ש"ח</div>
-                                            <div>עד כה גויס:  {numberWithCommas(campaign.goalRaised)} ש"ח</div>
+                                            <div style={{ fontSize: '16px' }}>יעד:  {numberWithCommas(campaign.goal)} ₪</div>
+                                            <div>עד כה גויס:  {numberWithCommas(campaign.goalRaised)} ₪</div>
                                         </div>
                                         <div className="progress">
                                             {campaign.goal ? <Progress percent={Math.round(100 / campaign.goal * campaign.goalRaised)} /> : <Progress percent={0} />}

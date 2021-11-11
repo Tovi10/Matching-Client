@@ -118,7 +118,11 @@ export default function DeleteCards() {
                 <Table dataSource={cards} columns={columns}
                     rowKey={campaign => campaign._id}
                     pagination={{ position: ['bottomLeft', 'none'] }}
-                    style={{ direction: 'ltr' }} />
+                    notFoundContent={<div>jj</div>}
+                    locale={{
+                        emptyText: 'לא נמצאו כרטיסים',
+                    }}
+                     style={{ direction: 'ltr' }} />
             </Spin>
         </div>
     )

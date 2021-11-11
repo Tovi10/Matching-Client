@@ -44,10 +44,10 @@ export default function CreateCard() {
             <h1>יצירת כרטיס</h1>
             <Form
                 labelCol={{
-                    span: 4,
+                    span: 10,
                 }}
                 wrapperCol={{
-                    span: 20,
+                    span: 14,
                 }}
                 form={form}
                 name="CreateCard"

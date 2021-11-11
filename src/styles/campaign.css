@@ -17,9 +17,7 @@
     background-color:#FAE01A;
 }
 
-.clrWhite{
-color: #FFFF;
-}
+
 
 /* scrolbar style */
 
@@ -120,8 +118,4 @@ color: #FFFF;
 .ant-tabs-tab{
     margin-left: 10px !important;
     border-radius: 15px 15px 0px 0px !important;
-}
-
-.ant-tabs-tab-active{
-    background: #FAE01A !important;
 }

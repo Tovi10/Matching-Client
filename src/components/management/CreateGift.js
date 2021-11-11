@@ -109,7 +109,7 @@ export default function CreateGift() {
                     >
                         {image ?
                             <div className='wrapperImgs'>
-                                <DeleteTwoTone twoToneColor="#5ddf5d" className='deleteImgIcon' title={`מחק לוגו`} onClick={() => setImage(null)} />
+                                <DeleteTwoTone twoToneColor="#FAE01A" className='deleteImgIcon' title={`מחק לוגו`} onClick={() => setImage(null)} />
                                 <img alt='img' src={imageURL} style={{ width: '100%', height: '15vh', objectFit: 'contain' }} />
                             </div> :
                             <div className='btn d-flex justify-content-center uploadLogoDiv'>

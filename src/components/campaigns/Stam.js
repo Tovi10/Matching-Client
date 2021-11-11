@@ -116,7 +116,7 @@ export default function Stam() {
                     <div className='d-flex align-items-center justify-content-around'>
                         {imagesURLs.length ? imagesURLs.map((i, key) => (
                             <div key={key} className='wrapperImgs' >
-                                <DeleteTwoTone twoToneColor="#5ddf5d" className='deleteImgIcon' title={`מחק תמונה`} onClick={() => removeImage(key)} />
+                                <DeleteTwoTone twoToneColor="#FAE01A" className='deleteImgIcon' title={`מחק תמונה`} onClick={() => removeImage(key)} />
                                 <img alt='img' src={i} style={{ width: '100%', height: '20vh', objectFit: 'contain' }} />
                             </div>
                         )) : ''}

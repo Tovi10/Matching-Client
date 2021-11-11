@@ -160,7 +160,7 @@ export default function UpdateGift() {
                             </div>}
                         <div className='d-flex align-items-center justify-content-around'>
                             {imageURL && <div className='wrapperImgs' >
-                                <DeleteTwoTone twoToneColor="#5ddf5d" className='deleteImgIcon' title={`מחק תמונה`} onClick={removeImage} />
+                                <DeleteTwoTone twoToneColor="#FAE01A" className='deleteImgIcon' title={`מחק תמונה`} onClick={removeImage} />
                                 <img alt='img' src={imageURL} style={{ width: '100%', height: '20vh', objectFit: 'contain' }} />
                             </div>}
                         </div>
