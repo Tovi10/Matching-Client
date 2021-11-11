@@ -5,6 +5,8 @@ import LiveCampaigns from '../campaigns/LiveCampaigns';
 
 import { actions } from '../../redux/actions';
 
+import img from '../../assets/backgroundHomePage.png'
+
 export default function BaseHome() {
 
     const dispatch = useDispatch();
@@ -12,6 +14,16 @@ export default function BaseHome() {
 
     useEffect(() => {
         dispatch(actions.getAllCampaigns());
+        document.body.className = "backgroundHomeImage";
+        document.getElementsByClassName('App')[0].classList.remove("APP1");
+        // document.body.style.backgroundImage = "url('../assets/backgroundHomePage.png')";
+        // // document.body.style.WebkitBackgroundSize = "cover";
+        // document.body.style.backgroundRepeat = "no-repeat";
+        // document.body.style.bbackgroundSize = "cover";
+        return () => {
+            document.body.classList.remove("backgroundHomeImage");
+            document.getElementsByClassName("App")[0].classList.add("APP1");
+        };
     }, []);
 
     return (

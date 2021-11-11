@@ -33,7 +33,6 @@ export default function CreateApply() {
                     name="CreateApply"
                     onFinish={onFinish}
                 >
-                    {/* text */}
                     <Form.Item
                         name="text"
                         rules={[
@@ -43,7 +42,7 @@ export default function CreateApply() {
                             },
                         ]}
                     >
-                        <Input.TextArea placeholder={`פרט על הקמפיין שברצונך ליצור...`}/>
+                        <Input.TextArea placeholder={`פרט על הקמפיין שברצונך ליצור...`} />
                     </Form.Item>
                     {/* submit */}
                     <Form.Item className='submitFormItem'>
