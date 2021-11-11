@@ -53,7 +53,7 @@
 }
 
 .shareIcon {
-    background: #1890ff;
+    background: #fae01a9c;
     padding: 0px 5px 5px 5px;
     border-radius: 5px;
     border: solid 1px;
@@ -74,12 +74,12 @@
     position: relative;
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
-    color: #252583;
+    /* color: #FAE01A; */
     width: 100%;
     z-index: 1;
     align-self: center;
-    border-top: solid 1px;
-    border-bottom: solid 1px;
+    /* border-top: solid 1px; */
+    /* border-bottom: solid 1px; */
 }
 
 /* Blockquote right double quotes */
@@ -87,7 +87,7 @@
 .blockquote:after {
     position: absolute;
     content: "”";
-    color: #25258349;
+    color: #fae01a9c;
     font-size: 5rem;
     line-height: 0;
     bottom: -15px;
