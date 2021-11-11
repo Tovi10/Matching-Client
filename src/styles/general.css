@@ -235,3 +235,61 @@ body {
   }
 }
 /* end bg */
+
+
+.rtlColumn{
+  direction: rtl !important;
+}
+
+.watermark {
+  position: relative;
+  cursor:not-allowed;
+}
+.watermark::after {
+  content: 'אזל!';
+  position: absolute;
+  right: 25%;
+  opacity: 0.5;
+  font-size: 6em;
+  color: red;
+  top: 15%;
+
+  /* rotate */
+  transform: rotate(-60deg);
+
+
+  /* Legacy vendor prefixes that you probably don't need... */
+
+  /* Safari */
+  -webkit-transform: rotate(-60deg);
+
+  /* Firefox */
+  -moz-transform: rotate(-60deg);
+
+  /* IE */
+  -ms-transform: rotate(-60deg);
+
+  /* Opera */
+  -o-transform: rotate(-60deg);
+
+  /* Internet Explorer */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+.mySlides{
+  display: none;
+}
+
+.arrowSlide{
+    /* background: #000000;
+    color: #fff;
+    border:solid 1px #000000; */
+    padding: 5px;
+    color: #000000;
+}
+
+.ant-popover-buttons{
+  text-align: left !important;
+}
+
+

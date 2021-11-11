@@ -1,0 +1,59 @@
+.Stamp {
+  z-index: 3;
+  /* background: transparent; */
+  opacity: 0.4;
+  position: absolute;
+  /* margin-top: 50%; */
+}
+
+.Stamp p {
+  background: linear-gradient(to left, transparent 50%, rgba(255, 255, 255, 0.3) 50%), linear-gradient(to bottom, transparent 50%, rgba(255, 255, 255, 0.3)50%);
+  background-size: 2px 4px, 4px 2px;
+  font-family: "black ops one", cursive;
+  display: inline-block;
+  /* margin: 0 1em 1em; */
+  /* font-size: 40px; */
+  font-size: 35px;
+  letter-spacing: 8px;
+  color: #0E5AD2;
+  transform: rotate(-5deg);
+}
+
+.Stamp p span {
+  font-family: 'Fredericka the Great', cursive;
+  /* width: 7.3em; */
+  width: 16vw;
+  letter-spacing: 10px;
+  display: inline-block;
+  padding: 0.5em;
+  border-radius: 15px;
+  box-shadow: 0 0 0 5px, inset 0 0 0 5px white, inset 0 0 0 8px, inset 0 0 0 400px white;
+  mix-blend-mode: overlay;
+  outline-offset: -1px;
+  outline: solid 8px;
+  margin: 8px;
+}
+
+.Stamp p span:first-line, p:first-line {
+  letter-spacing: 0;
+}
+
+.Stamp p+p span {
+  border-radius: 15px;
+  padding: 0.25em 1em;
+  font-family: "black ops one", cursive;
+  display: inline-block;
+  margin: 1em 2em;
+  font-size: 40px;
+  /* font-size: 35px; */
+  letter-spacing: 8px;
+  width: 7em;
+}
+
+.Stamp code {
+  font-family: 'Fredericka the Great', cursive;
+}
+
+.Stamp div span {
+  font-family: "black ops one", cursive;
+}

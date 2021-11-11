@@ -12,8 +12,8 @@ export default function GiftDetails(props) {
                 <div className="card mb-3 col-8 giftCard">
                     <div className="row no-gutters">
                         <div className="col-md-4">
-                            {/* <img className="card-img" src={currentGift ? currentGift.image: ""} alt="..." /> */}
-                            <img style={{ width: '100%', height: '100%', objectFit: 'contain' }} className="card-img" src='https://s3.eu-central-1.amazonaws.com/prod-prog-site-s3/data/siropu/am/user/161276d2ed5a57.gif' alt="..." />
+                            <img className="card-img" src={currentGift ? currentGift.image: ""} alt="..." />
+                            {/* <img style={{ width: '100%', height: '100%', objectFit: 'contain' }} className="card-img" src='https://s3.eu-central-1.amazonaws.com/prod-prog-site-s3/data/siropu/am/user/161276d2ed5a57.gif' alt="..." /> */}
                         </div>
                         <div className="col-md-8">
                             <div className="card-body">

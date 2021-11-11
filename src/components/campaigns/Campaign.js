@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Carousel } from 'react-carousel-minimal';
-import { Spin, Tooltip } from 'antd';
+import { Spin, Tooltip, Tabs, notification, } from 'antd';
 import { ShareAltOutlined, MailOutlined, CopyOutlined, CopyFilled } from '@ant-design/icons';
 import { numberWithCommas } from '../../services/service';
 import { SpinnerCircularFixed } from 'spinners-react';
@@ -9,23 +8,74 @@ import { SpinnerCircularFixed } from 'spinners-react';
 import { actions } from '../../redux/actions';
 
 import Card from './Card';
+import Donations from './Donations';
+import Recruiters from './Recruiters';
+
+const { TabPane } = Tabs;
 
 
 export default function Campaign(props) {
 
     const campaign = useSelector(state => state.campaignReducer.campaign);
+    const socket = useSelector(state => state.socketReducer.socket);
     const dispatch = useDispatch();
+
     const [showSpin, setShowSpin] = useState(true);
     const [copy, setCopy] = useState(true);
+    const [index, setIndex] = useState(1);
+
+    const showCurrentImg = (n) => {
+        if (!campaign || !campaign.images.length) { return }
+        const x = document.getElementsByClassName("mySlides");
+        let slideIndex = n;
+        if (n > x.length) {
+            slideIndex = 1
+        }
+        if (n < 1) {
+            slideIndex = x.length
+        }
+        for (let i = 0; i < x.length; x[i].style.display = "none", i++);
+        x[slideIndex - 1].style.display = "block";
+        setIndex(slideIndex)
+    }
 
     useEffect(() => {
         if (!campaign) {
             dispatch(actions.getCampaignById(window.location.pathname.split('/')[2]));
         }
+        // time to get the images from firebase
         setTimeout(() => {
             setShowSpin(false)
         }, 2000);
+
+        socket.on('gotEntered', event => console.log(event.msg));
+        socket.on('leaveCampaign', event => console.log(event.msg));
+        socket.on('newDonation', event => {
+            notification.open({
+                message: 'תרומה חדשה!',
+                description: event.donation.user.name + ` תרם ` + event.donation.card.sum + ` וקבל ` + event.donation.card.gift.advertising
+            });
+            console.log(event);
+            console.log("🚀 ~ file: Campaign.js ~ line 60 ~ useEffect ~ campaign", campaign)
+            campaign ? dispatch(actions.getCampaignById(campaign._id)) : dispatch(actions.getCampaignById(window.location.href.split('/')[4]));
+        });
+        return () => socket.emit('leaveCampaign', { room: campaign ? campaign._id : window.location.href.split('/')[4] });
     }, [])
+
+    useEffect(() => {
+        campaign ? socket.emit('enterCampaign', { room: campaign._id }) : console.log("No campaign!");
+    }, [campaign]);
+
+    // when spining finish -> its the time to display the images (by width);
+    useEffect(() => {
+        if (!showSpin) {
+            showCurrentImg(1)
+        }
+    }, [showSpin])
+
+    useInterval(() => {
+        showCurrentImg(index + 1);
+    }, 10000);
 
     return (
         <div className='Campaign container-fluid'>
@@ -38,13 +88,22 @@ export default function Campaign(props) {
                         <div className="col-9">
                             <div className="row container" style={{ height: '50vh' }}>
                                 <div className='d-flex justify-content-center'>
-                                    <div className='col-8 d-flex align-items-center justify-content-center'>
-                                        {/* <Spin style={{ display: showSpin ? 'block' : 'none' }} /> */}
-                                        <SpinnerCircularFixed style={{ display: showSpin ? 'block' : 'none' }} size={73} thickness={100} speed={100} color="#252583" secondaryColor="#5ddf5d" />
-                                        {(campaign && campaign.images && campaign.images.length) ?
-                                            <img style={{ width: '100%', height: '50vh', objectFit: 'contain', display: showSpin ? 'none' : 'block' }} className='rounded' src={campaign.images[0]} /> :
-                                            <div style={{ display: showSpin ? 'none' : 'block' }}>no img!</div>}
-                                    </div>
+                                    {campaign.images.length ?
+                                        <div className='col-7 offset-1 d-flex align-items-center justify-content-center'>
+                                            <SpinnerCircularFixed style={{ display: showSpin ? 'block' : 'none' }} size={73} thickness={100} speed={100} color="#252583" secondaryColor="#5ddf5d" />
+                                            {/* {campaign.images.length > 1 && <div className='arrowSlide pointer notSelected' onClick={e => showCurrentImg(index + 1)} title={`הבא`}
+                                                style={{ display: showSpin ? 'none' : 'block' }}>&#10094;</div>} */}
+                                            {campaign.images.map((i, imgIndex) => {
+                                                return (<img key={imgIndex} alt='img' title={`תמונה מס' ${imgIndex + 1}`}
+                                                    // style={{ width: '100%', height: '50vh', objectFit: 'contain', display: showSpin ? 'none' : 'block' }}
+                                                    style={{ height: '50vh', objectFit: 'contain', width: showSpin ? '0px' : '100%' }}
+                                                    className='rounded mySlides notSelected' src={i} />)
+                                            })}
+                                            {/* {campaign.images.length > 1 && <div className='arrowSlide pointer notSelected' onClick={e => showCurrentImg(index - 1)} title={`הקודם`} style={{ display: showSpin ? 'none' : 'block' }}>&#10095;</div>} */}
+                                        </div> :
+                                        <div className='col-8 d-flex align-items-center justify-content-center'>
+                                            <div>אין תמונות לקמפיין זה 📸</div>
+                                        </div>}
                                     <div className="col-4 d-flex align-items-center">
                                         <div className="blockquote-wrapper">
                                             <div className="blockquote">
@@ -70,10 +129,13 @@ export default function Campaign(props) {
                                     </div>
                                 </div>
                                 <div className='row'>
-                                    <p>מתוך סכום של {numberWithCommas(campaign.goal)} ש"ח</p>
-                                    {campaign.donors.length ? <h4>מס' התורמים עד כה הינו {campaign.donors.length}</h4> : <h4>היה אתה התורם הראשון!</h4>}
-                                    <div className='col-4'></div>
-                                    <div className='col-4 d-flex justify-content-around p-2 Share'>
+                                    <div className='col-8'>
+                                        <p>מתוך סכום של {numberWithCommas(campaign.goal)} ש"ח</p>
+                                        {/* {campaign.donations.length ? <h4>מס' התרומות עד כה הינו {campaign.donations.length}</h4> : <h4>היה אתה התורם הראשון!</h4>} */}
+                                        {campaign.donations.length ? <h4>{`עד כה נתרם ${campaign.goalRaised} ש"ח, על ידי ${campaign.donations.length} תרומות.`}</h4> : <h4>היה אתה התורם הראשון!</h4>}
+                                    </div>
+                                    {/* <div className='col-4'></div> */}
+                                    <div className='col-4 d-flex justify-content-around align-items-center Share'>
                                         <div>
                                             שתף באמצעות:
                                             {/* <ShareAltOutlined /> */}
@@ -89,7 +151,8 @@ export default function Campaign(props) {
                                         </Tooltip>
                                         <Tooltip title='מייל'>
                                             <div className='shareIcon'>
-                                                {/* <MailOutlined onClick={() => window.open(`https://mail.google.com/mail/u/0/?fs=1&su=1&body=http://localhost:3000/current-campaign/${campaign._id}&tf=cm`, '_blank')} /> */}
+                                                {/* NOTE SERVER */}
+                                                {/* <MailOutlined onClick={() => window.open(`https://mail.google.com/mail/u/0/?fs=1&su=1&body=http://3000/current-campaign/${campaign._id}&tf=cm`, '_blank')} /> */}
                                                 <MailOutlined onClick={() => window.open(`https://mail.google.com/mail/u/0/?fs=1&su=1&body=https://matching-try.herokuapp.com/current-campaign/${campaign._id}&tf=cm`, '_blank')} />
                                             </div>
                                         </Tooltip>
@@ -104,10 +167,34 @@ export default function Campaign(props) {
                             }
                         </div>
                     </div>
-                    <div className='row'>
-                    </div>
+                    <Tabs defaultActiveKey="1" type='card'>
+                        <TabPane tab="תרומות" key="1">
+                            <Donations />
+                        </TabPane>
+                        <TabPane tab="מגייסים" key="2">
+                            <Recruiters />
+                        </TabPane>
+                    </Tabs>
                 </div> : 'אין קמפיין'
             }
         </div >
     )
+}
+
+
+function useInterval(callback, delay) {
+    const savedCallback = useRef();
+
+    useEffect(() => {
+        savedCallback.current = callback;
+    }, [callback]);
+
+    useEffect(() => {
+        function tick() {
+            savedCallback.current();
+        }
+
+        let id = setInterval(tick, delay);
+        return () => clearInterval(id);
+    }, [delay]);
 }

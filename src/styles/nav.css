@@ -1,30 +1,43 @@
 .nav-link {
-    color: #5ddf5d;
-    padding: .5rem !important;
-    border-bottom: thin solid #5ddf5d;
-    margin: 10px;
-    transition: all 0.4s ease-in;
+    color: #FFFF !important;
+    padding: 0rem !important;
+    margin: 7px;
+    /* transition: all 0.4s ease-in; */
 }
-.Nav{
+
+.Nav {
     margin: unset !important;
     height: 10vh;
+    padding-bottom: 10%;
+    padding-top: 2%;
 }
 
-.navbar-brand{
+.navbar-brand {
     margin: unset !important;
-    color: #252583;
+    color: #FAE01A !important;
     font-size: 20px;
+    z-index: 3;
 }
 
-.nav-link:hover{
-    transition: all 0.4s ease-in;
-    transform: translateY(2px);
-    border-bottom: thin solid #252583;
-    color: #252583;
+.nav-link:hover {
+    /* transition: all 0.4s ease-in; */
+    /* transform: translateY(2px); */
+    color: #FAE01A !important;
 }
 
-.navLinkActive{
-    border-bottom: thin solid #252583;
-    color: #252583;
+.navLinkActive {
+    color: #FAE01A !important;
 }
 
+.linksMenu {
+    z-index: 3;
+}
+
+.profileLetter {
+    z-index: 1;
+    color: #FFFF;
+}
+
+.profileInNav{
+    margin-right: -20px;
+}

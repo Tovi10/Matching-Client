@@ -14,12 +14,16 @@ export default function CreateCard() {
     const allCampaigns = useSelector(state => state.campaignReducer.allCampaigns);
     const allGifts = useSelector(state => state.giftReducer.allGifts);
     const general = useSelector(state => state.generalReducer);
+    const user = useSelector(state => state.userReducer.user);
+    const admin = useSelector(state => state.userReducer.admin);
 
     const [form] = Form.useForm();
 
     useEffect(() => {
-        dispatch(actions.getAllCampaigns());
-        dispatch(actions.getAllGifts());
+        if (!allCampaigns)
+            dispatch(actions.getAllCampaigns());
+        if (!allGifts)
+            dispatch(actions.getAllGifts());
     }, []);
 
 
@@ -31,9 +35,8 @@ export default function CreateCard() {
 
     const onFinish = (values) => {
         console.log("🚀 ~ file: CreateCard.js ~ line 20 ~ onFinish ~ values", values);
-        const campaignId = allCampaigns.find(c => c.campaignName === values.campaign)._id;
-        const giftId = allGifts.find(g => g.name === values.gift)._id;
-        dispatch(actions.createCard({ card: { ...values, gift: giftId }, campaignId }));
+        // const giftId = allGifts.find(g => g.name === values.gift)._id;
+        dispatch(actions.createCard({ card: values, campaignId: values.campaign }));
     };
 
     return (
@@ -53,7 +56,6 @@ export default function CreateCard() {
                 {/* campaign */}
                 <Form.Item
                     name="campaign"
-                    label={`קמפיין`}
                     rules={[
                         {
                             required: true,
@@ -64,19 +66,23 @@ export default function CreateCard() {
                     <Select
                         allowClear
                         showSearch
-                        options={allCampaigns && allCampaigns.map(campaign => {
-                            return { value: campaign.campaignName, label: campaign.campaignName }
-                        })}
+                        // options={allCampaigns && allCampaigns.map(campaign => {
+                        //     return { value: campaign.campaignName, label: campaign.campaignName }
+                        // })}
                         style={{ textAlign: 'right' }}
                         dropdownStyle={{ textAlign: 'right' }}
                         notFoundContent={<>לא נמצאו נתונים</>}
                         placeholder={`בחר קמפיין...`} >
+                        {admin ? (allCampaigns && allCampaigns.map(item => (
+                            <Select.Option key={item._id}>{item.campaignName}</Select.Option>
+                        ))) : (user.campaigns && user.campaigns.map(item => (
+                            <Select.Option key={item._id}>{item.campaignName}</Select.Option>
+                        )))}
                     </Select>
                 </Form.Item>
                 {/* gift */}
                 <Form.Item
                     name="gift"
-                    label={`מתנה`}
                     rules={[
                         {
                             required: true,
@@ -87,19 +93,21 @@ export default function CreateCard() {
                     <Select
                         allowClear
                         showSearch
-                        options={allGifts && allGifts.map(gift => {
-                            return { value: gift.name, label: gift.name }
-                        })}
+                        // options={allGifts && allGifts.map(gift => {
+                        //     return { value: gift.name, label: gift.name }
+                        // })}
                         style={{ textAlign: 'right' }}
                         dropdownStyle={{ textAlign: 'right' }}
                         notFoundContent={<>לא נמצאו נתונים</>}
                         placeholder={`בחר מתנה...`} >
+                        {allGifts && allGifts.map(gift => (
+                            <Select.Option key={gift._id}>{gift.name}</Select.Option>
+                        ))}
                     </Select>
                 </Form.Item>
                 {/* sum */}
                 <Form.Item
                     name="sum"
-                    label={`סכום התרומה`}
                     rules={[
                         {
                             required: true,
@@ -112,7 +120,6 @@ export default function CreateCard() {
                 {/* text */}
                 <Form.Item
                     name="text"
-                    label={`שם הכרטיס`}
                 >
                     <Input placeholder={`הכנס כאן את שם הכרטיס...`} />
                 </Form.Item>

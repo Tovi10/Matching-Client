@@ -35,11 +35,13 @@ export const createCampaign = store => next => action => {
         axios.post(`${SERVER_URL}/api/campaign/createCampaign`, action.payload)
             .then(result => {
                 console.log("🚀 ~ file: campaign.crud.js ~ line 27 ~ result.data", result.data);
-                if (!result.data.images.length) {
+                if (!result.data.campaign.images.length) {
                     store.dispatch(actions.setCurrentNotification('הקמפיין נוצר בהצלחה!'))
                 }
-                store.dispatch(actions.setCampaignFromServer(result.data));
-                store.dispatch(actions.setCampaignId(result.data._id))
+                store.dispatch(actions.setCampaignFromServer(result.data.campaign));
+                store.dispatch(actions.setUser(result.data.user));
+                store.dispatch(actions.setCampaignId(result.data.campaign._id))
+                store.dispatch(actions.setAllCampaigns(result.data.allCampaigns));
             })
             .catch(error => {
                 store.dispatch(actions.setCurrentNotification('ארעה שגיאה ביצירת הקמפיין!'))
@@ -51,15 +53,42 @@ export const createCampaign = store => next => action => {
 
 export const updateCampaign = store => next => action => {
     if (action.type === 'UPDATE_CAMPAIGN') {
-        axios.put(`${SERVER_URL}/api/campaign/updateCampaign`, action.payload)
+        const data=action.payload;
+        axios.put(`${SERVER_URL}/api/campaign/updateCampaign`, {...data,uid:store.getState().userReducer.user.uid})
             .then(result => {
-                store.dispatch(actions.setCurrentNotification('הקמפיין נוצר בהצלחה!'))
+                if (action.payload.create)
+                    store.dispatch(actions.setCurrentNotification('הקמפיין נוצר בהצלחה!'));
+                else
+                    store.dispatch(actions.setCurrentNotification('הקמפיין התעדכן בהצלחה!'))
                 console.log("🚀 ~ file: campaign.crud.js ~ line 39 ~ result", result)
-                store.dispatch(actions.setCampaignFromServer(result.data));
+                store.dispatch(actions.setCampaignFromServer(result.data.campaign));
+                store.dispatch(actions.setAllCampaigns(result.data.allCampaigns));
+                store.dispatch(actions.setUser(result.data.user));
+
             })
             .catch(error => {
-                store.dispatch(actions.setCurrentNotification('ארעה שגיאה ביצירת הקמפיין!'))
+                if (action.payload.create)
+                    store.dispatch(actions.setCurrentNotification('ארעה שגיאה ביצירת הקמפיין!'))
+                else
+                    store.dispatch(actions.setCurrentNotification('ארעה שגיאה בעדכון הקמפיין!'))
                 console.log("🚀 ~ file: campaign.crud.js ~ line 42 ~ error", error)
+            });
+    }
+    return next(action);
+}
+
+export const deleteCampaign = store => next => action => {
+    if (action.type === 'DELETE_CAMPAIGN') {
+        axios.delete(`${SERVER_URL}/api/campaign/deleteCampaign/${action.payload.campaignId}/${action.payload.userId}`)
+            .then(result => {
+                console.log("🚀 ~ file: campaign.crud.js ~ line 80 ~ result", result)
+                store.dispatch(actions.setAllCampaigns(result.data.allCampaigns));
+                store.dispatch(actions.setUser(result.data.user));
+                store.dispatch(actions.setCurrentNotification('הקמפיין נמחק בהצלחה!'))
+            })
+            .catch(error => {
+                console.log("🚀 ~ file: campaign.crud.js ~ line 85 ~ error", error)
+                store.dispatch(actions.setCurrentNotification('ארעה שגיאה במחיקת הקמפיין!'))
             });
     }
     return next(action);

@@ -1,11 +1,16 @@
+.LiveCampaigns {
+    padding-top: 10vh;
+}
+
 .LiveCampaigns .cardImg {
     position: relative;
     background-position: center;
     background-size: cover;
     width: 100%;
-    height: 40vh;
+    /* height: 40vh; */
+    height: 100%;
     object-fit: contain;
-    border-radius: 5px 5px 0px 0px;
+    border-radius: 15px;
 }
 
 .LiveCampaigns .card-body {
@@ -68,23 +73,20 @@
     align-self: flex-end;
 }
 
-.liveCampaignCard:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06)
-}
-
 .liveCampaignCard {
-    background-color: #c3c3d33b !important;
-    height: 70vh;
+    height: 80vh;
     display: inline-block;
     cursor: pointer;
     margin: 2%;
     width: 100%;
     background: #fff;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, .08), 0 0 6px rgba(0, 0, 0, .05);
-    transition: .3s transform cubic-bezier(.155, 1.105, .295, 1.12), .3s box-shadow, .3s -webkit-transform cubic-bezier(.155, 1.105, .295, 1.12);
     border: 0;
-    border-radius: 1rem
+    border-radius: 15px;
+    /* border-radius: 1rem */
+}
+
+.hoverCampaign {
+    box-shadow: inset 2000px 0 0 0 rgba(255, 255, 255, 0.8) !important;
 }
 
 .LiveCampaigns .row>* {
@@ -93,4 +95,8 @@
 
 .card {
     display: inline-block;
+}
+
+.pAbsolute {
+    position: absolute;
 }
