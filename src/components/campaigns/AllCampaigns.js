@@ -7,6 +7,8 @@ import { numberWithCommas } from '../../services/service';
 import Stamp from './Stamp';
 import { ReactHeight } from 'react-height';
 
+import plusImg from '../../assets/plus.png'
+
 function AllCampaigns(props) {
 
     const { history } = props;
@@ -71,6 +73,9 @@ function AllCampaigns(props) {
                     <Spin size='large' />
                 }
             </div >
+            <div>
+                <img title="קמפיין חדש" className="imgBtnNewCapmaign" src={plusImg} />
+            </div>
         </div >
     )
 }

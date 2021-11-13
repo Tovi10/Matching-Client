@@ -32,3 +32,24 @@
 .LiveCampaigns .ant-progress-inner {
     background-color: #e2e2e2;
 }
+
+.AllCampaigns .imgBtnNewCapmaign {
+    position: fixed;
+    top: 75vh;
+    right: 4vw;
+    width: 7vw;
+    background-color: white;
+    border-radius: 50%;
+    padding: 15px;
+    cursor: pointer;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.7);
+    transition: all 0.3s ease 0s;
+    /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0)); */
+}
+
+.imgBtnNewCapmaign:hover {
+    background-color: rgb(250, 224, 26);
+    box-shadow: 0px 15px 20px rgba(250, 224, 26, 0.2);
+    color: #fff;
+    transform: translateY(-7px);
+}
