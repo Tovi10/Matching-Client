@@ -8,6 +8,7 @@ import Stamp from './Stamp';
 import { ReactHeight } from 'react-height';
 
 import plusImg from '../../assets/plus.png'
+import CreateApply from '../general/CreateApply';
 
 function AllCampaigns(props) {
 
@@ -37,6 +38,11 @@ function AllCampaigns(props) {
         setCurrentHeight([...a])
         // console.log({ key: i, value: height })
     }
+
+    const createApplyForNewCampaign = () => {
+        dispatch(actions.setShowModal(true));
+    }
+
     return (
         <div className='AllCampaigns container-fluid'>
             <div className="card-columns">
@@ -74,7 +80,8 @@ function AllCampaigns(props) {
                 }
             </div >
             <div>
-                <img title="קמפיין חדש" className="imgBtnNewCapmaign" src={plusImg} />
+                <img title="קמפיין חדש" className="imgBtnNewCapmaign" src={plusImg} onClick={createApplyForNewCampaign} />
+                <CreateApply />
             </div>
         </div >
     )

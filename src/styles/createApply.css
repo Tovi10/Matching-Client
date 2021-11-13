@@ -1,15 +1,16 @@
-.CreateApply {
+.wrapApplyModal {
     margin: auto;
 }
 
-.CreateApply .backgroundAll {
+.wrapApplyModal .backgroundAll {
     background-color: rgba(255, 255, 255, 0.6);
     border-radius: 30px;
     height: 90vh;
-    width: 33vw;
+    width: 30vw;
+    margin-right: 3vw;
 }
 
-.CreateApply .wantCampaign {
+.wrapApplyModal .wantCampaign {
     color: #45022D;
     font-size: 45px;
     letter-spacing: -2px;
@@ -18,7 +19,7 @@
     padding-top: 7.5vh;
 }
 
-.CreateApply .new {
+.wrapApplyModal .new {
     color: #45022D;
     font-weight: bolder;
     font-size: 85px;
@@ -28,7 +29,7 @@
     text-decoration: underline #FAE01A;
 }
 
-.CreateApply .applyNewCampaign {
+.wrapApplyModal .applyNewCampaign {
     color: black;
     font-weight: bolder;
     font-size: 20px;
@@ -37,9 +38,10 @@
     line-height: 20px;
 }
 
-.CreateApply .inputText {
+.wrapApplyModal .inputText {
     width: 20vw !important;
     height: 35vh !important;
+    background-color: #e3dce0;
 }
 
 @keyframes fadeAnim {
@@ -51,7 +53,7 @@
     }
 }
 
-.CreateApply .btnSend {
+.wrapApplyModal .btnSend {
     background-color: rgba(255, 255, 255, 0) !important;
     color: #FAE01A;
     font-weight: bolder;
@@ -62,4 +64,12 @@
     animation-duration: 1s;
     animation-iteration-count: infinite;
     animation-fill-mode: forwards;
+}
+
+/* .backgroundApplyModal {
+    background-image: linear-gradient(to bottom left, rgb(41, 3, 28), rgb(124, 51, 98));
+} */
+
+.modal-content {
+    background: linear-gradient(to bottom left, rgb(41, 3, 28), rgb(124, 51, 98)) !important;
 }
