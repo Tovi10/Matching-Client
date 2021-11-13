@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Card, Col, Row, } from 'antd';
-import Moment from 'react-moment';
+// import Moment from 'react-moment';
 
-import 'moment-timezone'
+// import 'moment-timezone'
 export default function Donations() {
 
     const campaign = useSelector(state => state.campaignReducer.campaign);
@@ -25,7 +25,7 @@ export default function Donations() {
                         {sortedArray.map(donation => {
                             return (
                                 <Col span={8} key={donation._id} >
-                                    <Card style={{ height: '30vh' ,borderRadius:'15px'  }} title={donation.user.name ? donation.user.name : "לא ידוע"} bordered={false}>
+                                    <Card style={{ height: '30vh', borderRadius: '15px' }} title={donation.user.name ? donation.user.name : "לא ידוע"} bordered={false}>
                                         <div>{`תרם ${donation.card.sum} ₪ ${donation.card.text}`}</div>
                                         <div>{`בתאריך ${donation.date}`}</div>
                                         {/* {donation && donation.recruiter ? <div>{`ע"י ${donation.recruiter.user.name === undefined ? "לא ידוע" : donation.recruiter.user.name}`}</div> : ""} */}

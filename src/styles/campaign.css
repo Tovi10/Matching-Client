@@ -13,11 +13,10 @@
     height: 15px;
     background-color: rgb(212, 212, 212);
 }
+
 .progress-bar {
-    background-color:#FAE01A;
+    background-color: #FAE01A;
 }
-
-
 
 /* scrolbar style */
 
@@ -115,7 +114,7 @@
 
 /* END QOUTE */
 
-.ant-tabs-tab{
+.ant-tabs-tab {
     margin-left: 10px !important;
     border-radius: 15px 15px 0px 0px !important;
 }

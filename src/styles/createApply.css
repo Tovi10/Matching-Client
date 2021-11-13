@@ -1,0 +1,65 @@
+.CreateApply {
+    margin: auto;
+}
+
+.CreateApply .backgroundAll {
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 30px;
+    height: 90vh;
+    width: 33vw;
+}
+
+.CreateApply .wantCampaign {
+    color: #45022D;
+    font-size: 45px;
+    letter-spacing: -2px;
+    word-spacing: 0px;
+    margin-bottom: 2vh;
+    padding-top: 7.5vh;
+}
+
+.CreateApply .new {
+    color: #45022D;
+    font-weight: bolder;
+    font-size: 85px;
+    letter-spacing: 200px;
+    word-spacing: normal;
+    line-height: 0px;
+    text-decoration: underline #FAE01A;
+}
+
+.CreateApply .applyNewCampaign {
+    color: black;
+    font-weight: bolder;
+    font-size: 20px;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: 20px;
+}
+
+.CreateApply .inputText {
+    width: 20vw !important;
+    height: 35vh !important;
+}
+
+@keyframes fadeAnim {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.CreateApply .btnSend {
+    background-color: rgba(255, 255, 255, 0) !important;
+    color: #FAE01A;
+    font-weight: bolder;
+    border: rgba(255, 255, 255, 0);
+    font-size: 20px;
+    animation-name: fadeAnim;
+    animation-delay: 1s;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+}

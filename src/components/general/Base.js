@@ -18,6 +18,7 @@ import '../../styles/createRecruiter.css';
 import '../../styles/recruiterArea.css';
 import '../../styles/baseHome.css';
 import '../../styles/base.css';
+import '../../styles/createApply.css';
 
 export default function Base() {
 

@@ -49,16 +49,16 @@ export default function About() {
                     <span></span>
                 </div>
             </div> */}
-            <div className="wrapper" >
+            {/* <div className="wrapper" >
                 <div className="typing-demo" >
                     זה המקום לספר על האתר שלנו כמה הוא יפה ומשוכלל!!
                 </div >
-            </div>
+            </div> */}
             {/* </div> */}
             {/* </div >
                 </div> */}
             {/* </div> */}
-            {/* <ApplyCreateCampaign /> */}
+            <ApplyCreateCampaign />
         </div >
     )
 }
