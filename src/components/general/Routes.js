@@ -11,6 +11,8 @@ import BaseManagement from '../management/BaseManagement';
 import RecruiterArea from '../general/RecruiterArea';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import Thank from './Thank';
+import Failure from './Failure';
 
 
 export default function Routes() {
@@ -30,6 +32,8 @@ export default function Routes() {
                 <Route path="/personal" component={Personal} />
                 <Route path="/current-campaign/:currentCampaign" component={Campaign} />
                 <Route path="/recruiters/:recruiterId" component={RecruiterArea} />
+                <Route path="/thank" component={Thank} />
+                <Route path="/failure" component={Failure} />
                 {(admin || (user && user.allowed)) && <Route path="/management" component={BaseManagement} />}
                 <Route path="*" component={NotFound} />
             </Switch >

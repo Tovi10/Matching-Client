@@ -18,11 +18,17 @@ export default function Campaign(props) {
 
     const campaign = useSelector(state => state.campaignReducer.campaign);
     const socket = useSelector(state => state.socketReducer.socket);
+    const donationData = useSelector(state => state.generalReducer.donationData);
     const dispatch = useDispatch();
 
     const [showSpin, setShowSpin] = useState(true);
     const [copy, setCopy] = useState(true);
     const [index, setIndex] = useState(1);
+
+    useEffect(() => {
+        debugger
+        console.log("🚀 ~ file: Campaign.js ~ line 31 ~ Campaign ~ donationData", donationData)
+    }, [donationData])
 
     const showCurrentImg = (n) => {
         if (!campaign || !campaign.images.length) { return }
@@ -40,6 +46,13 @@ export default function Campaign(props) {
     }
 
     useEffect(() => {
+        window.onmessage = function (e) {
+            if (e.data == 'createDonation') {
+                // alert('It works!');
+                // dispatch(actions.createDonation({ ...values, campaignId: campaign._id, user: user._id, card: card._id, date: moment(new Date()).format('DD/MM/YYYY a h:mm:ss ') + "" }));
+                dispatch(actions.createDonation(donationData));
+            }
+        };
         if (!campaign) {
             dispatch(actions.getCampaignById(window.location.pathname.split('/')[2]));
         }
@@ -142,8 +155,8 @@ export default function Campaign(props) {
                                         </div>
                                         <Tooltip title={copy ? 'העתקת קישור' : 'הקישור הועתק'} onClick={() => {
                                             setCopy(false);
-                                            navigator.clipboard.writeText(`http://localhost:3000/current-campaign/${campaign._id}`);
-                                            // navigator.clipboard.writeText(`https://matching-try.herokuapp.com/current-campaign/${campaign._id}`);
+                                            // navigator.clipboard.writeText(`http://localhost:3000/current-campaign/${campaign._id}`);
+                                            navigator.clipboard.writeText(`https://matching-try.herokuapp.com/current-campaign/${campaign._id}`);
                                         }}>
                                             <div className='shareIcon'>
                                                 {copy ? <CopyTwoTone twoToneColor="#FAE01A" /> : <CopyFilled />}

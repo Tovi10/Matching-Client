@@ -32,9 +32,12 @@ export default function Base() {
     return (
         <Router>
             <div className='Base container'>
-                <Nav />
+                {(window.location.pathname.includes('thank') || window.location.pathname.includes('failure')) ? '' : <Nav />}
+                {/* <Nav/> */}
                 <Routes />
-                <Notification />
+                {/* <Notification /> */}
+                {(window.location.pathname.includes('thank') || window.location.pathname.includes('failure')) ? '' : <Notification />}
+
             </div>
         </Router>
     )

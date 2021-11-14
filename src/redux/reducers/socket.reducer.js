@@ -3,12 +3,12 @@ import createReducer from "./reducerUtils";
 import io from "socket.io-client";
 
 const initialState = {
-    socket: io.connect('http://localhost:4000/', {
-        transports: ['websocket']
-    }),
-    // socket: io.connect('https://matching-try.herokuapp.com/', {
-    //     transports: ['polling']
+    // socket: io.connect('http://localhost:4000/', {
+    //     transports: ['websocket']
     // }),
+    socket: io.connect('https://matching-try.herokuapp.com/', {
+        transports: ['polling']
+    }),
 }
 
 const socketReducer = {

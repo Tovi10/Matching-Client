@@ -6,6 +6,7 @@ const initialState = {
     companyId: null,
     giftId: null,
     currentNotification: null,
+    donationData: null,
 }
 
 const generalReducer = {
@@ -23,6 +24,9 @@ const generalReducer = {
     },
     zeroCurrentNotification(state, action) {
         state.currentNotification = null;
+    },
+    setDonationData(state, action) {
+        state.donationData = action.payload;
     },
 }
 export default produce((state, action) => createReducer(state, action, generalReducer), initialState);
