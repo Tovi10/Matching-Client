@@ -43,7 +43,7 @@ export default function CreateApply() {
                         <div className="backgroundAll">
                             <p className="wantCampaign">רוצה קמפיין</p>
                             <p className="new">חדש</p>
-                            <p className="applyNewCampaign">הגשת בקשה לקמפיין חדש</p>
+                            {user ? <p className="applyNewCampaign">הגשת בקשה לקמפיין חדש</p> : <p className="applyNewCampaign m-5">הרשם כדי להגיש בקשה</p>}
                             {user ?
                                 <Form
                                     wrapperCol={{

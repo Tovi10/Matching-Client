@@ -9,6 +9,7 @@
     /* width: 30vw; */
     /* margin-right: 3vw; */
     margin: 5%;
+    min-height: 85vh;
 }
 
 .wrapApplyModal .wantCampaign {

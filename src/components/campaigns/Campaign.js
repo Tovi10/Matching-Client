@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Spin, Tooltip, Tabs, notification, } from 'antd';
-import { ShareAltOutlined, MailOutlined, CopyOutlined, CopyFilled ,CopyTwoTone, MailTwoTone,} from '@ant-design/icons';
+import { ShareAltOutlined, MailOutlined, CopyOutlined, CopyFilled, CopyTwoTone, MailTwoTone, } from '@ant-design/icons';
 import { numberWithCommas } from '../../services/service';
 import { SpinnerCircularFixed } from 'spinners-react';
 
@@ -126,12 +126,12 @@ export default function Campaign(props) {
                                         </div>
                                         <div>מתוך סכום של {numberWithCommas(campaign.goal)} ₪</div>
                                     </div>
-                                    <div className="col-2" style={{fontSize:'20px'}}>
+                                    <div className="col-2" style={{ fontSize: '20px' }}>
                                         {Math.round(100 / campaign.goal * campaign.goalRaised)}%
                                     </div>
                                 </div>
                                 <div className='row mt-5 d-flex align-items-center clrWhite'>
-                                    <div className='col-9'  style={{fontSize:'20px'}}>
+                                    <div className='col-9' style={{ fontSize: '20px' }}>
                                         {/* {campaign.donations.length ? `עד כה נתרם ${campaign.goalRaised} ₪, על ידי ${campaign.donations.length} תרומות.` : `היה אתה התורם הראשון!`} */}
                                         {campaign.donations.length ? `עד כה נתרם ${numberWithCommas(campaign.goalRaised)} ₪.  ` : `היה אתה התורם הראשון!`}
                                     </div>
@@ -146,7 +146,7 @@ export default function Campaign(props) {
                                             // navigator.clipboard.writeText(`https://matching-try.herokuapp.com/current-campaign/${campaign._id}`);
                                         }}>
                                             <div className='shareIcon'>
-                                                {copy ? <CopyTwoTone twoToneColor="#FAE01A"/> : <CopyFilled/>}
+                                                {copy ? <CopyTwoTone twoToneColor="#FAE01A" /> : <CopyFilled />}
                                             </div>
                                         </Tooltip>
                                         <Tooltip title='מייל'>
