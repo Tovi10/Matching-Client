@@ -5,9 +5,10 @@
 .wrapApplyModal .backgroundAll {
     background-color: rgba(255, 255, 255, 0.6);
     border-radius: 30px;
-    height: 90vh;
-    width: 30vw;
-    margin-right: 3vw;
+    /* height: 90vh; */
+    /* width: 30vw; */
+    /* margin-right: 3vw; */
+    margin: 5%;
 }
 
 .wrapApplyModal .wantCampaign {
@@ -64,6 +65,7 @@
     animation-duration: 1s;
     animation-iteration-count: infinite;
     animation-fill-mode: forwards;
+    padding-bottom: 2vh;
 }
 
 /* .backgroundApplyModal {
@@ -72,4 +74,16 @@
 
 .modal-content {
     background: linear-gradient(to bottom left, rgb(41, 3, 28), rgb(124, 51, 98)) !important;
+}
+
+.ant-form-item-has-error :not(.ant-input-disabled):not(.ant-input-borderless).ant-input, .ant-form-item-has-error :not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper, .ant-form-item-has-error :not(.ant-input-disabled):not(.ant-input-borderless).ant-input:hover, .ant-form-item-has-error :not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {
+    background-color: #e3dce0;
+}
+
+.xCloseImg {
+    width: 3vw;
+    position: absolute;
+    cursor: pointer;
+    top: 3%;
+    left: 3%;
 }
