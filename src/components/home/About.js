@@ -1,5 +1,5 @@
 import React from 'react';
-import ApplyCreateCampaign from '../general/CreateApplyyy';
+import ApplyCreateCampaign from '../general/CreateApply';
 // import "animate.css"
 // import Board from '../campaigns/Note';
 // import Note from '../campaigns/try';
