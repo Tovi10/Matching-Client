@@ -5,7 +5,7 @@ import UpdateGift from './UpdateGift';
 import DeleteGifts from './DeleteGifts';
 
 export default function GiftsManagment() {
-    
+
     const [action, setAction] = useState(null);
 
     return (
@@ -15,8 +15,8 @@ export default function GiftsManagment() {
             <Button onClick={() => setAction('update')}>עריכה</Button>
             <Button onClick={() => setAction('delete')}>מחיקה</Button>
             {action === 'create' && <CreateGift />}
-            {action === 'update' && <UpdateGift/>}
-            {action === 'delete' && <DeleteGifts/>}
+            {action === 'update' && <UpdateGift />}
+            {action === 'delete' && <DeleteGifts />}
         </div>
     )
 }
