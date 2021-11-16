@@ -8,7 +8,7 @@
     /* height: 90vh; */
     /* width: 30vw; */
     /* margin-right: 3vw; */
-    margin: 5%;
+    /* margin: 0.5%; */
     min-height: 85vh;
 }
 
@@ -75,6 +75,8 @@
 
 .modal-content {
     background: linear-gradient(to bottom left, rgb(41, 3, 28), rgb(124, 51, 98)) !important;
+    border-radius: 30px;
+    min-height: 85vh;
 }
 
 .ant-form-item-has-error :not(.ant-input-disabled):not(.ant-input-borderless).ant-input, .ant-form-item-has-error :not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper, .ant-form-item-has-error :not(.ant-input-disabled):not(.ant-input-borderless).ant-input:hover, .ant-form-item-has-error :not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {

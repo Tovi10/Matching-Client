@@ -2,7 +2,6 @@ import React from 'react';
 import {
     Form,
     Input,
-    Button,
 } from 'antd';
 import { Modal } from 'react-bootstrap';
 
@@ -10,7 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/actions';
 import Login from '../login/Login';
 
-import xImg from '../../assets/x.png'
+import xImg from '../../assets/x.png';
+import wantNewCampaignImg from '../../assets/wantNewCampaign.png'
 
 export default function CreateApply() {
 
@@ -34,15 +34,13 @@ export default function CreateApply() {
     return (
         <div className="CreateApply">
             <Modal show={showModal} onHide={handleClose}>
-                {/* <Modal.Header closeButton> */}
-                {/* <Modal.Title>Modal heading</Modal.Title> */}
-                {/* </Modal.Header> */}
                 <Modal.Body>
                     <div className='p-auto wrapApplyModal'>
                         <img className="xCloseImg" src={xImg} onClick={handleClose} />
                         <div className="backgroundAll">
-                            <p className="wantCampaign">רוצה קמפיין</p>
-                            <p className="new">חדש</p>
+                            {/* <p className="wantCampaign">רוצה קמפיין</p>
+                            <p className="new">חדש</p> */}
+                            <img style={{ width: "20vw", marginTop: "10vh" }} src={wantNewCampaignImg} />
                             {user ? <p className="applyNewCampaign">הגשת בקשה לקמפיין חדש</p> : <p className="applyNewCampaign m-5">הרשם כדי להגיש בקשה</p>}
                             {user ?
                                 <Form
@@ -64,7 +62,6 @@ export default function CreateApply() {
                                     >
                                         <Input.TextArea className="inputText" placeholder={`פרט על הקמפיין שברצונך ליצור...`} />
                                     </Form.Item>
-                                    {/* submit */}
                                     <Form.Item className='submitFormItem'>
                                         <button className="btnSend" type="primary" htmlType="submit">שלח</button>
                                     </Form.Item>
@@ -72,14 +69,6 @@ export default function CreateApply() {
                         </div>
                     </div >
                 </Modal.Body>
-                {/* <Modal.Footer> */}
-                {/* <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
-                    </Button> */}
-                {/* </Modal.Footer> */}
             </Modal>
         </div>
     );
