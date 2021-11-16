@@ -10,42 +10,33 @@ import Login from '../login/Login'
 
 
 import { SERVER_URL } from "../../constants"
-import { Redirect, withRouter } from 'react-router';
 const { Step } = Steps;
 
 
 
-// export default
-function Donate(props) {
+export default function Donate(props) {
 
     const { card } = props;
-    const { history } = props;
 
     const dispatch = useDispatch();
 
     const user = useSelector(state => state.userReducer.user);
     const campaign = useSelector(state => state.campaignReducer.campaign);
+    const resetDonate = useSelector(state => state.generalReducer.resetDonate);
 
     const [iframeUrl, setIframeUrl] = useState(null);
 
-    const stam = (x) => {
-        // debugger
-        // if (window.frames[0] && window.frames[0].location && window.frames[0].location.href && window.frames[0].location.href.split('&')[1]) {
-        // console.log("🚀 ~ file: Donate.js ~ line 34 ~ stam ~ window.frames[0]", window.frames[0])
-        // console.log("🚀 ~ file: Donate.js ~ line 34 ~ stam ~ window.frames[0].location", window.frames[0].location)
-        // // console.log("🚀 ~ file: Donate.js ~ line 34 ~ stam ~ window.frames[0].location.href", window.frames[0].location.href)
-        // // console.log("🚀 ~ file: Donate.js ~ line 34 ~ stam ~ window.frames[0].location.href.split('&')[1]", window.frames[0].location.href.split('&')[1])
-        // const s = window.frames[0].location.href.split('&')[1].split('response=')[1]
-        // console.log("🚀 ~ file: Donate.js ~ line 34 ~ stam ~ s", s)
-        // }
-        // https://cgmpi.creditguard.co.il/CGMPI_Server/PerformTransaction?txId=11766abb-f9a9-45a5-adb3-ba8efeadf48f
-        // https://cgmpi.creditguard.co.il/CGMPI_Server/PerformTransaction?txId=11766abb-f9a9-45a5-adb3-ba8efeadf48f
+    const [form] = Form.useForm();
 
-        // http://localhost:3000/thank&response=failure&json=eyJlcnIiOnsiaWQiOi04MiwibWVzc2FnZSI6IteU16LXoden15Qg16nXkdeV16bXoteUINeg15vXqdec15QsICDXoNeQINec16TXoNeV16og15zXnteg15TXnCDXntei16jXm9eqIDMxNDQqIn0sInN0YXR1cyI6IjAiLCJkYXRhIjp7ImlkIjoiMTM3MTMzOTIiLCJwcmV2aW91c19lcnJvciI6eyJpZCI6IjM0MyIsIm1lc3NhZ2UiOiLXoNeQINec16TXoNeV16og15zXnteg15TXnCDXntei16jXm9eqIDMxNDQqIn19fQ==&company_api_extra_details=
-        // history.push('/thank')
-        // <Redirect to={x.target.src} />
 
-    }
+    useEffect(() => {
+        if (resetDonate) {
+            form.resetFields();
+            setIframeUrl(null)
+            dispatch(actions.setResetDonate(false))
+        }
+    }, [resetDonate])
+
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
         axios.post(`${SERVER_URL}/api/donation/clearingCredit`, {
@@ -54,7 +45,8 @@ function Donate(props) {
             fullName: user.name,
             paymentsNum: values.paymentsNum,
             phone: user.phone,
-            sum: card.sum,
+            // sum: card.sum,
+            sum:1,
         }).then(result => {
             setIframeUrl(result.data.url);
             // window.open(result.data.url, "_blank")
@@ -76,6 +68,7 @@ function Donate(props) {
             {user ?
                 !iframeUrl ?
                     <Form onFinish={onFinish}
+                    form={form}
                         labelCol={{
                             span: 10,
                         }}
@@ -109,9 +102,8 @@ function Donate(props) {
                         </Form.Item>
                     </Form>
                     :
-                    <iframe src={iframeUrl} style={{ width: '100%', height: '80%' }} onLoad={stam} />
+                    <iframe src={iframeUrl} style={{ width: '100%', height: '80%' }} />
                 : <Login />}
         </div >
     )
 }
-export default withRouter(Donate);

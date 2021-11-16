@@ -4,13 +4,14 @@ import { actions } from "../actions";
 
 export const createDonation = store => next => action => {
     if (action.type === 'CREATE_DONATION') {
-        axios.post(`${SERVER_URL}/api/donation/createDonation/${store.getState().generalReducer.donationData.campaignId}/${store.getState().userReducer.user.uid}`, store.getState().generalReducer.donationData)
+        // axios.post(`${SERVER_URL}/api/donation/createDonation/${store.getState().generalReducer.donationData.campaignId}/${store.getState().userReducer.user.uid}`, store.getState().generalReducer.donationData)
+        axios.post(`${SERVER_URL}/api/donation/createDonation/${action.payload.campaignId}/${store.getState().userReducer.user.uid}`, action.payload)
             .then(result => {
                 console.log("🚀 ~ file: donation.crud.js ~ line 8 ~ result", result);
-                // store.dispatch(actions.setCurrentNotification('התרומה שלך התווספה בהצלחה!'));
                 store.dispatch(actions.setCampaignFromServer(result.data.campaign));
                 store.dispatch(actions.setAllCampaigns(result.data.allCampaigns));
                 store.dispatch(actions.setUser(result.data.user));
+                store.dispatch(actions.setResetDonate(true))
                 store.getState().socketReducer.socket.emit('newDonation', { room: result.data.campaign._id,donation:result.data.donation });
             })
             .catch(error => {
