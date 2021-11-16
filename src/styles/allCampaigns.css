@@ -36,7 +36,7 @@
 .AllCampaigns .imgBtnNewCapmaign {
     position: fixed;
     top: 75vh;
-    right: 4vw;
+    left: 4vw;
     width: 5vw;
     background-color: white;
     border-radius: 50%;
