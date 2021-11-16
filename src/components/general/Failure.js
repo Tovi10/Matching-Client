@@ -11,7 +11,7 @@ export default function Failure() {
         window.top.postMessage('resetDonation', 'https://matching-try.herokuapp.com/current-campaign/618a66d008342abb8852352e')
     }, [])
     return (
-        <div className='Failure clrWhite' style={{fontSize:'150px'}}>
+        <div className='Failure clrWhite' style={{ fontSize: '150px' }}>
             <img style={{ width: "100vw" }} src={failurImg} />
         </div>
     )
