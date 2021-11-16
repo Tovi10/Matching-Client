@@ -67,6 +67,7 @@ export default function Donate(props) {
             </Steps>
             {user ?
                 !iframeUrl ?
+                <div className='mt-2' style={{height:'100%',paddingTop:'10%'}}>
                     <Form onFinish={onFinish}
                     form={form}
                         labelCol={{
@@ -101,6 +102,7 @@ export default function Donate(props) {
                             <Button type="primary" htmlType="submit">המשך</Button>
                         </Form.Item>
                     </Form>
+                    </div>
                     :
                     <iframe src={iframeUrl} style={{ width: '100%', height: '80%' }} />
                 : <Login />}
