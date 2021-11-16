@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
+import failurImg from '../../assets/donationError.png';
 
 export default function Failure() {
     // const campaignId = useSelector(state => state.campaignReducer.campaign._id)
@@ -11,7 +12,7 @@ export default function Failure() {
     }, [])
     return (
         <div className='Failure clrWhite' style={{fontSize:'150px'}}>
-            failure!
+            <img style={{ width: "100vw" }} src={failurImg} />
         </div>
     )
 }

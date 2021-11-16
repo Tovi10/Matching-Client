@@ -13,6 +13,11 @@ import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import Thank from './Thank';
 import Failure from './Failure';
+import CampaignsManagment from '../management/CampaignsManagment';
+import GiftsManagment from '../management/GiftsManagment';
+import RecruitersManagment from '../management/RecruitersManagment';
+import Applies from '../management/Applies';
+import CardsManagment from '../management/CardsManagment';
 
 
 export default function Routes() {
@@ -35,6 +40,11 @@ export default function Routes() {
                 <Route path="/thank" component={Thank} />
                 <Route path="/failure" component={Failure} />
                 {(admin || (user && user.allowed)) && <Route path="/management" component={BaseManagement} />}
+                {(admin || (user && user.allowed)) && <Route path="/management/campaigns" component={CampaignsManagment} />}
+                {(admin || (user && user.allowed)) && <Route path="/management/gifts" component={GiftsManagment} />}
+                {(admin || (user && user.allowed)) && <Route path="/management/recruiters" component={RecruitersManagment} />}
+                {(admin || (user && user.allowed)) && <Route path="/management/cards" component={CardsManagment} />}
+                {(admin || (user && user.allowed)) && <Route path="/management/applies" component={Applies} />}
                 <Route path="*" component={NotFound} />
             </Switch >
         </div >

@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 
+import thankImg from '../../assets/donationSuccess.png'
+
 export default function Thank() {
 
     useEffect(() => {
@@ -7,8 +9,8 @@ export default function Thank() {
         // window.top.postMessage('resetDonation', 'https://matching-try.herokuapp.com/current-campaign/618a66d008342abb8852352e')
     }, [])
     return (
-        <div className='Thank clrWhite'  style={{fontSize:'150px'}}>
-            thankkkkkkkkkkkk!
+        <div className='Thank clrWhite' style={{ fontSize: '150px' }}>
+            <img style={{ width: "100vw" }} src={thankImg} />
         </div>
     )
 }

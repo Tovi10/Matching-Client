@@ -7,41 +7,48 @@ import CardsManagment from './CardsManagment';
 import GiftsManagment from './GiftsManagment';
 import RecruitersManagment from './RecruitersManagment';
 import { actions } from '../../redux/actions';
+import { withRouter } from 'react-router';
+import { numberWithCommas } from '../../services/service';
 
 
 const { TabPane } = Tabs;
 
 
-export default function BaseManagement() {
+function BaseManagement(props) {
 
+    const { history } = props;
     const dispatch = useDispatch();
-
     const admin = useSelector(state => state.userReducer.admin);
     const allCampaigns = useSelector(state => state.campaignReducer.allCampaigns);
-    
+
     useEffect(() => {
         if (!allCampaigns && admin)
             dispatch(actions.getAllCampaigns())
     }, [])
 
+    const selectManage = (e) => {
+        const indexManageRoute = ["campaigns", "cards", "recruiters", "gifts", "applies"]
+        history.push(`/management/${indexManageRoute[Number(e)]}`);
+    }
+
     return (
         <div className='BaseManagement'>
-            <Tabs defaultActiveKey="1" tabPosition='left' className='clrWhite' animated={false} >
-                <TabPane tab="קמפיינים" key="1">
+            <Tabs defaultActiveKey="0" tabPosition='left' onChange={e => selectManage(e)} className='clrWhite' animated={false} >
+                <TabPane tab="קמפיינים" key="0">
                     <CampaignsManagment />
                 </TabPane>
-                <TabPane tab="כרטיסים" key="2">
+                <TabPane tab="כרטיסים" key="1" >
                     <CardsManagment />
                 </TabPane>
-                <TabPane tab="מגייסים" key="3">
+                <TabPane tab="מגייסים" key="2">
                     <RecruitersManagment />
                 </TabPane>
                 {admin &&
                     <>
-                        <TabPane tab="מתנות" key="4">
+                        <TabPane tab="מתנות" key="3" >
                             <GiftsManagment />
                         </TabPane>
-                        <TabPane tab="בקשות" key="5">
+                        <TabPane tab="בקשות" key="4" >
                             <Applies />
                         </TabPane>
                     </>}
@@ -49,3 +56,5 @@ export default function BaseManagement() {
         </div>
     )
 }
+
+export default withRouter(BaseManagement);

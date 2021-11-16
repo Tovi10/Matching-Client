@@ -6,7 +6,7 @@ import { UserOutlined } from '@ant-design/icons';
 import UserProfile from '../campaigns/UserProfile';
 import Login from '../login/Login';
 
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logoWhite.png'
 import profileInNav from '../../assets/profileInNav.svg'
 import allCampaigns from '../../assets/allCampaigns.svg'
 
