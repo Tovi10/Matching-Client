@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import failurImg from '../../assets/donationError.png';
 
 export default function Failure() {
+    // const campaignId = useSelector(state => state.campaignReducer.campaign._id)
+    useEffect(() => {
+        console.log(window.location.pathname);
+        // console.log("🚀 ~ file: Failure.js ~ line 7 ~ Failure ~ campaignId FROM IFRAME", campaignId)
+        window.top.postMessage('resetDonation', 'https://matching-try.herokuapp.com/current-campaign/618a66d008342abb8852352e')
+    }, [])
     return (
-        <div className='Failure'>
-            <img style={{ width: "100vw", position: 'absolute', top: '0%', right: '0%' }} src={failurImg} />
+        <div className='Failure clrWhite' style={{ fontSize: '150px' }}>
+            <img style={{ width: "100vw" }} src={failurImg} />
         </div>
     )
 }

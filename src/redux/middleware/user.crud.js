@@ -9,7 +9,7 @@ export const getUserByUid = store => next => action => {
                 console.log("🚀 ~ file: user.crud.js ~ line 8 ~ result", result);
                 store.dispatch(actions.setUser(result.data));
                 if (!result.data)
-                    store.dispatch(actions.setCurrentNotification('משתמש לא קיים!'))
+                    store.dispatch(actions.setCurrentNotification('נסה להתחבר שוב!'))
 
             })
             .catch(error => {

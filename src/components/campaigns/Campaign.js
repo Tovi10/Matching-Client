@@ -26,7 +26,6 @@ export default function Campaign(props) {
     const [index, setIndex] = useState(1);
 
     useEffect(() => {
-        debugger
         console.log("🚀 ~ file: Campaign.js ~ line 31 ~ Campaign ~ donationData", donationData)
     }, [donationData])
 
@@ -48,6 +47,11 @@ export default function Campaign(props) {
     useEffect(() => {
         window.onmessage = function (e) {
             if (e.data == 'createDonation') {
+                // alert('It works!');
+                // dispatch(actions.createDonation({ ...values, campaignId: campaign._id, user: user._id, card: card._id, date: moment(new Date()).format('DD/MM/YYYY a h:mm:ss ') + "" }));
+                dispatch(actions.createDonation(donationData));
+            }
+            if (e.data == 'resetDonation') {
                 // alert('It works!');
                 // dispatch(actions.createDonation({ ...values, campaignId: campaign._id, user: user._id, card: card._id, date: moment(new Date()).format('DD/MM/YYYY a h:mm:ss ') + "" }));
                 dispatch(actions.createDonation(donationData));

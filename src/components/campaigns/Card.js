@@ -20,7 +20,7 @@ export default function Card(props) {
                     setOpenModal(true)
             }}>
                 {card && <div className={`card-body ${card.gift.numOfUsed >= card.gift.amount ? 'watermark notSelected' : ''}`}>
-                {/* {card && <div className={`card-body watermark notSelected`}> */}
+                    {/* {card && <div className={`card-body watermark notSelected`}> */}
                     <div className='d-flex align-items-center justify-content-center '>
                         {/* <GiftOutlined /> */}
                         <h3>{`${card.sum} ₪`}</h3>
@@ -36,14 +36,15 @@ export default function Card(props) {
                 </div>}
             </div>
             <Modal footer={false}
-             title={`תרום ${card.sum} ₪ וקבל ${card.gift ? card.gift.name : 'אין שם למתנה'}`}
-            width={800}
-            bodyStyle={{height:'85vh'}}
-            centered={true}
-            style={{textAlign:'center'}}
-            visible={openModal} onCancel={() => setOpenModal(false)}>
+                title={`תרום ${card.sum} ₪ וקבל ${card.gift ? card.gift.name : 'אין שם למתנה'}`}
+                width={800}
+                bodyStyle={{ height: '85vh' }}
+                centered={true}
+                style={{ textAlign: 'center' }}
+                visible={openModal}
+                onCancel={() => setOpenModal(false)}>
                 {/* {user ? <Donate card={card} close={() => setOpenModal(false)} /> : <Login />} */}
-                <Donate card={card} close={() => setOpenModal(false)}/>
+                <Donate card={card} close={() => setOpenModal(false)} />
             </Modal>
         </div >
     )
