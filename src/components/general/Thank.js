@@ -10,7 +10,7 @@ export default function Thank() {
 
     return (
         <div className='Thank'>
-            <img style={{ width: "100vw" }} src={thankImg} />
+            <img style={{ width: "100vw", position: 'absolute', top: '0%', right: '0%' }} src={thankImg} />
         </div>
     )
 }
