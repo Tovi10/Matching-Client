@@ -4,10 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// import './assets/fonts/Heebo/Heebo-VariableFont_wght.ttf';
+import './assets/fonts/Heebo/static/Heebo-Medium.ttf';
+
 ReactDOM.render(
   // <React.StrictMode>
   // </React.StrictMode>,
-    <App />,
+  <App />,
   document.getElementById('root')
 );
 

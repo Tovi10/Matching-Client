@@ -41,7 +41,6 @@ div.note:active {
 div.note p {
     font-size: 22px;
     padding: 5px;
-    font-family: 'Shadows Into Light', 'Tangerine', Arial;
 }
 
 div.note:hover>span {
