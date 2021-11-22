@@ -222,10 +222,6 @@ body {
   width: 80%;
 }
 
-/* h1 {
-  font-family:monospace;
-} */
-
 @keyframes slide {
   0% {
     transform: translateX(-25%);
@@ -234,17 +230,18 @@ body {
     transform: translateX(25%);
   }
 }
+
 /* end bg */
 
-
-.rtlColumn{
+.rtlColumn {
   direction: rtl !important;
 }
 
 .watermark {
   position: relative;
-  cursor:not-allowed;
+  cursor: not-allowed;
 }
+
 .watermark::after {
   content: 'אזל!';
   position: absolute;
@@ -253,45 +250,37 @@ body {
   font-size: 6em;
   color: red;
   top: 15%;
-
   /* rotate */
   transform: rotate(-60deg);
-
-
   /* Legacy vendor prefixes that you probably don't need... */
-
   /* Safari */
   -webkit-transform: rotate(-60deg);
-
   /* Firefox */
   -moz-transform: rotate(-60deg);
-
   /* IE */
   -ms-transform: rotate(-60deg);
-
   /* Opera */
   -o-transform: rotate(-60deg);
-
   /* Internet Explorer */
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
-.mySlides{
+.mySlides {
   display: none;
 }
 
-.arrowSlide{
-    /* background: #000000;
+.arrowSlide {
+  /* background: #000000;
     color: #fff;
     border:solid 1px #000000; */
-    padding: 5px;
-    color: #000000;
+  padding: 5px;
+  color: #000000;
 }
 
-.ant-popover-buttons{
+.ant-popover-buttons {
   text-align: left !important;
 }
 
-.clrWhite{
+.clrWhite {
   color: #FFFF;
-  }
+}

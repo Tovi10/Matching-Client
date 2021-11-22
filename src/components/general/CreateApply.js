@@ -38,9 +38,7 @@ export default function CreateApply() {
                     <div className='p-auto wrapApplyModal'>
                         <img className="xCloseImg" src={xImg} onClick={handleClose} />
                         <div className="backgroundAll">
-                            {/* <p className="wantCampaign">רוצה קמפיין</p>
-                            <p className="new">חדש</p> */}
-                            <img style={{ width: "20vw", marginTop: "10vh" }} src={wantNewCampaignImg} />
+                            <img style={{ width: "18vw", marginTop: "9vh" }} src={wantNewCampaignImg} />
                             {user ? <p className="applyNewCampaign">הגשת בקשה לקמפיין חדש</p> : <p className="applyNewCampaign m-5">הרשם כדי להגיש בקשה</p>}
                             {user ?
                                 <Form

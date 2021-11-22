@@ -5,30 +5,7 @@
 .wrapApplyModal .backgroundAll {
     background-color: rgba(255, 255, 255, 0.6);
     border-radius: 30px;
-    /* height: 90vh; */
-    /* width: 30vw; */
-    /* margin-right: 3vw; */
-    /* margin: 0.5%; */
     min-height: 85vh;
-}
-
-.wrapApplyModal .wantCampaign {
-    color: #45022D;
-    font-size: 45px;
-    letter-spacing: -2px;
-    word-spacing: 0px;
-    margin-bottom: 2vh;
-    padding-top: 7.5vh;
-}
-
-.wrapApplyModal .new {
-    color: #45022D;
-    font-weight: bolder;
-    font-size: 85px;
-    letter-spacing: 200px;
-    word-spacing: normal;
-    line-height: 0px;
-    text-decoration: underline #FAE01A;
 }
 
 .wrapApplyModal .applyNewCampaign {
@@ -37,12 +14,12 @@
     font-size: 20px;
     letter-spacing: normal;
     word-spacing: normal;
-    line-height: 20px;
+    line-height: 18px;
 }
 
 .wrapApplyModal .inputText {
-    width: 20vw !important;
-    height: 35vh !important;
+    width: 19vw !important;
+    height: 33vh !important;
     background-color: #e3dce0;
 }
 
@@ -66,17 +43,14 @@
     animation-duration: 1s;
     animation-iteration-count: infinite;
     animation-fill-mode: forwards;
-    padding-bottom: 2vh;
+    padding-bottom: 1.3vh;
 }
-
-/* .backgroundApplyModal {
-    background-image: linear-gradient(to bottom left, rgb(41, 3, 28), rgb(124, 51, 98));
-} */
 
 .modal-content {
     background: linear-gradient(to bottom left, rgb(41, 3, 28), rgb(124, 51, 98)) !important;
     border-radius: 30px;
     min-height: 85vh;
+    width: 35vw;
 }
 
 .ant-form-item-has-error :not(.ant-input-disabled):not(.ant-input-borderless).ant-input, .ant-form-item-has-error :not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper, .ant-form-item-has-error :not(.ant-input-disabled):not(.ant-input-borderless).ant-input:hover, .ant-form-item-has-error :not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper:hover {
@@ -87,6 +61,6 @@
     width: 3vw;
     position: absolute;
     cursor: pointer;
-    top: 3%;
-    left: 3%;
+    top: 4%;
+    left: 4%;
 }
