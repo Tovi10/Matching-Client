@@ -71,20 +71,6 @@
   transform-origin: 30% 3em;
 }
 
-.customForm {
-  /* height: 73vh; */
-  /* overflow-y: auto; */
-  /* overflow-x: hidden; */
-}
-
-.wrapForm {
-  /* height: 80vh; */
-  /* box-shadow: 0 15px 25px rgba(0,0,0,.6); */
-  border-radius: 10px;
-  /* background: #FAE01A33; */
-  background-color: #FFFF;
-}
-
 .createCampaignTxt {
   height: 5vh;
   font-size: 16px;

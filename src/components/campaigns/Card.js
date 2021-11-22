@@ -10,9 +10,12 @@ export default function Card(props) {
 
     const { card } = props;
     const dispatch = useDispatch();
-    const user = useSelector(state => state.userReducer.user);
 
     const [openModal, setOpenModal] = useState(false);
+
+    const closeModal=()=>{
+        setOpenModal(false);
+    }
     return (
         <div className='Card row'>
             <div className="card col-12 mb-2" style={{ width: "18rem" }} onClick={() => {
@@ -42,9 +45,8 @@ export default function Card(props) {
                 centered={true}
                 style={{ textAlign: 'center' }}
                 visible={openModal}
-                onCancel={() => setOpenModal(false)}>
-                {/* {user ? <Donate card={card} close={() => setOpenModal(false)} /> : <Login />} */}
-                <Donate card={card} close={() => setOpenModal(false)} />
+                onCancel={closeModal}>
+                <Donate card={card} close={closeModal} />
             </Modal>
         </div >
     )

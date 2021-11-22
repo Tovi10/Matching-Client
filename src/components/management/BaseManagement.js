@@ -10,7 +10,6 @@ import { actions } from '../../redux/actions';
 import { withRouter } from 'react-router';
 import { numberWithCommas } from '../../services/service';
 
-
 const { TabPane } = Tabs;
 
 

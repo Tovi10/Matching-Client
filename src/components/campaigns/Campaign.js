@@ -47,14 +47,10 @@ export default function Campaign(props) {
     useEffect(() => {
         window.onmessage = function (e) {
             if (e.data == 'createDonation') {
-                // alert('It works!');
-                // dispatch(actions.createDonation({ ...values, campaignId: campaign._id, user: user._id, card: card._id, date: moment(new Date()).format('DD/MM/YYYY a h:mm:ss ') + "" }));
                 dispatch(actions.createDonation(donationData));
             }
             if (e.data == 'resetDonation') {
-                // alert('It works!');
-                // dispatch(actions.createDonation({ ...values, campaignId: campaign._id, user: user._id, card: card._id, date: moment(new Date()).format('DD/MM/YYYY a h:mm:ss ') + "" }));
-                dispatch(actions.createDonation(donationData));
+                dispatch(actions.setResetDonate(true))
             }
         };
         if (!campaign) {
@@ -171,10 +167,14 @@ export default function Campaign(props) {
                                                 {/* NOTE SERVER */}
                                                 {/* <MailOutlined onClick={() => window.open(`https://mail.google.com/mail/u/0/?fs=1&su=1&body=https://matching-try.herokuapp.com/current-campaign/${campaign._id}&tf=cm`, '_blank')} /> */}
                                                 {/* <MailOutlined onClick={() => window.open(`https://mail.google.com/mail/u/0/?fs=1&su=1&body=http://3000/current-campaign/${campaign._id}&tf=cm`, '_blank')} /> */}
-                                                <MailTwoTone twoToneColor="#FAE01A" onClick={() => window.open(`https://mail.google.com/mail/u/0/?fs=1&su=1&body=שלום 
+                                                <MailTwoTone twoToneColor="#FAE01A" onClick={() => window.open(`https://mail.google.com/mail/u/0/?fs=1&su=גיפטמאצ'&body=שלום,
+%0A
 רוצה לתרום לקמפיין שלנו?
+%0A
 הכנס כאן לקישור:
+%0A
 https://matching-try.herokuapp.com/${campaign._id}
+%0A
 ותזכה בזכויות!! ובמתנות שוות!!
 &tf=cm`, '_blank')} />
                                                 {/* <MailOutlined onClick={() => window.open(`https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&subject=תרום%20CALL%20לקמפיין&body=שלום%2C%0A%0AI%20tried%20contacting%20you%20today%20but%20you%20seem%20to%20have%20missed%20my%20call.%20%0A%0APlease%20return%20my%20call%20as%20soon%20as%20you%E2%80%99re%20available.%20%0A%0AIn%20any%20case%2C%20I%20will%20try%20ringing%20you%20at%20a%20later%20time.%0A%0A%0ATy%2C%0A%0A%0A%0A`, '_blank')} /> */}

@@ -65,37 +65,6 @@ function LiveCampaigns(props) {
                         </div>
                     </div>
                 ))}
-                {liveCampaigns && liveCampaigns.map(campaign => (
-                    <div key={campaign._id} style={{width:'30%',margin:'0% 1.65%'}} className="col-4 d-flex align-items-center justify-content-center"
-                        onClick={() => { selectCampaign(campaign) }}
-                        onMouseEnter={() => setIsCampaignHover(campaign._id)}
-                        onMouseLeave={() => setIsCampaignHover(null)}
-                    >
-                        <div className={`shadow mb-5 bg-body card liveCampaignCard`}                            >
-                            <div style={{ backgroundImage: campaign.images[0] ? `url(${campaign.images[0]})` : 'linear-gradient(to right, rgb(124, 51, 98), rgb(41, 3, 28))' }}
-                                className={`cardImg card-img-top ${isCampaignHover === campaign._id ? 'hoverCampaign' : ''}`} alt="..." >
-                                {isCampaignHover === campaign._id &&
-                                    <div className='d-flex flex-column px-2' style={{ textAlign: 'left', color: '#45022D' }}>
-                                        <div className='' style={{ paddingTop: '20%', fontSize: '20px', fontWeight: 'bold' }}>
-                                            <div className="">{campaign.company.companyName}</div>
-                                        </div>
-                                        <div style={{ paddingTop: '5%' }}>
-                                            <div style={{ fontSize: '16px' }}>{campaign.campaignName}</div>
-                                            <div>{campaign.purposeOfCollecting}</div>
-                                        </div>
-                                        <div style={{ paddingTop: '5%' }}>
-                                            <div style={{ fontSize: '16px' }}>יעד:  {numberWithCommas(campaign.goal)} ₪</div>
-                                            <div>עד כה גויס:  {numberWithCommas(campaign.goalRaised)} ₪</div>
-                                        </div>
-                                        <div className="progress">
-                                            {campaign.goal ? <Progress percent={Math.round(100 / campaign.goal * campaign.goalRaised)} /> : <Progress percent={0} />}
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                ))}
                 <div className='aaa r-link link text-underlined' style={{color:'#FAE01A',fontSize:'30px',fontWeight:'bolder'}}>לכל הקמפיינים</div>
                 <div className='d-flex justify-content-center'>
                     {allCompanies && allCompanies.map(company => (
