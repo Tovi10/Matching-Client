@@ -15,7 +15,6 @@
 .navbar-brand {
     margin: unset !important;
     color: #FAE01A !important;
-    font-size: 20px;
     z-index: 3;
 }
 
@@ -38,6 +37,10 @@
     color: #FFFF;
 }
 
-.profileInNav{
+.profileInNav {
     margin-right: 1%;
+}
+
+.Nav a {
+    font-size: large;
 }
