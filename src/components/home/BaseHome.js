@@ -25,7 +25,7 @@ export default function BaseHome() {
     return (
         <div className='BaseHome'>
             <img className="donationWorthImg" src={yourDonationWorthMoreImg} />
-            <p className="homeText ">סתם משפט שאני רוצה לשים מתחת למשפט הזה כדי שיהיה יפה.</p>
+            <p className="homeText ">תורמים וזוכים במתנות שוות!</p>
             {allCampaigns ? <LiveCampaigns /> : ""}
         </div>
     )

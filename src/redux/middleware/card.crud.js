@@ -40,7 +40,7 @@ export const updateCard = store => next => action => {
 
 export const deleteCard = store => next => action => {
     if (action.type === 'DELETE_CARD') {
-        debugger
+         
         axios.delete(`${SERVER_URL}/api/card/deleteCard/${action.payload.card._id}/${store.getState().userReducer.user.uid}/${action.payload.card.gift._id}/${action.payload.campaignId}`)
             .then(result => {
                 console.log("🚀 ~ file: card.crud.js ~ line 43 ~ result", result)

@@ -74,10 +74,10 @@ export const getAllGifts = store => next => action => {
 
 export const deleteGift = store => next => action => {
     if (action.type === 'DELETE_GIFT') {
-        debugger
+         
         axios.delete(`${SERVER_URL}/api/gift/deleteGift/${action.payload._id}`)
             .then(result => {
-                debugger
+                 
                 console.log("🚀 ~ file: gift.crud.js ~ line 77 ~ result", result)
                 store.dispatch(actions.setAllGifts(result.data))
                 if (action.payload.image) {

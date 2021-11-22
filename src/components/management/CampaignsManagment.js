@@ -8,17 +8,20 @@ import whatToDoImg from '../../assets/whatToDo.png';
 
 export default function CampaignsManagment() {
 
-    const [action, setAction] = useState(null);
+	const [action, setAction] = useState(null);
 
-    return (
-        <div className='CampaignsManagment'>
-            <img style={{ width: '35vw', margin: 'auto', display: 'block' }} src={whatToDoImg} />
-            <Button onClick={() => setAction('create')}>יצירה</Button>
-            <Button onClick={() => setAction('update')}>עריכה</Button>
-            <Button onClick={() => setAction('delete')}>מחיקה</Button>
-            {action === 'create' && <CreateCampaign />}
-            {action === 'update' && <UpdateCampaign />}
-            {action === 'delete' && <DeleteCampaigns />}
-        </div>
-    )
+	return (
+		<div classNameName='CampaignsManagment'>
+			<img style={{ width: '35vw', margin: 'auto', display: 'block' }} src={whatToDoImg} />
+			<div className='row'>
+				<Button className='col' onClick={() => setAction('create')}>יצירה</Button>
+				<Button className='col' onClick={() => setAction('update')}>עריכה</Button>
+				<Button className='col' onClick={() => setAction('delete')}>מחיקה</Button>
+			</div>
+			{action === 'create' && <CreateCampaign />}
+			{action === 'update' && <UpdateCampaign />}
+			{action === 'delete' && <DeleteCampaigns />}
+		</div>
+
+	)
 }

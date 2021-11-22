@@ -5,12 +5,15 @@ import thankImg from '../../assets/donationSuccess.png'
 export default function Thank() {
 
     useEffect(() => {
-        window.top.postMessage('createDonation', 'https://matching-try.herokuapp.com/current-campaign/618a66d008342abb8852352e')
-        // window.top.postMessage('resetDonation', 'https://matching-try.herokuapp.com/current-campaign/618a66d008342abb8852352e')
+         
+        window.top.postMessage('createDonation', window.parent.location.href)
+        document.body.className = "backgroundThankImage";
+        document.getElementsByClassName('App')[0].classList.remove("APP1");
+        return () => {
+            document.body.classList.remove("backgroundThankImage");
+            document.getElementsByClassName("App")[0].classList.add("APP1");
+        };
     }, [])
-    return (
-        <div className='Thank clrWhite' style={{ fontSize: '150px' }}>
-            <img style={{ width: "100vw" }} src={thankImg} />
-        </div>
-    )
+
+    return (<></>)
 }
