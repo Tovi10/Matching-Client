@@ -126,7 +126,6 @@ export default function UpdateCampaign() {
         if (!toUploadArray.length) {
             const updateCampaign = { ...campaign, ...values, duration: [moment(values.duration[0].toString()).format("DD/MM/YYYY"), moment(values.duration[1].toString()).format("DD/MM/YYYY")], images: imagePaths }
             dispatch(actions.updateCampaign(updateCampaign));
-            // setSpining(false);
         }
         // upload the news
         const storageRef = firebase.storage().ref();
@@ -139,22 +138,20 @@ export default function UpdateCampaign() {
             if (imagePaths.length === imagesFiles.length) {
                 const updateCampaign = { ...campaign, ...values, duration: [moment(values.duration[0].toString()).format("DD/MM/YYYY"), moment(values.duration[1].toString()).format("DD/MM/YYYY")], images: imagePaths }
                 dispatch(actions.updateCampaign(updateCampaign));
-                // setSpining(false);
-
             }
         });
     }
 
 
     return (
-        <div className='UpdateCampaign'>
+        <div className='UpdateCampaign mt-3'>
             <Spin size='large' spinning={spining}>
                 <div>
                     <Select
                         size='large'
                         allowClear
                         showSearch
-                        style={{ textAlign: 'right' }}
+                        style={{ textAlign: 'right' ,width:'96%'}}
                         dropdownStyle={{ textAlign: 'right' }}
                         onChange={choose}
                         onClear={()=>{form.resetFields();removeAll()}}
@@ -281,7 +278,7 @@ export default function UpdateCampaign() {
                             style={{ display: 'inline-block', width: 'calc(100% - 8px)', marginLeft: '8px' }}
                             className='submitFormItem'>
                             <Button size='large' type="primary" htmlType="submit" className='btnSubmit'>
-                                SAVE                    </Button>
+                                ערוך קמפיין                    </Button>
                         </Form.Item>
                     </Form>
                 </div>

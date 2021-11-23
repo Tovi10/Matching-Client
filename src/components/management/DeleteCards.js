@@ -81,11 +81,11 @@ export default function DeleteCards() {
 
     ];
     return (
-        <div className='DeleteCards'>
-            <h6>כאן מוצגים רק הכרטיסים שעוד לא השתמשו בהם</h6>
+        <div className='DeleteCards mt-3'>
+            <h6 className='clrWhite'>כאן מוצגים רק הכרטיסים שעוד לא השתמשו בהם.</h6>
             <Form
                 wrapperCol={{
-                    span: 20,
+                    span: 24,
                 }}
                 form={form}>
                 {/* campaign */}
@@ -99,6 +99,7 @@ export default function DeleteCards() {
                     ]}
                 >
                     <Select
+                    size='large'
                         allowClear
                         showSearch
                         onChange={choose}

@@ -45,9 +45,12 @@ export default function UpdateCard() {
         setSpining(true)
     };
     const chooseCampaign = (campaignId) => {
-        const cardsObj = allCampaigns.find(c => c._id === campaignId).cards;
+        const campaignObj = allCampaigns.find(c => c._id === campaignId);
+        if(campaignObj){
+        const cardsObj = campaignObj.cards;
         console.log("🚀 ~ file: UpdateCard.js ~ line 36 ~ choose ~ cardsObj", cardsObj)
         setCards(cardsObj)
+        }
     }
 
     const chooseCard = (cardId) => {
@@ -57,12 +60,11 @@ export default function UpdateCard() {
 
 
     return (
-        <div className='p-auto UpdateCard'>
-            <h1>עריכת כרטיס</h1>
+        <div className='UpdateCard mt-3'>
             <Spin size='large' spinning={spining}>
             <Form
                 wrapperCol={{
-                    span: 20,
+                    span: 24,
                 }}
                 form={form}
                 name="updateCard"
@@ -79,6 +81,7 @@ export default function UpdateCard() {
                     ]}
                 >
                     <Select
+                    size='large'
                         allowClear
                         showSearch
                         onChange={chooseCampaign}
@@ -104,6 +107,7 @@ export default function UpdateCard() {
                     ]}
                 >
                     <Select
+                    size='large'
                         allowClear
                         showSearch
                         // options={cards && cards.map(card => {
@@ -130,6 +134,7 @@ export default function UpdateCard() {
                     ]}
                 >
                     <Select
+                    size='large'
                         allowClear
                         showSearch
                         style={{ textAlign: 'right' }}
@@ -151,15 +156,15 @@ export default function UpdateCard() {
                         },
                     ]}
                 >
-                    <Input type='number' placeholder={`הכנס כאן את סכום התרומה...`} />
+                    <Input size='large' type='number' placeholder={`הכנס כאן את סכום התרומה...`} />
                 </Form.Item>
                 {/* text */}
                 <Form.Item name="text">
-                    <Input placeholder={`הכנס כאן את שם הכרטיס...`} />
+                    <Input size='large' placeholder={`הכנס כאן את שם הכרטיס...`} />
                 </Form.Item>
                 {/* submit */}
                 <Form.Item className='submitFormItem'>
-                    <Button type="primary" htmlType="submit">
+                <Button size='large' type="primary" htmlType="submit" className='btnSubmit'>
                         עריכת כרטיס
                     </Button>
                 </Form.Item>

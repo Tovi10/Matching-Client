@@ -40,14 +40,10 @@ export default function CreateCard() {
     };
 
     return (
-        <div className='p-auto CreateCard'>
-            <h1>יצירת כרטיס</h1>
+        <div className='CreateCard mt-3'>
             <Form
-                labelCol={{
-                    span: 10,
-                }}
                 wrapperCol={{
-                    span: 14,
+                    span: 24,
                 }}
                 form={form}
                 name="CreateCard"
@@ -64,6 +60,7 @@ export default function CreateCard() {
                     ]}
                 >
                     <Select
+                    size='large'
                         allowClear
                         showSearch
                         // options={allCampaigns && allCampaigns.map(campaign => {
@@ -91,6 +88,7 @@ export default function CreateCard() {
                     ]}
                 >
                     <Select
+                    size='large'
                         allowClear
                         showSearch
                         // options={allGifts && allGifts.map(gift => {
@@ -115,17 +113,17 @@ export default function CreateCard() {
                         },
                     ]}
                 >
-                    <Input type='number' placeholder={`הכנס כאן את סכום התרומה...`} />
+                    <Input size='large' type='number' placeholder={`הכנס כאן את סכום התרומה...`} />
                 </Form.Item>
                 {/* text */}
                 <Form.Item
                     name="text"
                 >
-                    <Input placeholder={`הכנס כאן את שם הכרטיס...`} />
+                    <Input size='large' placeholder={`הכנס כאן את שם הכרטיס...`} />
                 </Form.Item>
                 {/* submit */}
                 <Form.Item className='submitFormItem'>
-                    <Button type="primary" htmlType="submit">
+                    <Button size='large' type="primary" htmlType="submit" className='btnSubmit'>
                         יצירת כרטיס
                     </Button>
                 </Form.Item>

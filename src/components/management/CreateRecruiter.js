@@ -36,14 +36,10 @@ export default function CreateRecruiter() {
     };
 
     return (
-        <div className='p-auto CreateRecruiter'>
-            <h1>יצירת מגייס</h1>
+        <div className='CreateRecruiter mt-3'>
             <Form
-                labelCol={{
-                    span: 4,
-                }}
                 wrapperCol={{
-                    span: 20,
+                    span: 24,
                 }}
                 form={form}
                 // name="CreateRecruiter"
@@ -60,6 +56,7 @@ export default function CreateRecruiter() {
                     ]}
                 >
                     <Select
+                    size='large'
                         allowClear
                         showSearch
                         options={admin ? (
@@ -85,7 +82,7 @@ export default function CreateRecruiter() {
                         },
                     ]}
                 >
-                    <Input type='number' placeholder={`הכנס כאן את סכום התרומה...`} />
+                    <Input size='large' type='number' placeholder={`הכנס כאן את סכום התרומה...`} />
                 </Form.Item>
                 {/* name */}
                 <Form.Item
@@ -93,18 +90,18 @@ export default function CreateRecruiter() {
                     rules={[{ required: true, message: 'הכנס שם!' }]}
 
                 >
-                    <Input placeholder={`הכנס כאן את שם המגייס לתצוגה...`} />
+                    <Input size='large' placeholder={`הכנס כאן את שם המגייס לתצוגה...`} />
                 </Form.Item>
                 {/* emil */}
                 <Form.Item
                     name="email"
                     rules={[{ required: true, message: 'הכנס מייל!' }]}
                 >
-                    <Input type='email' placeholder="מייל" />
+                    <Input size='large' type='email' placeholder="מייל" />
                 </Form.Item>
                 {/* submit */}
                 <Form.Item className='submitFormItem'>
-                    <Button type="primary" htmlType="submit">
+                <Button size='large' type="primary" htmlType="submit" className='btnSubmit'>
                         יצירת מגייס
                     </Button>
                 </Form.Item>

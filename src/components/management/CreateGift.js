@@ -64,15 +64,11 @@ export default function CreateGift() {
 
 
     return (
-        <div className='p-auto CreateGift'>
-            <h1>יצירת מתנה</h1>
+        <div className='CreateGift mt-3'>
             <Spin size='large' spinning={spining}>
                 <Form
-                    labelCol={{
-                        span: 4,
-                    }}
                     wrapperCol={{
-                        span: 20,
+                        span: 24,
                     }}
                     form={form}
                     name="CreateGift"
@@ -88,7 +84,7 @@ export default function CreateGift() {
                             },
                         ]}
                     >
-                        <Input placeholder={`הכנס כאן את שם המתנה...`} />
+                        <Input size='large' placeholder={`הכנס כאן את שם המתנה...`} />
                     </Form.Item>
                     {/* advertising */}
                     <Form.Item
@@ -100,7 +96,7 @@ export default function CreateGift() {
                             },
                         ]}
                     >
-                        <Input placeholder={`הכנס כאן את תאור המתנה...`} />
+                        <Input size='large' placeholder={`הכנס כאן את תאור המתנה...`} />
                     </Form.Item>
                     {/* image */}
                     <Form.Item
@@ -132,16 +128,14 @@ export default function CreateGift() {
                             },
                         ]}
                     >
-                        <Input type='number' placeholder={`הכנס כאן את מחיר המתנה...`} />
+                        <Input size='large' type='number' placeholder={`הכנס כאן את מחיר המתנה...`} />
                     </Form.Item>
                     {/* amount */}
-                    <Form.Item
-                        name="amount"
-                    >
-                        <Input type='number' placeholder={`הכנס כאן את כמות המתנה...`} />
+                    <Form.Item name="amount">
+                        <Input size='large' type='number' placeholder={`הכנס כאן את כמות המתנה...`} />
                     </Form.Item>
                     <Form.Item>
-                        <Checkbox checked={coupon} onChange={() => setCoupon(!coupon)}>שובר</Checkbox>
+                        <Checkbox className='clrWhite' checked={coupon} onChange={() => setCoupon(!coupon)}>שובר</Checkbox>
                     </Form.Item>
                     {coupon &&
                         <Form.Item
@@ -156,11 +150,11 @@ export default function CreateGift() {
                                     message: `הכנס מייל!`,
                                 },
                             ]}>
-                            <Input placeholder='הכנס מייל אליו ישלחו פרטי מקבלי השוברים' />
+                            <Input size='large' placeholder='הכנס מייל אליו ישלחו פרטי מקבלי השוברים' />
                         </Form.Item>}
                     {/* submit */}
                     <Form.Item className='submitFormItem'>
-                        <Button type="primary" htmlType="submit">
+                        <Button size='large' type="primary" htmlType="submit" className='btnSubmit'>
                             יצירת מתנה
                         </Button>
                     </Form.Item>

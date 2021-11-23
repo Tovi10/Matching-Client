@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Table, Button, Spin, Popconfirm, Form, Select, Tooltip, Avatar, } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../../redux/actions';
-import { firebase } from '../../services/firebase.service';
-import moment from 'moment';
 
 export default function DeleteRecruiters() {
 
@@ -82,11 +80,11 @@ export default function DeleteRecruiters() {
         },
     ];
     return (
-        <div className='DeleteRecruiters'>
-            <h6>כאן מוצגים רק המגייסים שעוד לא תרמו להם</h6>
+        <div className='DeleteRecruiters mt-3'>
+            <h6 className='clrWhite'>כאן מוצגים רק המגייסים שעוד לא תרמו להם.</h6>
             <Form
                 wrapperCol={{
-                    span: 20,
+                    span: 24,
                 }}
                 form={form}>
                 {/* campaign */}
@@ -100,6 +98,7 @@ export default function DeleteRecruiters() {
                     ]}
                 >
                     <Select
+                    size='large'
                         allowClear
                         showSearch
                         onChange={choose}

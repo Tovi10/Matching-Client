@@ -101,8 +101,8 @@ export default function DeleteCampaigns() {
 
     ];
     return (
-        <div className='DeleteCampaigns'>
-            <h6>כאן מוצגים רק הקמפיינים שעוד לא תרמו להם</h6>
+        <div className='DeleteCampaigns mt-3'>
+            <h6 className='clrWhite'>כאן מוצגים רק הקמפיינים שעוד לא תרמו להם.</h6>
             <Spin size='large' spinning={!campaigns}>
                 <Table dataSource={campaigns} columns={columns}
                     rowKey={campaign => campaign._id}

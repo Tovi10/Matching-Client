@@ -10,7 +10,6 @@ export const createDonation = store => next => action => {
                 store.dispatch(actions.setCampaignFromServer(result.data.campaign));
                 store.dispatch(actions.setAllCampaigns(result.data.allCampaigns));
                 store.dispatch(actions.setUser(result.data.user));
-                store.dispatch(actions.setResetDonate(true))
                 store.getState().socketReducer.socket.emit('newDonation', { room: result.data.campaign._id,donation:result.data.donation });
             })
             .catch(error => {

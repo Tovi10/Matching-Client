@@ -53,8 +53,7 @@ export default function UpdateRecruiter() {
     }
 
     return (
-        <div className='p-auto UpdateRecruiter'>
-            <h1>עריכת מגייס</h1>
+        <div className='UpdateRecruiter mt-3'>
             <Spin size='large' spinning={spining}>
                 <Form
                     wrapperCol={{
@@ -74,6 +73,7 @@ export default function UpdateRecruiter() {
                         ]}
                     >
                         <Select
+                        size='large'
                             allowClear
                             showSearch
                             onChange={chooseCampaign}
@@ -99,6 +99,7 @@ export default function UpdateRecruiter() {
                         ]}
                     >
                         <Select
+                        size='large'
                             allowClear
                             showSearch
                             style={{ textAlign: 'right' }}
@@ -122,7 +123,7 @@ export default function UpdateRecruiter() {
                             },
                         ]}
                     >
-                        <Input type='number' placeholder={`הכנס כאן את סכום התרומה...`} />
+                        <Input size='large' type='number' placeholder={`הכנס כאן את סכום התרומה...`} />
                     </Form.Item>
                     {/* name */}
                     <Form.Item
@@ -130,7 +131,7 @@ export default function UpdateRecruiter() {
                         rules={[{ required: true, message: 'הכנס שם!' }]}
 
                     >
-                        <Input placeholder={`הכנס כאן את שם המגייס לתצוגה...`} />
+                        <Input size='large' placeholder={`הכנס כאן את שם המגייס לתצוגה...`} />
                     </Form.Item>
                     {/* emil */}
                     {/* <Form.Item
@@ -141,8 +142,7 @@ export default function UpdateRecruiter() {
                 </Form.Item> */}
                     {/* submit */}
                     <Form.Item className='submitFormItem'>
-                        <Button type="primary" htmlType="submit">
-                            עריכת מגייס
+                    <Button size='large' type="primary" htmlType="submit" className='btnSubmit'>                            עריכת מגייס
                         </Button>
                     </Form.Item>
                 </Form>

@@ -49,9 +49,6 @@ export default function Campaign(props) {
             if (e.data == 'createDonation') {
                 dispatch(actions.createDonation(donationData));
             }
-            if (e.data == 'resetDonation') {
-                dispatch(actions.setResetDonate(true))
-            }
         };
         if (!campaign) {
             dispatch(actions.getCampaignById(window.location.pathname.split('/')[2]));

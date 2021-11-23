@@ -284,3 +284,14 @@ body {
 .clrWhite {
   color: #FFFF;
 }
+
+.managmentAction{
+  border-radius: 13px;
+  padding: 20px !important;
+}
+
+@media screen and (max-width: 1024px) {
+  .managmentAction span:nth-child(2){
+    display: none !important;
+  }
+}

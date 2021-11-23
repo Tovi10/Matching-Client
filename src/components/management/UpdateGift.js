@@ -86,15 +86,11 @@ export default function UpdateGift() {
 
 
     return (
-        <div className='p-auto UpdateGift'>
-            <h1>עריכת מתנה</h1>
+        <div className='UpdateGift mt-3'>
             <Spin size='large' spinning={spining}>
                 <Form
-                    labelCol={{
-                        span: 4,
-                    }}
                     wrapperCol={{
-                        span: 20,
+                        span: 24,
                     }}
                     form={form}
                     name="UpdateGift"
@@ -111,6 +107,7 @@ export default function UpdateGift() {
                         ]}
                     >
                         <Select
+                        size='large'
                             allowClear
                             showSearch
                             onChange={choose}
@@ -133,7 +130,7 @@ export default function UpdateGift() {
                             },
                         ]}
                     >
-                        <Input placeholder={`הכנס כאן את שם המתנה...`} />
+                        <Input size='large' placeholder={`הכנס כאן את שם המתנה...`} />
                     </Form.Item>
                     {/* advertising */}
                     <Form.Item
@@ -145,7 +142,7 @@ export default function UpdateGift() {
                             },
                         ]}
                     >
-                        <Input placeholder={`הכנס כאן את תאור המתנה...`} />
+                        <Input size='large' placeholder={`הכנס כאן את תאור המתנה...`} />
                     </Form.Item>
                     {/* image */}
                     <Form.Item
@@ -175,15 +172,15 @@ export default function UpdateGift() {
                             },
                         ]}
                     >
-                        <Input type='number' placeholder={`הכנס כאן את מחיר המתנה...`} />
+                        <Input size='large' type='number' placeholder={`הכנס כאן את מחיר המתנה...`} />
                     </Form.Item>
                     {/* amount */}
                     <Form.Item name="amount">
-                        <Input type='number' placeholder={`הכנס כאן את כמות המתנה...`} />
+                        <Input size='large' type='number' placeholder={`הכנס כאן את כמות המתנה...`} />
                     </Form.Item>
                     {/* submit */}
                     <Form.Item className='submitFormItem'>
-                        <Button type="primary" htmlType="submit">
+                    <Button size='large' type="primary" htmlType="submit" className='btnSubmit'>
                             עריכת מתנה
                         </Button>
                     </Form.Item>

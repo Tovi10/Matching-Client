@@ -80,8 +80,8 @@ export default function DeleteGifts() {
 
     ];
     return (
-        <div className='DeleteGifts'>
-            <h6>כאן מוצגים רק הכרטיסים שעוד לא השתמשו בהם</h6>
+        <div className='DeleteGifts mt-3'>
+            <h6 className='clrWhite'>כאן מוצגים רק הכרטיסים שעוד לא השתמשו בהם</h6>
             <Spin size='large' spinning={!gifts}>
                 <Table dataSource={gifts} columns={columns}
                     rowKey={gift => gift._id}

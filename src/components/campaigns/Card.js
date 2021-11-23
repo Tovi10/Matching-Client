@@ -15,6 +15,7 @@ export default function Card(props) {
 
     const closeModal=()=>{
         setOpenModal(false);
+        dispatch(actions.setResetDonate(true));
     }
     return (
         <div className='Card row'>

@@ -5,7 +5,7 @@ import { actions } from '../../redux/actions';
 import moment from 'moment';
 import axios from 'axios';
 import { Steps } from 'antd';
-import { UserOutlined, SolutionOutlined, FileTextOutlined, LoadingOutlined, SmileOutlined } from '@ant-design/icons';
+import { UserOutlined, CreditCardOutlined, FileTextOutlined, LoadingOutlined, SmileOutlined } from '@ant-design/icons';
 import Login from '../login/Login'
 
 
@@ -53,7 +53,6 @@ export default function Donate(props) {
             sum: 1,
         }).then(result => {
             setIframeUrl(result.data.url);
-            // window.open(result.data.url, "_blank")
             console.log("🚀 ~ file: Donate.js ~ line 22 ~ onFinish ~ result", result);
             dispatch(actions.setDonationData({ ...values, campaignId: campaign._id, user: user._id, card: card._id, date: moment(new Date()).format('DD/MM/YYYY a h:mm:ss ') + "" }));
         }).catch(error => {
@@ -64,8 +63,8 @@ export default function Donate(props) {
     return (
         <div className='Donate' style={{ height: 'inherit' }}>
             <Steps size='small' style={{ direction: 'ltr' }} className='mb-3'>
-                <Step status={donationData ? 'finish' : 'wait'} title="!תודה" icon={<SmileOutlined />} />
-                <Step status={iframeUrl ? 'process' : 'wait'} title="תשלום" icon={<UserOutlined />} />
+                <Step status={donationData ? 'finish' : 'wait'} title="סיום" icon={<SmileOutlined />} />
+                <Step status={iframeUrl ? 'process' : 'wait'} title="תשלום" icon={<CreditCardOutlined />} />
                 <Step status={(user && !iframeUrl) ? 'process' : (!user ? 'wait' : 'finish')} title="הכנס פרטים" icon={(user && !iframeUrl) ? <LoadingOutlined /> : <FileTextOutlined />} />
                 <Step status={user ? 'finish' : 'process'} title="הרשמה" icon={<UserOutlined />} />
             </Steps>
