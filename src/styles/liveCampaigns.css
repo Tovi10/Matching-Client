@@ -64,7 +64,8 @@
 }
 
 .LiveCampaigns .ant-progress-text {
-    color: #6c757d!important;
+    color: #45022D !important;
+    font-weight: bolder;
 }
 
 .LiveCampaigns .goal {
