@@ -65,7 +65,7 @@ function LiveCampaigns(props) {
                         </div>
                     </div>
                 ))}
-                <div className='aaa r-link link text-underlined' style={{ color: '#FAE01A', fontSize: '30px', fontWeight: 'bolder' }}>לכל הקמפיינים</div>
+                <div className='aaa r-link link text-underlined' style={{ color: '#FAE01A', fontSize: '30px', fontWeight: 'bolder', cursor: 'pointer' }} onClick={() => { history.push('/all-campaigns') }} >לכל הקמפיינים</div>
                 <div className='d-flex justify-content-center'>
                     {allCompanies && allCompanies.map(company => (
                         <div className='d-flex justify-content-center align-items-center' key={company._id}>
