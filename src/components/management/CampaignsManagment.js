@@ -11,7 +11,7 @@ export default function CampaignsManagment() {
 	const [action, setAction] = useState(null);
 
 	return (
-		<div classNameName='CampaignsManagment'>
+		<div className='CampaignsManagment'>
 			<img style={{ width: '35vw', margin: 'auto', display: 'block' }} src={whatToDoImg} />
 			<div className='row'>
 				<div className='col-4'></div>

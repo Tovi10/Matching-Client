@@ -19,8 +19,9 @@ import CampaignDetails from './CampaignDetails';
 import '../../styles/createCampaign.css';
 import moment from 'moment';
 
-function CreateCampaign() {
+function CreateCampaign(props) {
 
+    const { history } = props;
 
     const dispatch = useDispatch();
 
@@ -36,7 +37,7 @@ function CreateCampaign() {
     const [spining, setSpining] = useState(false);
     const [uploadErr, setUploadErr] = useState(false);
     const [logoURL, setLogoURL] = useState(null);
-    const [openModal, setOpenModal] = useState(false);
+    // const [openModal, setOpenModal] = useState(false);
     const [imagesFiles, setImagesFiles] = useState([]);
     const [imagesURLs, setImagesURLs] = useState([]);
 
@@ -102,7 +103,8 @@ function CreateCampaign() {
         if (!imagesURLs.length) {
             // maybe move them to the end of the function;
             dispatch(actions.setCampaignId(null));
-            setOpenModal(true);
+            // setOpenModal(true);
+            history.push(`/current-campaign/${campaignId}`);
             return;
         };
         let imagePaths = [];
@@ -117,7 +119,8 @@ function CreateCampaign() {
                 const updateCampaign = { ...campaign, images: imagePaths, create: true }
                 dispatch(actions.updateCampaign(updateCampaign))
                 dispatch(actions.setCampaignId(null));
-                setOpenModal(true);
+                // setOpenModal(true);
+                history.push(`/current-campaign/${campaignId}`);
             }
         });
     }
@@ -398,9 +401,9 @@ function CreateCampaign() {
                     </Form.Item>
                 </Form>
             </Spin>
-            <Modal footer={false} title='קמפיין חדש' visible={openModal} onCancel={() => { setOpenModal(false); setSpining(false); form.resetFields(); removeAll(); }} centered={true} width={1000}>
+            {/* <Modal footer={false} title='קמפיין חדש' visible={openModal} onCancel={() => { setOpenModal(false); setSpining(false); form.resetFields(); removeAll(); }} centered={true} width={1000}>
                 <CampaignDetails />
-            </Modal>
+            </Modal> */}
         </div >
     );
 };

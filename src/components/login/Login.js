@@ -21,14 +21,19 @@ export default function Login() {
             })
             .catch((error) => {
                 console.log("🚀 ~ file: Login.js ~ line 24 ~ signIn ~ error", error)
-                if (error.code === 'auth/user-not-found') {
-                    dispatch(actions.setCurrentNotification('משתמש לא קיים!'))
-                }
-                if (error.code === 'auth/wrong-password') {
-                    dispatch(actions.setCurrentNotification('סיסמא לא תקינה!'))
-                }
-                else {
+                switch (error.code) {
+                    case 'auth/user-not-found':
+                        dispatch(actions.setCurrentNotification('משתמש לא קיים!'))
+                        break;
+                    case 'auth/wrong-password':
+                        dispatch(actions.setCurrentNotification('סיסמא לא תקינה!'))
+                        break;
+                    case 'auth/network-request-failed':
+                        dispatch(actions.setCurrentNotification('שגיאת רשת!'))
+                        break;
+                    default:
                     dispatch(actions.setCurrentNotification(error.code))
+                        break;
                 }
             });
     }
