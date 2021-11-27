@@ -17,10 +17,15 @@
     line-height: 18px;
 }
 
-.wrapApplyModal .inputText {
+.wrapApplyModal .inputText,.wrapApplyModal .inputText:focus {
     width: 19vw !important;
     height: 33vh !important;
-    background-color: #e3dce0;
+    /* background-color: #e3dce0; */
+    background: unset;
+    border: unset;
+    box-shadow: unset;
+    /* cursor:text; */
+    
 }
 
 @keyframes fadeAnim {

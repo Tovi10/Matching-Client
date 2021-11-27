@@ -43,7 +43,7 @@ function LiveCampaigns(props) {
                         <div className={`shadow mb-5 bg-body card liveCampaignCard`}                            >
                             <div style={{ backgroundImage: campaign.images[0] ? `url(${campaign.images[0]})` : 'linear-gradient(to right, rgb(124, 51, 98), rgb(41, 3, 28))' }}
                                 className={`cardImg card-img-top ${isCampaignHover === campaign._id ? 'hoverCampaign' : ''}`} alt="..." >
-                                {/* {isCampaignHover === campaign._id && */}
+                                {isCampaignHover === campaign._id &&
                                 <div className='d-flex flex-column px-2' style={{ textAlign: 'left', color: '#45022D' }}>
                                     <div className='' style={{ paddingTop: '20%', fontSize: '24px', fontWeight: 'bolder' }}>
                                         <div className="">{campaign.company.companyName}</div>
@@ -60,7 +60,7 @@ function LiveCampaigns(props) {
                                         {campaign.goal ? <Progress percent={Math.round(100 / campaign.goal * campaign.goalRaised)} /> : <Progress percent={0} />}
                                     </div>
                                 </div>
-                                {/* } */}
+                                }
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
     Form,
     Input,
@@ -17,6 +17,13 @@ export default function CreateApply() {
     const dispatch = useDispatch();
     const user = useSelector(state => state.userReducer.user);
     const showModal = useSelector(state => state.applyReducer.showModal);
+
+    const focusRef = useRef();
+    useEffect(() => {
+        if (showModal)
+            focusRef.current.focus();
+    }, [showModal])
+
 
     const handleClose = () => {
         dispatch(actions.setShowModal(false));
@@ -58,7 +65,7 @@ export default function CreateApply() {
                                             },
                                         ]}
                                     >
-                                        <Input.TextArea className="inputText" placeholder={`פרט על הקמפיין שברצונך ליצור...`} />
+                                        <Input.TextArea size='large' ref={focusRef} className="inputText" placeholder={`פרט על הקמפיין שברצונך ליצור...`} />
                                     </Form.Item>
                                     <Form.Item className='submitFormItem'>
                                         <button className="btnSend" type="primary" htmlType="submit">שלח</button>
